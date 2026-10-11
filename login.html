@@ -950,6 +950,17 @@
         if (alertBox) alertBox.style.display = 'none';
       }
 
+      // Уведомление об успешном выходе из профиля
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('logout')) {
+          showAlert('success', 'Вы успешно вышли из профиля.');
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }
+        }
+      } catch (e) {}
+
       // Управление состоянием кнопок при отправке
       function setButtonLoading(btn, textEl, isLoading, defaultText) {
         if (!btn || !textEl) return;

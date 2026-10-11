@@ -2543,10 +2543,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         navLoginBtn.title = `Вы вошли как ${userData.name}. Нажмите для выхода`;
         navLoginBtn.addEventListener('click', (e) => {
+          e.preventDefault();
           if (confirm(`Вы вошли как ${userData.name}. Хотите выйти из профиля?`)) {
-            e.preventDefault();
             localStorage.removeItem('dotaarena_user');
-            window.location.reload();
+            localStorage.removeItem('dotaarena_token');
+            window.location.href = 'login.html?logout=1';
           }
         });
       }
