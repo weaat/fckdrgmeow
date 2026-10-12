@@ -1,0 +1,32 @@
+streams:
+  cam1: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/102#backchannel=0
+  cam2: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/202#backchannel=0
+  cam3: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/302#backchannel=0
+  cam4: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/402#backchannel=0
+  cam5: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/502#backchannel=0
+  cam6: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/602#backchannel=0
+  cam7: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/702#backchannel=0
+  cam8: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/802#backchannel=0
+  cam9: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/902#backchannel=0
+  cam10: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1002#backchannel=0
+  cam11: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1102#backchannel=0
+  cam12: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1202#backchannel=0
+  cam13: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1302#backchannel=0
+  cam14: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1402#backchannel=0
+  cam15: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1502#backchannel=0
+  cam16: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1602#backchannel=0
+  cam17: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1702#backchannel=0
+  cam18: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1802#backchannel=0
+  cam19: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1902#backchannel=0
+  cam20: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2002#backchannel=0
+  cam21: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2102#backchannel=0
+  cam22: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2202#backchannel=0
+  cam23: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2302#backchannel=0
+  cam24: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2402#backchannel=0
+  cam25: rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2502#backchannel=0
+
+api:
+  listen: "127.0.0.1:1984"
+
+webrtc:
+  listen: "127.0.0.1:8555"

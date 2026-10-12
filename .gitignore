@@ -31,5 +31,7 @@ scripts/prepare_final.ps1
 
 # Executable binaries and tools
 *.exe
+go2rtc
+go2rtc_linux*
 tools/
 
