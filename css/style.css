@@ -3443,28 +3443,7 @@ section .all-heroes-title::before {
   letter-spacing: 0.05em;
 }
 
-.team-friend-cam-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 0.85rem;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
 
-.team-friend-cam-source-link {
-  color: #38bdf8;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s ease;
-}
-
-.team-friend-cam-source-link:hover {
-  color: #7dd3fc;
-  text-decoration: underline;
-}
 
 :root[data-theme="light"] .team-friend-cam-card {
   background: rgba(240, 249, 255, 0.88);
