@@ -3553,7 +3553,8 @@ section .all-heroes-title::before {
   transform: scale(1.02);
 }
 
-.cctv-cell-img {
+.cctv-cell-img,
+.cctv-cell-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -3756,15 +3757,18 @@ section .all-heroes-title::before {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
 }
 
-.cctv-modal-stream {
+.cctv-modal-stream,
+.cctv-modal-video {
   width: 100%;
   height: 100%;
   border: none;
   display: block;
   background: #020617;
+  object-fit: contain;
 }
 
 .cctv-modal-stream[hidden],
+.cctv-modal-video[hidden],
 .cctv-modal-player-wrap img[hidden] {
   display: none !important;
 }
