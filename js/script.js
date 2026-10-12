@@ -1205,12 +1205,25 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentRestaurantCamIdx = 1;
   let cctvViewMode = 'live';
 
-  // Автозапуск видеозаписей в сетке камер
+  const cctvGridStreams = document.querySelectorAll('#cctv-grid-cells .cctv-cell-stream');
   const cctvGridVideos = document.querySelectorAll('#cctv-grid-cells .cctv-cell-video');
-  cctvGridVideos.forEach(v => {
-    v.muted = true;
-    v.play().catch(() => {});
-  });
+
+  function checkGridStreamGateway() {
+    fetch('http://127.0.0.1:1984/api/streams', { method: 'GET', mode: 'no-cors', cache: 'no-store' })
+      .then(() => {
+        cctvGridStreams.forEach(s => s.hidden = false);
+        cctvGridVideos.forEach(v => v.hidden = true);
+      })
+      .catch(() => {
+        cctvGridStreams.forEach(s => s.hidden = true);
+        cctvGridVideos.forEach(v => {
+          v.hidden = false;
+          v.muted = true;
+          v.play().catch(() => {});
+        });
+      });
+  }
+  checkGridStreamGateway();
 
   function renderModalMedia(idx) {
     if (cctvModalImg) cctvModalImg.src = `images/restaurant_cctv/cam_${idx}.jpg`;

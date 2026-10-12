@@ -3553,12 +3553,36 @@ section .all-heroes-title::before {
   transform: scale(1.02);
 }
 
+.cctv-cell-stream {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #020617;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cctv-cell-stream[hidden] {
+  display: none !important;
+}
+
 .cctv-cell-img,
 .cctv-cell-video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  z-index: 0;
+}
+
+.cctv-cell-video[hidden],
+.cctv-cell-img[hidden] {
+  display: none !important;
 }
 
 .cctv-cell-bar {
@@ -3570,6 +3594,7 @@ section .all-heroes-title::before {
   align-items: center;
   justify-content: space-between;
   pointer-events: none;
+  z-index: 3;
 }
 
 .cctv-cell-ch {
@@ -3605,6 +3630,7 @@ section .all-heroes-title::before {
   border-radius: 3px;
   pointer-events: none;
   letter-spacing: 0.03em;
+  z-index: 3;
 }
 
 /* Модальное окно крупного плана камеры */
