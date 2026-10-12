@@ -2767,8 +2767,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================================
   //  ОФИЦИАЛЬНЫЙ МЕРЧ GAZBLOKI31.RU (ИНТЕРАКТИВ И МОДАЛКА)
   // ============================================================
-  // 1. Переключение размера и вида карточек товара
-  $$('.merch-card').forEach(card => {
+  // 1. Фильтрация мерча по категориям (Все / Футболки / Худи и кофты)
+  const merchTabBtns = $$('.merch-tab-btn');
+  const merchCards   = $$('.merch-card');
+
+  merchTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter || 'all';
+      merchTabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      merchCards.forEach(card => {
+        const cat = card.dataset.category;
+        if (filter === 'all' || cat === filter) {
+          card.hidden = false;
+        } else {
+          card.hidden = true;
+        }
+      });
+    });
+  });
+
+  // 2. Переключение размера и вида карточек товара
+  merchCards.forEach(card => {
     const sizeBtns = card.querySelectorAll('.size-btn');
     sizeBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -2777,23 +2798,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // 2. Кнопка переключения "Футболка / Крупный принт"
-    const toggleBtn = card.querySelector('.btn-toggle-print');
-    const tshirtImg = card.querySelector('.merch-img--tshirt');
-    const printImg  = card.querySelector('.merch-img--print');
-    const toggleTxt = card.querySelector('.toggle-print-text');
+    // Кнопка переключения "Вид одежды / Крупный принт"
+    const toggleBtn  = card.querySelector('.btn-toggle-print');
+    const apparelImg = card.querySelector('.merch-img--apparel, .merch-img--tshirt');
+    const printImg   = card.querySelector('.merch-img--print');
+    const toggleTxt  = card.querySelector('.toggle-print-text');
 
-    if (toggleBtn && tshirtImg && printImg) {
+    if (toggleBtn && apparelImg && printImg) {
       toggleBtn.addEventListener('click', () => {
         const isShowingPrint = !printImg.hidden;
         if (isShowingPrint) {
           printImg.hidden = true;
-          tshirtImg.hidden = false;
+          apparelImg.hidden = false;
           if (toggleTxt) toggleTxt.textContent = 'Крупный принт';
         } else {
           printImg.hidden = false;
-          tshirtImg.hidden = true;
-          if (toggleTxt) toggleTxt.textContent = 'Футболка';
+          apparelImg.hidden = true;
+          if (toggleTxt) toggleTxt.textContent = 'Вид одежды';
         }
       });
     }
@@ -2816,6 +2837,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (merchModalImg)   merchModalImg.src = imgSrc || 'images/merch/tshirt1.png';
     if (merchModalTitle) merchModalTitle.textContent = name;
     if (merchModalPrice) merchModalPrice.textContent = `${price} ₽`;
+    const totalEl = $('#merch-modal-total');
+    if (totalEl) totalEl.textContent = `${price} ₽`;
+    const submitTextEl = $('#merch-modal-submit-text');
+    if (submitTextEl) submitTextEl.textContent = `Оплатить заказ (${price} ₽)`;
     if (merchOrderSize && selectedSize) merchOrderSize.value = selectedSize;
 
     if (merchOrderForm)    merchOrderForm.hidden = false;

@@ -5226,6 +5226,55 @@ footer > * + * {
   font-size: 1.05rem;
 }
 
+.merch-filter-tabs {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.merch-tab-btn {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  color: var(--text-muted);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 50px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.merch-tab-btn:hover {
+  color: #fff;
+  border-color: rgba(56, 189, 248, 0.6);
+  background: rgba(14, 165, 233, 0.15);
+}
+
+.merch-tab-btn.active {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(2, 132, 199, 0.65));
+  border-color: #38bdf8;
+  color: #fff;
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.45);
+}
+
+.merch-tab-count {
+  font-size: 0.76rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+}
+
+.merch-card[hidden] {
+  display: none !important;
+}
+
 .merch-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
