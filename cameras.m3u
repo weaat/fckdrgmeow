@@ -1,0 +1,51 @@
+#EXTM3U
+#EXTINF:-1,Камера 1 (Офис / Кабинет)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/101
+#EXTINF:-1,Камера 2 (Мойка / Раздача)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/201
+#EXTINF:-1,Камера 3 (Главный зал - Диваны)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/301
+#EXTINF:-1,Камера 4 (Кухня - Горячий цех)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/401
+#EXTINF:-1,Камера 5 (Кухня - Холодный цех)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/501
+#EXTINF:-1,Камера 6 (Банкетный зал)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/601
+#EXTINF:-1,Камера 7 (Барная стойка)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/701
+#EXTINF:-1,Камера 8 (Зал - Столы 1-4)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/801
+#EXTINF:-1,Камера 9 (Зал - Столы 5-8)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/901
+#EXTINF:-1,Камера 10 (Декоративный холл)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1001
+#EXTINF:-1,Камера 11 (Служебный коридор)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1101
+#EXTINF:-1,Камера 12 (VIP-зал)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1201
+#EXTINF:-1,Камера 13 (Веранда / Столики)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1301
+#EXTINF:-1,Камера 14 (Барная линия)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1401
+#EXTINF:-1,Камера 15 (Линия выдачи блюд)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1501
+#EXTINF:-1,Камера 16 (Служебный проход)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1601
+#EXTINF:-1,Камера 17 (Склад / Приёмка)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1701
+#EXTINF:-1,Камера 18 (Лестница / Мансарда)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1801
+#EXTINF:-1,Камера 19 (Холл / Входная группа)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1901
+#EXTINF:-1,Камера 20 (Вход / Гардероб)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2001
+#EXTINF:-1,Камера 21 (Двор / Парковка)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2101
+#EXTINF:-1,Камера 22 (Коридор персонала)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2201
+#EXTINF:-1,Камера 23 (Заготовочный цех)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2301
+#EXTINF:-1,Камера 24 (Служебная лестница)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2401
+#EXTINF:-1,Камера 25 (Заготовочный склад)
+rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2501
