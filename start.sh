@@ -48,8 +48,8 @@ if [ ! -f "./go2rtc" ]; then
     elif command -v wget >/dev/null 2>&1; then
         wget -q -O "./go2rtc" "$DOWNLOAD_URL"
     else
-        echo "[!] Ne nayden curl ili wget. Ustanovite: sudo apt install -y curl"
-        exit 1
+        echo "[*] curl i wget ne naydeny, skachivanie cherez python3..."
+        python3 -c "import urllib.request; urllib.request.urlretrieve('$DOWNLOAD_URL', './go2rtc')"
     fi
 
     chmod +x "./go2rtc" 2>/dev/null || true
@@ -75,10 +75,15 @@ trap cleanup INT TERM EXIT
 # 4. Zapusk shlyuza potokovogo video go2rtc
 echo "[1/2] Zapusk shlyuza kamer go2rtc (port 1984)..."
 chmod +x ./go2rtc 2>/dev/null || true
-./go2rtc -config ./go2rtc.yaml >/dev/null 2>&1 &
+./go2rtc -config ./go2rtc.yaml > go2rtc.log 2>&1 &
 GO2RTC_PID=$!
 
 sleep 1
+
+if ! kill -0 "$GO2RTC_PID" 2>/dev/null; then
+    echo "[!] Ne udalos zapustit go2rtc. Log:"
+    cat go2rtc.log 2>/dev/null || true
+fi
 
 # 5. Zapusk backend-servera server.py
 echo "[2/2] Zapusk veb-servera server.py (port 8000)..."

@@ -1245,9 +1245,15 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('http://127.0.0.1:1984/api/streams', { method: 'GET', mode: 'no-cors', cache: 'no-store' })
       .then(() => {
         if (cctvOfflineNotice) cctvOfflineNotice.hidden = true;
+        if (cctvModalStream) cctvModalStream.hidden = false;
+        if (cctvModalVideo) {
+          cctvModalVideo.hidden = true;
+          cctvModalVideo.pause();
+        }
       })
       .catch(() => {
         if (cctvOfflineNotice) cctvOfflineNotice.hidden = false;
+        if (cctvModalStream) cctvModalStream.hidden = true;
         if (cctvModalVideo) {
           cctvModalVideo.hidden = false;
           cctvModalVideo.src = `videos/restaurant_cctv/cam_${idx}.mp4`;

@@ -12,6 +12,11 @@ import sqlite3
 import hashlib
 import secrets
 import mimetypes
+import socket
+import subprocess
+import platform
+import urllib.request
+import atexit
 from datetime import datetime, timedelta
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
@@ -390,10 +395,84 @@ class DotaArenaRequestHandler(SimpleHTTPRequestHandler):
 
 
 # ============================================================
-#  3. ТОЧКА ВХОДА СЕРВЕРА
+#  3. АВТОМАТИЧЕСКИЙ ЗАПУСК ШЛЮЗА ВИДЕОКАМЕР GO2RTC
+# ============================================================
+def ensure_go2rtc():
+    """Проверяет и автоматически запускает видеошлюз go2rtc на порту 1984."""
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(0.5)
+            if s.connect_ex(("127.0.0.1", 1984)) == 0:
+                print("  Шлюз видеопотоков go2rtc:  уже запущен (http://127.0.0.1:1984)")
+                return
+    except Exception:
+        pass
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    is_windows = (sys.platform == "win32")
+    bin_name = "go2rtc.exe" if is_windows else "go2rtc"
+    bin_path = os.path.join(base_dir, bin_name)
+    config_path = os.path.join(base_dir, "go2rtc.yaml")
+
+    if not os.path.exists(bin_path) and not is_windows:
+        arch = platform.machine().lower()
+        if arch in ("x86_64", "amd64"):
+            asset = "go2rtc_linux_amd64"
+        elif arch in ("aarch64", "arm64"):
+            asset = "go2rtc_linux_arm64"
+        elif "arm" in arch:
+            asset = "go2rtc_linux_arm"
+        else:
+            asset = "go2rtc_linux_amd64"
+        url = f"https://github.com/AlexxIT/go2rtc/releases/download/v1.9.14/{asset}"
+        print(f"[*] Загрузка видеошлюза go2rtc для Linux ({asset})...")
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=30) as resp, open(bin_path, "wb") as out:
+                out.write(resp.read())
+            os.chmod(bin_path, 0o755)
+            print("[OK] go2rtc успешно загружен.")
+        except Exception as e:
+            print(f"[!] Ошибка загрузки go2rtc: {e}")
+            return
+
+    if not os.path.exists(bin_path):
+        print(f"[!] Файл {bin_name} не найден в {base_dir}")
+        return
+
+    if not is_windows:
+        try:
+            os.chmod(bin_path, 0o755)
+        except Exception:
+            pass
+
+    print("[*] Запуск шлюза видеокамер go2rtc на порту 1984...")
+    try:
+        proc = subprocess.Popen(
+            [bin_path, "-config", config_path],
+            cwd=base_dir,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+
+        def stop_go2rtc():
+            try:
+                proc.terminate()
+            except Exception:
+                pass
+
+        atexit.register(stop_go2rtc)
+        print("  Шлюз видеопотоков go2rtc:  запущен (http://127.0.0.1:1984)")
+    except Exception as e:
+        print(f"[!] Не удалось запустить go2rtc: {e}")
+
+
+# ============================================================
+#  4. ТОЧКА ВХОДА СЕРВЕРА
 # ============================================================
 def run():
     init_database()
+    ensure_go2rtc()
     port = PORT
     server_address = ("", port)
     try:
