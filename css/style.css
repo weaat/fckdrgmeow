@@ -7485,3 +7485,252 @@ dialog.team-dialog-modal::backdrop {
   pointer-events: none;
   z-index: 999;
 }
+
+/* ============================================================
+   CCTV HUB — ЛЕГКОВЕСНЫЙ ХАБ ВИДЕОНАБЛЮДЕНИЯ НА ГЛАВНОЙ
+   ============================================================ */
+.team-friend-cam-card--hub {
+  padding: 1.25rem;
+}
+
+.cctv-hub-preview-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .cctv-hub-preview-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cctv-hub-preview-screen {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.cctv-hub-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cctv-hub-actions-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cctv-hub-desc {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.cctv-hub-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cctv-hub-btn-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: #dc2626;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
+}
+
+.cctv-hub-btn-open:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+}
+
+.cctv-hub-btn-vlc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.15rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f1f5f9;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cctv-hub-btn-vlc:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+/* ============================================================
+   INVOKER GAME PROMO SECTION НА ГЛАВНОЙ СТРАНИЦЕ
+   ============================================================ */
+.invoker-promo-section {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1.25rem;
+}
+
+.invoker-promo-card {
+  position: relative;
+  background: radial-gradient(circle at 85% 50%, rgba(245, 158, 11, 0.15) 0%, rgba(13, 17, 28, 0.85) 60%),
+              rgba(13, 17, 28, 0.85);
+  border: 2px solid rgba(245, 158, 11, 0.35);
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 40px rgba(245, 158, 11, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+@media (max-width: 860px) {
+  .invoker-promo-card {
+    grid-template-columns: 1fr;
+    padding: 1.75rem;
+  }
+  .invoker-promo-visual {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+  .invoker-promo-hero-img {
+    max-height: 220px !important;
+  }
+}
+
+.invoker-promo-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+}
+
+.invoker-promo-title {
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 900;
+  color: #f8fafc;
+  margin: 0 0 0.85rem;
+  line-height: 1.2;
+}
+
+.invoker-promo-desc {
+  font-size: 1rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+}
+
+.invoker-promo-orbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.orb-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.orb-tag--q {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.orb-tag--w {
+  background: rgba(192, 132, 252, 0.15);
+  border: 1px solid #c084fc;
+  color: #c084fc;
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.3);
+}
+
+.orb-tag--e {
+  background: rgba(251, 146, 60, 0.15);
+  border: 1px solid #fb923c;
+  color: #fb923c;
+  box-shadow: 0 0 10px rgba(251, 146, 60, 0.3);
+}
+
+.orb-tag--r {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid #f59e0b;
+  color: #facc15;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+}
+
+.invoker-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+  border: none;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+  transition: all 0.2s ease;
+}
+
+.invoker-play-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.65);
+}
+
+.invoker-promo-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invoker-promo-hero-img {
+  max-width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 25px rgba(245, 158, 11, 0.35));
+  transition: transform 0.3s ease;
+}
+
+.invoker-promo-card:hover .invoker-promo-hero-img {
+  transform: scale(1.04);
+}

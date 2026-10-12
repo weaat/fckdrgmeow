@@ -164,6 +164,17 @@
         </a>
       </li>
       <li>
+        <a href="invoker.html" target="_blank" rel="noopener noreferrer">
+          <span class="nav-link__icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+            </svg>
+          </span>
+          <span style="color:#fbbf24; font-weight:700;">Invoker Game</span>
+        </a>
+      </li>
+      <li>
         <a href="#live">
           <span class="nav-link__icon">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -195,6 +206,17 @@
             </svg>
           </span>
           <span>Команды</span>
+        </a>
+      </li>
+      <li>
+        <a href="cameras.html" target="_blank" rel="noopener noreferrer">
+          <span class="nav-link__icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 7l-7 5 7 5V7z"></path>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+            </svg>
+          </span>
+          <span style="color:#38bdf8;">Видеонаблюдение (25 камер)</span>
         </a>
       </li>
       <li>
@@ -1047,6 +1069,39 @@
     </section>
 
     <!-- ========================================================
+         ИНТЕРАКТИВНЫЙ МИНИ-ГЕЙМ: INVOKER GAME
+         ======================================================== -->
+    <section id="invoker" class="invoker-promo-section">
+      <div class="invoker-promo-card">
+        <div class="invoker-promo-content">
+          <span class="invoker-promo-badge">Dota 2 Mini-Game</span>
+          <h2 class="invoker-promo-title">Invoker Game — Тренажер способностей</h2>
+          <p class="invoker-promo-desc">
+            Проверьте свою реакцию и знание всех 10 заклинаний Invoker. Режим на время (Time Attack), комбо-серии,
+            свободная тренировка и управление сферами на клавиатуре (Q, W, E, R).
+          </p>
+          <div class="invoker-promo-orbs">
+            <span class="orb-tag orb-tag--q">Q · Quas</span>
+            <span class="orb-tag orb-tag--w">W · Wex</span>
+            <span class="orb-tag orb-tag--e">E · Exort</span>
+            <span class="orb-tag orb-tag--r">R · Invoke</span>
+          </div>
+          <div class="invoker-promo-buttons">
+            <a href="invoker.html" target="_blank" rel="noopener noreferrer" class="btn-primary invoker-play-btn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:6px;">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Играть в Invoker Game
+            </a>
+          </div>
+        </div>
+        <div class="invoker-promo-visual">
+          <img src="images/renders/invoker.png" alt="Invoker Dota 2" class="invoker-promo-hero-img" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
          СЕКЦИЯ 3: LIVE — текущие матчи
          Ссылка на Twitch-канал турнира
          ======================================================== -->
@@ -1359,173 +1414,46 @@
         <!-- ========================================================
              РЕСТОРАН GAZBLOKI31.RU (25 КАМЕР)
              ======================================================== -->
-        <div class="team-friend-cam-card team-friend-cam-card--matrix" id="team-friend-cam-2">
+        <div class="team-friend-cam-card team-friend-cam-card--hub" id="team-friend-cam-2">
           <div class="team-friend-cam-head">
             <div class="team-friend-cam-info">
               <h4 class="team-friend-cam-title">Ресторан gazbloki31.ru</h4>
               <p class="team-friend-cam-sub">82.119.149.206:8000 · Логин: admin · Пароль: admin123</p>
             </div>
             <div class="team-friend-cam-controls">
-              <span class="cctv-hint-badge">Нажмите на любую камеру для крупного плана</span>
+              <span class="cctv-hint-badge">25 активных видеокамер</span>
             </div>
           </div>
 
-          <!-- Консоль видеонаблюдения: сетка 25 активных камер ресторана -->
-          <div class="cctv-matrix-container" id="cctv-matrix-view">
-            <div class="cctv-matrix-topbar">
-              <span class="cctv-sys-name">Ресторан gazbloki31.ru · 82.119.149.206:8000</span>
-              <span class="cctv-live-clock" id="cctv-clock">07:36:14 10-12-2026</span>
+          <div class="cctv-hub-preview-wrap">
+            <div class="cctv-hub-preview-screen">
+              <img src="images/restaurant_cctv/cam_15.jpg" alt="Камера 15: Линия выдачи блюд" class="cctv-hub-preview-img">
+              <div class="cctv-cell-bar">
+                <span class="cctv-cell-ch">CH-15 · Линия выдачи блюд</span>
+                <span class="cctv-cell-rec"></span>
+              </div>
             </div>
-            <div class="cctv-grid-restaurant" id="cctv-grid-cells">
-              <div class="cctv-cell" data-cam-idx="1" title="Камера 1 (Офис / Кабинет) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam1&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_1.mp4" poster="images/restaurant_cctv/cam_1.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-01</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
+            <div class="cctv-hub-actions-panel">
+              <div class="cctv-hub-desc">
+                Для максимальной плавности сайта и защиты ноутбука от лагов, трансляция всех 25 камер вынесена в отдельное окно видеонаблюдения.
               </div>
-              <div class="cctv-cell" data-cam-idx="2" title="Камера 2 (Мойка / Раздача) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam2&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_2.mp4" poster="images/restaurant_cctv/cam_2.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-02</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="3" title="Камера 3 (Главный зал - Диваны) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam3&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_3.mp4" poster="images/restaurant_cctv/cam_3.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-03</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="4" title="Камера 4 (Кухня - Горячий цех) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam4&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_4.mp4" poster="images/restaurant_cctv/cam_4.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-04</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="5" title="Камера 5 (Кухня - Холодный цех) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam5&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_5.mp4" poster="images/restaurant_cctv/cam_5.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-05</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="6" title="Камера 6 (Банкетный зал) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam6&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_6.mp4" poster="images/restaurant_cctv/cam_6.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-06</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="7" title="Камера 7 (Барная стойка) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam7&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_7.mp4" poster="images/restaurant_cctv/cam_7.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-07</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="8" title="Камера 8 (Зал - Столы 1-4) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam8&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_8.mp4" poster="images/restaurant_cctv/cam_8.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-08</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="9" title="Камера 9 (Зал - Столы 5-8) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam9&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_9.mp4" poster="images/restaurant_cctv/cam_9.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-09</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="10" title="Камера 10 (Декоративный холл) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam10&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_10.mp4" poster="images/restaurant_cctv/cam_10.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-10</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="11" title="Камера 11 (Служебный коридор) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam11&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_11.mp4" poster="images/restaurant_cctv/cam_11.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-11</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="12" title="Камера 12 (VIP-зал) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam12&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_12.mp4" poster="images/restaurant_cctv/cam_12.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-12</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="13" title="Камера 13 (Веранда / Столики) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam13&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_13.mp4" poster="images/restaurant_cctv/cam_13.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-13</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="14" title="Камера 14 (Барная линия) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam14&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_14.mp4" poster="images/restaurant_cctv/cam_14.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-14</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="15" title="Камера 15 (Линия выдачи блюд) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam15&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_15.mp4" poster="images/restaurant_cctv/cam_15.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-15</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="16" title="Камера 16 (Служебный проход) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam16&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_16.mp4" poster="images/restaurant_cctv/cam_16.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-16</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="17" title="Камера 17 (Склад / Приёмка) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam17&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_17.mp4" poster="images/restaurant_cctv/cam_17.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-17</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="18" title="Камера 18 (Лестница / Мансарда) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam18&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_18.mp4" poster="images/restaurant_cctv/cam_18.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-18</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="19" title="Камера 19 (Холл / Входная группа) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam19&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_19.mp4" poster="images/restaurant_cctv/cam_19.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-19</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="20" title="Камера 20 (Вход / Гардероб) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam20&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_20.mp4" poster="images/restaurant_cctv/cam_20.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-20</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="21" title="Камера 21 (Двор / Парковка) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam21&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_21.mp4" poster="images/restaurant_cctv/cam_21.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-21</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="22" title="Камера 22 (Коридор персонала) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam22&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_22.mp4" poster="images/restaurant_cctv/cam_22.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-22</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="23" title="Камера 23 (Заготовочный цех) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam23&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_23.mp4" poster="images/restaurant_cctv/cam_23.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-23</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="24" title="Камера 24 (Служебная лестница) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam24&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_24.mp4" poster="images/restaurant_cctv/cam_24.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-24</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
-              </div>
-              <div class="cctv-cell" data-cam-idx="25" title="Камера 25 (Заготовочный склад) — нажмите для крупного плана">
-                <iframe src="http://127.0.0.1:1984/stream.html?src=cam25&background=false" class="cctv-cell-stream" allow="autoplay; fullscreen" loading="lazy"></iframe>
-                <video src="videos/restaurant_cctv/cam_25.mp4" poster="images/restaurant_cctv/cam_25.jpg" autoplay loop muted playsinline class="cctv-cell-video" hidden></video>
-                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-25</span><span class="cctv-cell-rec"></span></div>
-                <span class="cctv-cell-time cctv-stamp-time">07:36:14</span>
+              <div class="cctv-hub-buttons">
+                <a href="cameras.html" target="_blank" rel="noopener noreferrer" class="btn-primary cctv-hub-btn-open">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:6px;">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                  Открыть видеонаблюдение (25 камер)
+                </a>
+                <a href="cameras.m3u" download class="btn-secondary cctv-hub-btn-vlc">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:6px;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  Плейлист для VLC (.m3u)
+                </a>
               </div>
             </div>
           </div>

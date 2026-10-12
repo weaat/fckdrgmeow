@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoker Game — Тренажер способностей Invoker (DotaArena 2026)</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root {
+      --orb-quas: #38bdf8;
+      --orb-wex: #c084fc;
+      --orb-exort: #fb923c;
+      --accent-invoke: #f59e0b;
+    }
+    body {
+      background: #090a10;
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      user-select: none;
+    }
+    .invoker-bg {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 20%, rgba(30, 27, 75, 0.6) 0%, rgba(9, 10, 16, 0.95) 75%),
+                  url('images/hoodwink_dance.gif') center/cover no-repeat;
+      filter: brightness(0.2) saturate(0.8);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .invoker-header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.85rem 1.5rem;
+      background: rgba(15, 17, 28, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .invoker-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .invoker-brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #f59e0b;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+    }
+    .invoker-brand h1 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .invoker-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .invoker-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      color: #f1f5f9;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .invoker-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: #fbbf24;
+      color: #fbbf24;
+    }
+    .invoker-btn.active {
+      background: #dc2626;
+      border-color: #dc2626;
+      color: #fff;
+      box-shadow: 0 0 14px rgba(220, 38, 38, 0.5);
+    }
+
+    /* Main Container */
+    .invoker-container {
+      position: relative;
+      z-index: 5;
+      max-width: 960px;
+      margin: 1.5rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    /* Status & Scoreboard */
+    .game-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (max-width: 640px) {
+      .game-stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat-card {
+      background: rgba(18, 22, 36, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      text-align: center;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #f8fafc;
+      font-family: monospace;
+    }
+    .stat-value.gold { color: #facc15; }
+    .stat-value.cyan { color: #38bdf8; }
+    .stat-value.streak { color: #f97316; }
+
+    /* Target Spell Box */
+    .target-spell-box {
+      background: rgba(15, 20, 35, 0.85);
+      border: 2px solid rgba(245, 158, 11, 0.4);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .target-spell-head {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+    .target-spell-name {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #f8fafc;
+      margin: 0.25rem 0 0.5rem;
+      text-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+    }
+    .target-spell-formula {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    /* Active Spheres (Quas, Wex, Exort) */
+    .active-orbs-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+      min-height: 70px;
+      align-items: center;
+    }
+    .active-orb {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .active-orb.quas {
+      background: radial-gradient(circle at 35% 35%, #7dd3fc 0%, #0284c7 65%, #0369a1 100%);
+      border: 2px solid #bae6fd;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
+      color: #fff;
+      transform: scale(1.08);
+    }
+    .active-orb.wex {
+      background: radial-gradient(circle at 35% 35%, #e879f9 0%, #a855f7 65%, #7e22ce 100%);
+      border: 2px solid #f5d0fe;
+      box-shadow: 0 0 20px rgba(192, 132, 252, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
+      color: #fff;
+      transform: scale(1.08);
+    }
+    .active-orb.exort {
+      background: radial-gradient(circle at 35% 35%, #fdba74 0%, #ea580c 65%, #c2410c 100%);
+      border: 2px solid #fed7aa;
+      box-shadow: 0 0 20px rgba(251, 146, 60, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    /* Ability Buttons (Q, W, E, R) */
+    .controls-panel {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 480px) {
+      .controls-panel { gap: 0.45rem; }
+    }
+    .ability-btn {
+      position: relative;
+      background: #111827;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 1rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+    .ability-btn:hover {
+      transform: translateY(-2px);
+    }
+    .ability-btn:active, .ability-btn.pressed {
+      transform: translateY(2px) scale(0.97);
+    }
+    .ability-btn--quas {
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.15);
+    }
+    .ability-btn--quas:hover, .ability-btn--quas.pressed {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: #38bdf8;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+    }
+    .ability-btn--wex {
+      border-color: rgba(192, 132, 252, 0.45);
+      box-shadow: 0 4px 14px rgba(192, 132, 252, 0.15);
+    }
+    .ability-btn--wex:hover, .ability-btn--wex.pressed {
+      background: rgba(192, 132, 252, 0.15);
+      border-color: #c084fc;
+      box-shadow: 0 0 20px rgba(192, 132, 252, 0.45);
+    }
+    .ability-btn--exort {
+      border-color: rgba(251, 146, 60, 0.45);
+      box-shadow: 0 4px 14px rgba(251, 146, 60, 0.15);
+    }
+    .ability-btn--exort:hover, .ability-btn--exort.pressed {
+      background: rgba(251, 146, 60, 0.15);
+      border-color: #fb923c;
+      box-shadow: 0 0 20px rgba(251, 146, 60, 0.45);
+    }
+    .ability-btn--invoke {
+      border-color: rgba(245, 158, 11, 0.6);
+      background: linear-gradient(180deg, #1f1b13 0%, #17120a 100%);
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+    }
+    .ability-btn--invoke:hover, .ability-btn--invoke.pressed {
+      background: rgba(245, 158, 11, 0.25);
+      border-color: #f59e0b;
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.6);
+    }
+    .key-badge {
+      font-family: monospace;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #fff;
+      display: inline-block;
+      margin-bottom: 0.25rem;
+    }
+    .key-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .ability-btn--quas .key-name { color: #38bdf8; }
+    .ability-btn--wex .key-name { color: #c084fc; }
+    .ability-btn--exort .key-name { color: #fb923c; }
+    .ability-btn--invoke .key-name { color: #f59e0b; }
+
+    /* Invoked Current Spell Output */
+    .invoked-spell-display {
+      background: rgba(13, 17, 28, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .invoked-spell-title {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    .invoked-spell-result {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+
+    /* Grimoire Cheatsheet */
+    .spells-grid-card {
+      background: rgba(15, 20, 32, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .spells-grid-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 0.85rem;
+      color: #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .spells-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+    @media (max-width: 600px) {
+      .spells-list { grid-template-columns: 1fr; }
+    }
+    .spell-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .spell-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .spell-item-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+    .spell-item-dots {
+      display: flex;
+      gap: 4px;
+    }
+    .spell-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-q { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+    .dot-w { background: #c084fc; box-shadow: 0 0 6px #c084fc; }
+    .dot-e { background: #fb923c; box-shadow: 0 0 6px #fb923c; }
+
+    /* Flash feedback */
+    .flash-correct {
+      animation: flashGreen 0.35s ease;
+    }
+    .flash-wrong {
+      animation: flashRed 0.35s ease;
+    }
+    @keyframes flashGreen {
+      0% { box-shadow: 0 0 40px rgba(34, 197, 94, 0.8); border-color: #22c55e; }
+      100% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); }
+    }
+    @keyframes flashRed {
+      0% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.8); border-color: #ef4444; }
+      100% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="invoker-bg"></div>
+
+  <!-- Header -->
+  <header class="invoker-header">
+    <div class="invoker-brand">
+      <img src="images/renders/invoker.png" alt="Invoker" />
+      <div>
+        <h1>Invoker Game</h1>
+        <small style="color:#94a3b8; font-size:0.75rem;">Тренажер заклинаний Dota 2 · DotaArena 2026</small>
+      </div>
+    </div>
+    <div class="invoker-nav-links">
+      <button type="button" class="invoker-btn active" id="btn-mode-timed">Time Attack (30с)</button>
+      <button type="button" class="invoker-btn" id="btn-mode-practice">Тренировка</button>
+      <a href="index.html" class="invoker-btn">← На сайт турнира</a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="invoker-container">
+
+    <!-- Score & Time Statistics -->
+    <div class="game-stats-bar">
+      <div class="stat-card">
+        <span class="stat-label">Очки</span>
+        <span class="stat-value gold" id="stat-score">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Время</span>
+        <span class="stat-value cyan" id="stat-time">30.0s</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Комбо</span>
+        <span class="stat-value streak" id="stat-combo">x0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Рекорд</span>
+        <span class="stat-value gold" id="stat-record">0</span>
+      </div>
+    </div>
+
+    <!-- Target Spell Prompt -->
+    <div class="target-spell-box" id="target-box">
+      <div class="target-spell-head">Требуемое заклинание:</div>
+      <div class="target-spell-name" id="target-name">Sun Strike</div>
+      <div class="target-spell-formula" id="target-formula">
+        <span>Комбинация:</span>
+        <span id="target-dots" style="display:inline-flex; gap:6px; margin:0 4px;"></span>
+        <span id="target-keys" style="color:#facc15;">E E E + R</span>
+      </div>
+    </div>
+
+    <!-- 3 Active Spheres -->
+    <div class="active-orbs-container" id="active-orbs">
+      <div class="active-orb" id="orb-slot-0">?</div>
+      <div class="active-orb" id="orb-slot-1">?</div>
+      <div class="active-orb" id="orb-slot-2">?</div>
+    </div>
+
+    <!-- Interactive Ability Keys (Q, W, E, R) -->
+    <div class="controls-panel">
+      <button type="button" class="ability-btn ability-btn--quas" id="btn-key-q" aria-label="Quas (Q)">
+        <span class="key-badge">Q</span>
+        <span class="key-name">Quas</span>
+      </button>
+      <button type="button" class="ability-btn ability-btn--wex" id="btn-key-w" aria-label="Wex (W)">
+        <span class="key-badge">W</span>
+        <span class="key-name">Wex</span>
+      </button>
+      <button type="button" class="ability-btn ability-btn--exort" id="btn-key-e" aria-label="Exort (E)">
+        <span class="key-badge">E</span>
+        <span class="key-name">Exort</span>
+      </button>
+      <button type="button" class="ability-btn ability-btn--invoke" id="btn-key-r" aria-label="Invoke (R)">
+        <span class="key-badge">R</span>
+        <span class="key-name">Invoke</span>
+      </button>
+    </div>
+
+    <!-- Last Invoked Spell -->
+    <div class="invoked-spell-display">
+      <span class="invoked-spell-title">Сотворённое заклинание:</span>
+      <span class="invoked-spell-result" id="last-invoked">—</span>
+    </div>
+
+    <!-- Spells Grimoire -->
+    <section class="spells-grid-card">
+      <div class="spells-grid-title">
+        <span>Книга заклинаний (10 способностей Invoker)</span>
+        <small style="color:#94a3b8; font-weight:normal; font-size:0.8rem;">Управление клавишами: Q, W, E, R</small>
+      </div>
+      <div class="spells-list" id="spells-cheatsheet">
+        <!-- Генерируется скриптом -->
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // База заклинаний Инвокера
+    const SPELLS = [
+      { id: 'coldsnap', name: 'Cold Snap', ru: 'Колд Снэп', orbs: ['Q', 'Q', 'Q'] },
+      { id: 'ghostwalk', name: 'Ghost Walk', ru: 'Гост Волк', orbs: ['Q', 'Q', 'W'] },
+      { id: 'icewall', name: 'Ice Wall', ru: 'Айс Волл', orbs: ['Q', 'Q', 'E'] },
+      { id: 'emp', name: 'EMP', ru: 'ЕМП', orbs: ['W', 'W', 'W'] },
+      { id: 'tornado', name: 'Tornado', ru: 'Торнадо', orbs: ['W', 'W', 'Q'] },
+      { id: 'alacrity', name: 'Alacrity', ru: 'Алакрити', orbs: ['W', 'W', 'E'] },
+      { id: 'sunstrike', name: 'Sun Strike', ru: 'Сан Страйк', orbs: ['E', 'E', 'E'] },
+      { id: 'forgespirit', name: 'Forge Spirit', ru: 'Фордж Спирит', orbs: ['E', 'E', 'Q'] },
+      { id: 'chaosmeteor', name: 'Chaos Meteor', ru: 'Метеор', orbs: ['E', 'E', 'W'] },
+      { id: 'deafeningblast', name: 'Deafening Blast', ru: 'Бласт', orbs: ['Q', 'W', 'E'] }
+    ];
+
+    // Текущие 3 сферы
+    let currentOrbs = ['Q', 'W', 'E'];
+    let targetSpell = null;
+    let score = 0;
+    let combo = 0;
+    let record = parseInt(localStorage.getItem('invoker_high_score') || '0', 10);
+    let timeLeft = 30.0;
+    let timerInterval = null;
+    let isPlaying = false;
+    let gameMode = 'timed'; // 'timed' | 'practice'
+
+    // Элементы DOM
+    const statScore = document.getElementById('stat-score');
+    const statTime = document.getElementById('stat-time');
+    const statCombo = document.getElementById('stat-combo');
+    const statRecord = document.getElementById('stat-record');
+    const targetBox = document.getElementById('target-box');
+    const targetName = document.getElementById('target-name');
+    const targetDots = document.getElementById('target-dots');
+    const targetKeys = document.getElementById('target-keys');
+    const orbSlots = [
+      document.getElementById('orb-slot-0'),
+      document.getElementById('orb-slot-1'),
+      document.getElementById('orb-slot-2')
+    ];
+    const lastInvokedEl = document.getElementById('last-invoked');
+    const cheatsheetEl = document.getElementById('spells-cheatsheet');
+    const btnModeTimed = document.getElementById('btn-mode-timed');
+    const btnModePractice = document.getElementById('btn-mode-practice');
+
+    statRecord.textContent = record;
+
+    // Web Audio Синтезатор звуков (без внешних файлов)
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.12, gainVal = 0.15) {
+      try {
+        const ctx = getAudioCtx();
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(gainVal, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function soundOrb(orb) {
+      if (orb === 'Q') playTone(330, 'sine', 0.1, 0.2); // Ледяной тон
+      if (orb === 'W') playTone(580, 'triangle', 0.1, 0.2); // Штормовой тон
+      if (orb === 'E') playTone(220, 'sawtooth', 0.1, 0.15); // Огненный тон
+    }
+    function soundInvokeSuccess() {
+      playTone(440, 'triangle', 0.08, 0.2);
+      setTimeout(() => playTone(880, 'sine', 0.15, 0.25), 80);
+    }
+    function soundInvokeFail() {
+      playTone(140, 'sawtooth', 0.18, 0.2);
+    }
+
+    // Рендер подсказок чит-листа
+    SPELLS.forEach(s => {
+      const item = document.createElement('div');
+      item.className = 'spell-item';
+      item.innerHTML = `
+        <span class="spell-item-name">${s.name} (${s.ru})</span>
+        <div class="spell-item-dots">
+          ${s.orbs.map(o => `<span class="spell-dot dot-${o.toLowerCase()}"></span>`).join('')}
+        </div>
+      `;
+      item.addEventListener('click', () => {
+        currentOrbs = [...s.orbs];
+        renderOrbs();
+        castInvoke();
+      });
+      cheatsheetEl.appendChild(item);
+    });
+
+    // Добавление сферы
+    function addOrb(orb) {
+      soundOrb(orb);
+      currentOrbs.shift();
+      currentOrbs.push(orb);
+      renderOrbs();
+    }
+
+    function renderOrbs() {
+      currentOrbs.forEach((orb, i) => {
+        orbSlots[i].className = 'active-orb ' + (orb === 'Q' ? 'quas' : orb === 'W' ? 'wex' : 'exort');
+        orbSlots[i].textContent = orb;
+      });
+    }
+
+    // Определение заклинания по текущим 3 сферам
+    function getSpellFromOrbs(orbs) {
+      const sortedCurrent = [...orbs].sort().join('');
+      return SPELLS.find(s => [...s.orbs].sort().join('') === sortedCurrent) || null;
+    }
+
+    // Сотворение заклинания (Invoke / R)
+    function castInvoke() {
+      const spell = getSpellFromOrbs(currentOrbs);
+      if (!spell) return;
+
+      lastInvokedEl.textContent = `${spell.name} (${spell.ru})`;
+      lastInvokedEl.style.color = '#f59e0b';
+
+      if (gameMode === 'timed') {
+        if (!isPlaying) startGame();
+
+        if (targetSpell && spell.id === targetSpell.id) {
+          // Успех!
+          score += 100 + combo * 15;
+          combo++;
+          statScore.textContent = score;
+          statCombo.textContent = 'x' + combo;
+          if (score > record) {
+            record = score;
+            localStorage.setItem('invoker_high_score', record);
+            statRecord.textContent = record;
+          }
+          soundInvokeSuccess();
+          targetBox.classList.remove('flash-correct');
+          void targetBox.offsetWidth;
+          targetBox.classList.add('flash-correct');
+          nextTarget();
+        } else {
+          // Ошибка
+          combo = 0;
+          statCombo.textContent = 'x0';
+          soundInvokeFail();
+          targetBox.classList.remove('flash-wrong');
+          void targetBox.offsetWidth;
+          targetBox.classList.add('flash-wrong');
+        }
+      } else {
+        soundInvokeSuccess();
+      }
+    }
+
+    // Выбор следующей цели
+    function nextTarget() {
+      const pool = SPELLS.filter(s => !targetSpell || s.id !== targetSpell.id);
+      targetSpell = pool[Math.floor(Math.random() * pool.length)];
+
+      targetName.textContent = targetSpell.name;
+      targetDots.innerHTML = targetSpell.orbs.map(o =>
+        `<span class="spell-dot dot-${o.toLowerCase()}"></span>`
+      ).join('');
+      targetKeys.textContent = targetSpell.orbs.join(' ') + ' + R';
+    }
+
+    // Старт игры на время
+    function startGame() {
+      isPlaying = true;
+      score = 0;
+      combo = 0;
+      timeLeft = 30.0;
+      statScore.textContent = '0';
+      statCombo.textContent = 'x0';
+      nextTarget();
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeLeft -= 0.1;
+        if (timeLeft <= 0) {
+          timeLeft = 0;
+          endGame();
+        }
+        statTime.textContent = timeLeft.toFixed(1) + 's';
+      }, 100);
+    }
+
+    function endGame() {
+      isPlaying = false;
+      clearInterval(timerInterval);
+      alert(`Время вышло! Ваш результат: ${score} очков. Рекорд: ${record}.`);
+      targetName.textContent = 'Нажмите Q, W, E, R для старта!';
+    }
+
+    // Обработка клавиатуры
+    window.addEventListener('keydown', e => {
+      const key = e.key.toUpperCase();
+      if (['Q', 'W', 'E', 'R'].includes(key)) {
+        e.preventDefault();
+        const btn = document.getElementById('btn-key-' + key.toLowerCase());
+        if (btn) {
+          btn.classList.add('pressed');
+          setTimeout(() => btn.classList.remove('pressed'), 120);
+        }
+        if (key === 'Q') addOrb('Q');
+        if (key === 'W') addOrb('W');
+        if (key === 'E') addOrb('E');
+        if (key === 'R') castInvoke();
+      }
+    });
+
+    // Обработка кликов / тачей по кнопкам
+    document.getElementById('btn-key-q').addEventListener('click', () => addOrb('Q'));
+    document.getElementById('btn-key-w').addEventListener('click', () => addOrb('W'));
+    document.getElementById('btn-key-e').addEventListener('click', () => addOrb('E'));
+    document.getElementById('btn-key-r').addEventListener('click', () => castInvoke());
+
+    // Переключение режимов
+    btnModeTimed.addEventListener('click', () => {
+      gameMode = 'timed';
+      btnModeTimed.classList.add('active');
+      btnModePractice.classList.remove('active');
+      statTime.style.display = 'block';
+      startGame();
+    });
+
+    btnModePractice.addEventListener('click', () => {
+      gameMode = 'practice';
+      isPlaying = false;
+      clearInterval(timerInterval);
+      btnModePractice.classList.add('active');
+      btnModeTimed.classList.remove('active');
+      statTime.textContent = 'Freeplay';
+      targetName.textContent = 'Свободная тренировка';
+      targetKeys.textContent = 'Сотворяйте любые заклинания';
+      targetDots.innerHTML = '';
+    });
+
+    // Инициализация
+    renderOrbs();
+    nextTarget();
+  </script>
+</body>
+</html>
