@@ -1156,63 +1156,96 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 16-канальная система видеонаблюдения друга команды (185.253.103.36)
-  const cctvGridCells = document.querySelectorAll('.cctv-cell');
-  const cctvMatrixView = document.getElementById('cctv-matrix-view');
-  const cctvSingleView = document.getElementById('cctv-single-view');
-  const cctvSingleImg = document.getElementById('cctv-single-img');
-  const cctvSingleLabel = document.getElementById('cctv-single-label');
-  const cctvCurrentIndicator = document.getElementById('cctv-current-ch-indicator');
-  const btnCctvGrid = document.getElementById('btn-cctv-mode-grid');
-  const btnCctvSingle = document.getElementById('btn-cctv-mode-single');
-  const btnCctvBack = document.getElementById('btn-cctv-back-grid');
-  const btnCctvPrev = document.getElementById('btn-cctv-prev');
-  const btnCctvNext = document.getElementById('btn-cctv-next');
-  let currentCctvIdx = 1;
+  // Система видеонаблюдения: Наш ресторан (82.119.149.206:8000, 25 активных камер)
+  const RESTAURANT_CAM_NAMES = [
+    'Камера 1 (Офис / Кабинет)',
+    'Камера 2 (Мойка / Раздача)',
+    'Камера 3 (Главный зал - Диваны)',
+    'Камера 4 (Кухня - Горячий цех)',
+    'Камера 5 (Кухня - Холодный цех)',
+    'Камера 6 (Банкетный зал)',
+    'Камера 7 (Барная стойка)',
+    'Камера 8 (Зал - Столы 1-4)',
+    'Камера 9 (Зал - Столы 5-8)',
+    'Камера 10 (Декоративный холл)',
+    'Камера 11 (Служебный коридор)',
+    'Камера 12 (VIP-зал)',
+    'Камера 13 (Веранда / Столики)',
+    'Камера 14 (Барная линия)',
+    'Камера 15 (Линия выдачи блюд)',
+    'Камера 16 (Служебный проход)',
+    'Камера 17 (Склад / Приёмка)',
+    'Камера 18 (Лестница / Мансарда)',
+    'Камера 19 (Холл / Входная группа)',
+    'Камера 20 (Вход / Гардероб)',
+    'Камера 21 (Двор / Парковка)',
+    'Камера 22 (Коридор персонала)',
+    'Камера 23 (Заготовочный цех)',
+    'Камера 24 (Служебная лестница)',
+    'Камера 25 (Заготовочный склад)'
+  ];
 
-  function showCctvSingle(idx) {
-    currentCctvIdx = idx;
-    if (cctvSingleImg) cctvSingleImg.src = `images/cctv/cam_${idx}.jpg`;
+  const cctvGridCells = document.querySelectorAll('#cctv-grid-cells .cctv-cell');
+  const cctvModalBackdrop = document.getElementById('cctv-modal-backdrop');
+  const cctvModalClose = document.getElementById('cctv-modal-close');
+  const cctvModalImg = document.getElementById('cctv-modal-img');
+  const cctvModalTitle = document.getElementById('cctv-modal-title');
+  const cctvModalBadge = document.getElementById('cctv-modal-badge-label');
+  const cctvModalCounter = document.getElementById('cctv-modal-counter');
+  const cctvModalPrev = document.getElementById('cctv-modal-prev');
+  const cctvModalNext = document.getElementById('cctv-modal-next');
+  let currentRestaurantCamIdx = 1;
+
+  function openCctvModal(idx) {
+    currentRestaurantCamIdx = idx;
+    const name = RESTAURANT_CAM_NAMES[idx - 1] || `Камера ${idx}`;
+    if (cctvModalImg) cctvModalImg.src = `images/restaurant_cctv/cam_${idx}.jpg`;
+    if (cctvModalTitle) cctvModalTitle.textContent = name;
+    if (cctvModalCounter) cctvModalCounter.textContent = `Камера ${idx} из 25`;
     const chFormatted = String(idx).padStart(2, '0');
-    if (cctvSingleLabel) cctvSingleLabel.textContent = `CH-${chFormatted} · 185.253.103.36:8000 (admin)`;
-    if (cctvCurrentIndicator) cctvCurrentIndicator.textContent = `Камера ${idx} из 16`;
-    if (cctvMatrixView) cctvMatrixView.hidden = true;
-    if (cctvSingleView) cctvSingleView.hidden = false;
-    if (btnCctvSingle) btnCctvSingle.classList.add('active');
-    if (btnCctvGrid) btnCctvGrid.classList.remove('active');
+    if (cctvModalBadge) cctvModalBadge.textContent = `CH-${chFormatted} · 82.119.149.206:8000 (admin)`;
+    if (cctvModalBackdrop) cctvModalBackdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
   }
 
-  function showCctvGrid() {
-    if (cctvMatrixView) cctvMatrixView.hidden = false;
-    if (cctvSingleView) cctvSingleView.hidden = true;
-    if (btnCctvGrid) btnCctvGrid.classList.add('active');
-    if (btnCctvSingle) btnCctvSingle.classList.remove('active');
+  function closeCctvModal() {
+    if (cctvModalBackdrop) cctvModalBackdrop.hidden = true;
+    document.body.style.overflow = '';
   }
 
   cctvGridCells.forEach(cell => {
     cell.addEventListener('click', () => {
       const idx = parseInt(cell.getAttribute('data-cam-idx'), 10) || 1;
-      showCctvSingle(idx);
+      openCctvModal(idx);
     });
   });
 
-  if (btnCctvGrid) btnCctvGrid.addEventListener('click', showCctvGrid);
-  if (btnCctvSingle) btnCctvSingle.addEventListener('click', () => showCctvSingle(currentCctvIdx));
-  if (btnCctvBack) btnCctvBack.addEventListener('click', showCctvGrid);
-
-  if (btnCctvPrev) {
-    btnCctvPrev.addEventListener('click', () => {
-      const prev = currentCctvIdx > 1 ? currentCctvIdx - 1 : 16;
-      showCctvSingle(prev);
+  if (cctvModalClose) cctvModalClose.addEventListener('click', closeCctvModal);
+  if (cctvModalBackdrop) {
+    cctvModalBackdrop.addEventListener('click', e => {
+      if (e.target === cctvModalBackdrop) closeCctvModal();
     });
   }
 
-  if (btnCctvNext) {
-    btnCctvNext.addEventListener('click', () => {
-      const next = currentCctvIdx < 16 ? currentCctvIdx + 1 : 1;
-      showCctvSingle(next);
+  if (cctvModalPrev) {
+    cctvModalPrev.addEventListener('click', () => {
+      const prev = currentRestaurantCamIdx > 1 ? currentRestaurantCamIdx - 1 : 25;
+      openCctvModal(prev);
     });
   }
+
+  if (cctvModalNext) {
+    cctvModalNext.addEventListener('click', () => {
+      const next = currentRestaurantCamIdx < 25 ? currentRestaurantCamIdx + 1 : 1;
+      openCctvModal(next);
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && cctvModalBackdrop && !cctvModalBackdrop.hidden) {
+      closeCctvModal();
+    }
+  });
 
   // Часы реального времени для видеонаблюдения
   function updateCctvClock() {
@@ -1221,9 +1254,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateStr = now.toLocaleDateString('ru-RU');
     const fullStr = `${timeStr} ${dateStr}`;
     const clockEl = document.getElementById('cctv-clock');
-    const sClockEl = document.getElementById('cctv-single-clock');
+    const mClockEl = document.getElementById('cctv-modal-clock');
     if (clockEl) clockEl.textContent = fullStr;
-    if (sClockEl) sClockEl.textContent = fullStr;
+    if (mClockEl) mClockEl.textContent = fullStr;
     document.querySelectorAll('.cctv-stamp-time').forEach(el => {
       el.textContent = timeStr;
     });
