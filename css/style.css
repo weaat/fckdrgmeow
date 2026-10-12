@@ -3695,6 +3695,44 @@ section .all-heroes-title::before {
   letter-spacing: 0.02em;
 }
 
+.cctv-modal-head-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cctv-mode-switcher {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.cctv-mode-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cctv-mode-btn:hover {
+  color: #fff;
+}
+
+.cctv-mode-btn.is-active {
+  background: var(--accent, #dc2626);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.45);
+}
+
 .cctv-modal-clock {
   font-family: monospace;
   font-size: 0.82rem;
@@ -3718,12 +3756,45 @@ section .all-heroes-title::before {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
 }
 
+.cctv-modal-stream {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #020617;
+}
+
+.cctv-modal-stream[hidden],
+.cctv-modal-player-wrap img[hidden] {
+  display: none !important;
+}
+
 .cctv-modal-player-wrap img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   background: #020617;
   display: block;
+}
+
+.cctv-modal-offline-notice {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  background: rgba(15, 23, 42, 0.94);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+  font-size: 0.75rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  z-index: 5;
+  text-align: center;
+}
+
+.cctv-modal-offline-notice[hidden] {
+  display: none !important;
 }
 
 .cctv-modal-nav {

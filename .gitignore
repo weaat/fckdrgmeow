@@ -28,3 +28,8 @@ __pycache__/
 # Submission build directories
 final_*
 scripts/prepare_final.ps1
+
+# Executable binaries and tools
+*.exe
+tools/
+

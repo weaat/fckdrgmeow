@@ -3021,17 +3021,27 @@
 
       <div class="cctv-modal-head">
         <div class="cctv-modal-status">
-          <span class="cam-rec-icon" aria-hidden="true">REC</span>
+          <span class="cam-rec-icon" id="cctv-modal-rec-badge" aria-hidden="true">LIVE STREAM</span>
           <h3 class="cctv-modal-title" id="cctv-modal-title">Камера 1 (Офис / Кабинет)</h3>
         </div>
-        <span id="cctv-modal-clock" class="cctv-modal-clock">07:36:14 10-12-2026</span>
+        <div class="cctv-modal-head-right">
+          <div class="cctv-mode-switcher" role="group" aria-label="Режим отображения камеры">
+            <button type="button" class="cctv-mode-btn is-active" id="cctv-mode-live">Видеопоток (Live)</button>
+            <button type="button" class="cctv-mode-btn" id="cctv-mode-photo">Стоп-кадр</button>
+          </div>
+          <span id="cctv-modal-clock" class="cctv-modal-clock">07:36:14 10-12-2026</span>
+        </div>
       </div>
 
-      <div class="cctv-modal-player-wrap">
-        <img id="cctv-modal-img" src="images/restaurant_cctv/cam_1.jpg" alt="Крупный план камеры">
+      <div class="cctv-modal-player-wrap" id="cctv-modal-player-wrap">
+        <iframe id="cctv-modal-stream" class="cctv-modal-stream" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <img id="cctv-modal-img" src="images/restaurant_cctv/cam_1.jpg" alt="Крупный план камеры" hidden>
         <div class="team-friend-cam-overlay-badge">
           <span class="cam-rec-icon" aria-hidden="true">LIVE</span>
-          <span id="cctv-modal-badge-label">82.119.149.206:8000 · admin</span>
+          <span id="cctv-modal-badge-label">CH-01 · 82.119.149.206:8000 (admin)</span>
+        </div>
+        <div class="cctv-modal-offline-notice" id="cctv-modal-offline-notice" hidden>
+          <span>Шлюз go2rtc не запущен на 127.0.0.1:1984. Показан стоп-кадр. Запустите start_stream_gateway.bat для живого видео.</span>
         </div>
       </div>
 
