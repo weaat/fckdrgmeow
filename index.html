@@ -1324,16 +1324,12 @@
         </div>
 
         <!-- ========================================================
-             ОНЛАЙН ВЕБ-КАМЕРА: ТУТ ЖИВЕТ ДРУГ НАШЕЙ КОМАНДЫ
+             ОНЛАЙН ВЕБ-КАМЕРА: ТУТ ЖИВЕТ ДРУГ
              ======================================================== -->
         <div class="team-friend-cam-card" id="team-friend-cam">
           <div class="team-friend-cam-head">
             <div class="team-friend-cam-info">
-              <div class="team-friend-cam-status">
-                <span class="cam-pulse-dot" aria-hidden="true"></span>
-                <span class="cam-status-label">LIVE STREAM</span>
-              </div>
-              <h4 class="team-friend-cam-title">Тут живет друг нашей команды</h4>
+              <h4 class="team-friend-cam-title">Тут живет друг</h4>
               <p class="team-friend-cam-sub">ул. Родосская, д. 3 · Прямая онлайн-трансляция двора и штаба</p>
             </div>
             <div class="team-friend-cam-controls">
@@ -1349,40 +1345,35 @@
           <div class="team-friend-cam-player-wrap">
             <iframe id="team-friend-cam-iframe"
                     src="https://stream.telko.ru/Rodos3_cam1/embed.html"
-                    title="Веб-камера: тут живет друг нашей команды"
+                    title="Веб-камера: тут живет друг"
                     allow="autoplay; fullscreen"
                     allowfullscreen
                     loading="lazy">
             </iframe>
             <div class="team-friend-cam-overlay-badge">
-              <span class="cam-rec-icon" aria-hidden="true">REC</span>
               <span id="cam-channel-label">Камера 1: ул. Родосская, д. 3</span>
             </div>
           </div>
         </div>
 
         <!-- ========================================================
-             ВТОРАЯ СИСТЕМА КАМЕР: ТУТ ЖИВЕТ ТОЖЕ ДРУГ НАШ (НАШ РЕСТОРАН)
+             РЕСТОРАН GAZBLOKI31.RU (25 КАМЕР)
              ======================================================== -->
         <div class="team-friend-cam-card team-friend-cam-card--matrix" id="team-friend-cam-2">
           <div class="team-friend-cam-head">
             <div class="team-friend-cam-info">
-              <div class="team-friend-cam-status">
-                <span class="cam-pulse-dot" aria-hidden="true"></span>
-                <span class="cam-status-label">CCTV SYSTEM · НАШ РЕСТОРАН (ПРЯМОЙ ЭФИР 25 КАМЕР)</span>
-              </div>
-              <h4 class="team-friend-cam-title">Тут живет тоже друг наш</h4>
-              <p class="team-friend-cam-sub">82.119.149.206:8000 · Логин: admin · Пароль: admin123 · Видеонаблюдение залов и кухни в прямом эфире</p>
+              <h4 class="team-friend-cam-title">Ресторан gazbloki31.ru</h4>
+              <p class="team-friend-cam-sub">82.119.149.206:8000 · Логин: admin · Пароль: admin123</p>
             </div>
             <div class="team-friend-cam-controls">
-              <span class="cctv-hint-badge">Нажмите на любую камеру для прямого эфира в реальном времени</span>
+              <span class="cctv-hint-badge">Нажмите на любую камеру для крупного плана</span>
             </div>
           </div>
 
           <!-- Консоль видеонаблюдения: сетка 25 активных камер ресторана -->
           <div class="cctv-matrix-container" id="cctv-matrix-view">
             <div class="cctv-matrix-topbar">
-              <span class="cctv-sys-name">Maintenance and Management · 82.119.149.206:8000 (Наш ресторан)</span>
+              <span class="cctv-sys-name">Ресторан gazbloki31.ru · 82.119.149.206:8000</span>
               <span class="cctv-live-clock" id="cctv-clock">07:36:14 10-12-2026</span>
             </div>
             <div class="cctv-grid-restaurant" id="cctv-grid-cells">
@@ -3045,18 +3036,8 @@
       <button type="button" class="cctv-modal__close" id="cctv-modal-close" aria-label="Закрыть камеру">✕</button>
 
       <div class="cctv-modal-head">
-        <div class="cctv-modal-status">
-          <span class="cam-rec-icon" id="cctv-modal-rec-badge" aria-hidden="true">LIVE STREAM</span>
-          <h3 class="cctv-modal-title" id="cctv-modal-title">Камера 1 (Офис / Кабинет)</h3>
-        </div>
-        <div class="cctv-modal-head-right">
-          <div class="cctv-mode-switcher" role="group" aria-label="Режим отображения камеры">
-            <button type="button" class="cctv-mode-btn is-active" id="cctv-mode-live">Прямой эфир (Live)</button>
-            <button type="button" class="cctv-mode-btn" id="cctv-mode-record">Видеозапись</button>
-            <button type="button" class="cctv-mode-btn" id="cctv-mode-photo">Стоп-кадр</button>
-          </div>
-          <span id="cctv-modal-clock" class="cctv-modal-clock">07:36:14 10-12-2026</span>
-        </div>
+        <h3 class="cctv-modal-title" id="cctv-modal-title">Камера 1 (Офис / Кабинет)</h3>
+        <span id="cctv-modal-clock" class="cctv-modal-clock">07:36:14 10-12-2026</span>
       </div>
 
       <div class="cctv-modal-player-wrap" id="cctv-modal-player-wrap">
@@ -3064,11 +3045,10 @@
         <video id="cctv-modal-video" class="cctv-modal-video" src="" loop muted playsinline controls hidden></video>
         <img id="cctv-modal-img" src="images/restaurant_cctv/cam_1.jpg" alt="Крупный план камеры" hidden>
         <div class="team-friend-cam-overlay-badge">
-          <span class="cam-rec-icon" id="cctv-modal-badge-status" aria-hidden="true">LIVE</span>
           <span id="cctv-modal-badge-label">CH-01 · 82.119.149.206:8000 (admin)</span>
         </div>
         <div class="cctv-modal-offline-notice" id="cctv-modal-offline-notice" hidden>
-          <span>Шлюз go2rtc не запущен на 127.0.0.1:1984. Для прямого эфира запустите start_stream_gateway.bat (показана запись).</span>
+          <span>Шлюз go2rtc не запущен на 127.0.0.1:1984. Для прямого эфира запустите start_stream_gateway.bat.</span>
         </div>
       </div>
 

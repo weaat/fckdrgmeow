@@ -1193,17 +1193,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const cctvModalStream = document.getElementById('cctv-modal-stream');
   const cctvModalTitle = document.getElementById('cctv-modal-title');
   const cctvModalBadge = document.getElementById('cctv-modal-badge-label');
-  const cctvModalBadgeStatus = document.getElementById('cctv-modal-badge-status');
   const cctvModalCounter = document.getElementById('cctv-modal-counter');
   const cctvModalPrev = document.getElementById('cctv-modal-prev');
   const cctvModalNext = document.getElementById('cctv-modal-next');
-  const cctvModeRecord = document.getElementById('cctv-mode-record');
-  const cctvModeLive = document.getElementById('cctv-mode-live');
-  const cctvModePhoto = document.getElementById('cctv-mode-photo');
   const cctvOfflineNotice = document.getElementById('cctv-modal-offline-notice');
-  const cctvModalRecBadge = document.getElementById('cctv-modal-rec-badge');
   let currentRestaurantCamIdx = 1;
-  let cctvViewMode = 'live';
 
   const cctvGridStreams = document.querySelectorAll('#cctv-grid-cells .cctv-cell-stream');
   const cctvGridVideos = document.querySelectorAll('#cctv-grid-cells .cctv-cell-video');
@@ -1225,80 +1219,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   checkGridStreamGateway();
 
-  function renderModalMedia(idx) {
-    if (cctvModalImg) cctvModalImg.src = `images/restaurant_cctv/cam_${idx}.jpg`;
-
-    if (cctvViewMode === 'live') {
-      if (cctvModalVideo) {
-        cctvModalVideo.hidden = true;
-        cctvModalVideo.pause();
-        cctvModalVideo.src = '';
-      }
-      if (cctvModalImg) cctvModalImg.hidden = true;
-      if (cctvModalStream) {
-        cctvModalStream.hidden = false;
-        cctvModalStream.src = `http://127.0.0.1:1984/stream.html?src=cam${idx}&background=false`;
-      }
-      if (cctvModalRecBadge) cctvModalRecBadge.textContent = 'LIVE STREAM';
-      if (cctvModalBadgeStatus) cctvModalBadgeStatus.textContent = 'LIVE';
-
-      // Проверка доступности локального шлюза go2rtc
-      fetch('http://127.0.0.1:1984/api/streams', { method: 'GET', mode: 'no-cors', cache: 'no-store' })
-        .then(() => {
-          if (cctvOfflineNotice) cctvOfflineNotice.hidden = true;
-        })
-        .catch(() => {
-          if (cctvOfflineNotice) cctvOfflineNotice.hidden = false;
-          if (cctvModalVideo) {
-            cctvModalVideo.hidden = false;
-            cctvModalVideo.src = `videos/restaurant_cctv/cam_${idx}.mp4`;
-            cctvModalVideo.play().catch(() => {});
-          }
-        });
-    } else if (cctvViewMode === 'record') {
-      if (cctvModalStream) {
-        cctvModalStream.hidden = true;
-        cctvModalStream.src = '';
-      }
-      if (cctvModalImg) cctvModalImg.hidden = true;
-      if (cctvOfflineNotice) cctvOfflineNotice.hidden = true;
-      if (cctvModalVideo) {
-        cctvModalVideo.hidden = false;
-        cctvModalVideo.src = `videos/restaurant_cctv/cam_${idx}.mp4`;
-        cctvModalVideo.play().catch(() => {});
-      }
-      if (cctvModalRecBadge) cctvModalRecBadge.textContent = 'RECORDING';
-      if (cctvModalBadgeStatus) cctvModalBadgeStatus.textContent = 'REC';
-    } else {
-      if (cctvModalVideo) {
-        cctvModalVideo.hidden = true;
-        cctvModalVideo.pause();
-        cctvModalVideo.src = '';
-      }
-      if (cctvModalStream) {
-        cctvModalStream.hidden = true;
-        cctvModalStream.src = '';
-      }
-      if (cctvModalImg) cctvModalImg.hidden = false;
-      if (cctvOfflineNotice) cctvOfflineNotice.hidden = true;
-      if (cctvModalRecBadge) cctvModalRecBadge.textContent = 'SNAPSHOT';
-      if (cctvModalBadgeStatus) cctvModalBadgeStatus.textContent = 'PHOTO';
-    }
-  }
-
-  function setCctvViewMode(mode) {
-    cctvViewMode = mode;
-    [cctvModeLive, cctvModeRecord, cctvModePhoto].forEach(btn => btn?.classList.remove('is-active'));
-    if (mode === 'live' && cctvModeLive) cctvModeLive.classList.add('is-active');
-    else if (mode === 'record' && cctvModeRecord) cctvModeRecord.classList.add('is-active');
-    else if (mode === 'photo' && cctvModePhoto) cctvModePhoto.classList.add('is-active');
-    renderModalMedia(currentRestaurantCamIdx);
-  }
-
-  if (cctvModeLive) cctvModeLive.addEventListener('click', () => setCctvViewMode('live'));
-  if (cctvModeRecord) cctvModeRecord.addEventListener('click', () => setCctvViewMode('record'));
-  if (cctvModePhoto) cctvModePhoto.addEventListener('click', () => setCctvViewMode('photo'));
-
   function openCctvModal(idx) {
     currentRestaurantCamIdx = idx;
     const name = RESTAURANT_CAM_NAMES[idx - 1] || `Камера ${idx}`;
@@ -1307,7 +1227,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const chFormatted = String(idx).padStart(2, '0');
     if (cctvModalBadge) cctvModalBadge.textContent = `CH-${chFormatted} · 82.119.149.206:8000 (admin)`;
 
-    setCctvViewMode('live');
+    if (cctvModalStream) {
+      cctvModalStream.hidden = false;
+      cctvModalStream.src = `http://127.0.0.1:1984/stream.html?src=cam${idx}&background=false`;
+    }
+    if (cctvModalVideo) {
+      cctvModalVideo.hidden = true;
+      cctvModalVideo.pause();
+      cctvModalVideo.src = '';
+    }
+    if (cctvModalImg) {
+      cctvModalImg.hidden = true;
+      cctvModalImg.src = `images/restaurant_cctv/cam_${idx}.jpg`;
+    }
+
+    // Проверка доступности локального шлюза go2rtc
+    fetch('http://127.0.0.1:1984/api/streams', { method: 'GET', mode: 'no-cors', cache: 'no-store' })
+      .then(() => {
+        if (cctvOfflineNotice) cctvOfflineNotice.hidden = true;
+      })
+      .catch(() => {
+        if (cctvOfflineNotice) cctvOfflineNotice.hidden = false;
+        if (cctvModalVideo) {
+          cctvModalVideo.hidden = false;
+          cctvModalVideo.src = `videos/restaurant_cctv/cam_${idx}.mp4`;
+          cctvModalVideo.play().catch(() => {});
+        }
+      });
 
     if (cctvModalBackdrop) cctvModalBackdrop.hidden = false;
     document.body.style.overflow = 'hidden';
