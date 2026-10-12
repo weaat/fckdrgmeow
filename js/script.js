@@ -1134,6 +1134,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Переключение каналов веб-камеры друга команды
+  const btnCam1 = document.getElementById('btn-cam-channel-1');
+  const btnCam2 = document.getElementById('btn-cam-channel-2');
+  const camIframe = document.getElementById('team-friend-cam-iframe');
+  const camLabel = document.getElementById('cam-channel-label');
+
+  if (btnCam1 && btnCam2 && camIframe) {
+    btnCam1.addEventListener('click', () => {
+      btnCam1.classList.add('active');
+      btnCam2.classList.remove('active');
+      camIframe.src = 'https://stream.telko.ru/Rodos3_cam1/embed.html';
+      if (camLabel) camLabel.textContent = 'Камера 1: ул. Родосская, д. 3';
+    });
+
+    btnCam2.addEventListener('click', () => {
+      btnCam2.classList.add('active');
+      btnCam1.classList.remove('active');
+      camIframe.src = 'https://stream.telko.ru/Rodos3_cam2/embed.html';
+      if (camLabel) camLabel.textContent = 'Камера 2: ул. Родосская, д. 3';
+    });
+  }
+
   // Первый рендер при загрузке
   renderTeams();
 
