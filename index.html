@@ -1360,6 +1360,138 @@
             </div>
           </div>
         </div>
+
+        <!-- ========================================================
+             ВТОРАЯ СИСТЕМА КАМЕР: ТУТ ЖИВЕТ ТОЖЕ ДРУГ НАШ (16CH CCTV)
+             ======================================================== -->
+        <div class="team-friend-cam-card team-friend-cam-card--matrix" id="team-friend-cam-2">
+          <div class="team-friend-cam-head">
+            <div class="team-friend-cam-info">
+              <div class="team-friend-cam-status">
+                <span class="cam-pulse-dot" aria-hidden="true"></span>
+                <span class="cam-status-label">CCTV SYSTEM · 16 CHANNELS</span>
+              </div>
+              <h4 class="team-friend-cam-title">Тут живет тоже друг наш</h4>
+              <p class="team-friend-cam-sub">185.253.103.36:8000 · Логин: admin · Пароль: admin · Hikvision DVR</p>
+            </div>
+            <div class="team-friend-cam-controls">
+              <button type="button" class="cam-switch-btn active" id="btn-cctv-mode-grid" title="Сетка 4x4 (все 16 камер)">
+                Сетка 4x4 (16 камер)
+              </button>
+              <button type="button" class="cam-switch-btn" id="btn-cctv-mode-single" title="Крупный план одной камеры">
+                Крупный план
+              </button>
+            </div>
+          </div>
+
+          <!-- Консоль видеонаблюдения: 4x4 сетка матрица -->
+          <div class="cctv-matrix-container" id="cctv-matrix-view">
+            <div class="cctv-matrix-topbar">
+              <span class="cctv-sys-name">Maintenance and Management · 185.253.103.36</span>
+              <span class="cctv-live-clock" id="cctv-clock">07:27:58 10-12-2026</span>
+            </div>
+            <div class="cctv-grid-4x4" id="cctv-grid-cells">
+              <div class="cctv-cell" data-cam-idx="1" title="Нажмите, чтобы открыть Камеру 1">
+                <img src="images/cctv/cam_1.jpg" alt="CH-01" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-01</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="2" title="Нажмите, чтобы открыть Камеру 2">
+                <img src="images/cctv/cam_2.jpg" alt="CH-02" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-02</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="3" title="Нажмите, чтобы открыть Камеру 3">
+                <img src="images/cctv/cam_3.jpg" alt="CH-03" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-03</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="4" title="Нажмите, чтобы открыть Камеру 4">
+                <img src="images/cctv/cam_4.jpg" alt="CH-04" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-04</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="5" title="Нажмите, чтобы открыть Камеру 5">
+                <img src="images/cctv/cam_5.jpg" alt="CH-05" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-05</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="6" title="Нажмите, чтобы открыть Камеру 6">
+                <img src="images/cctv/cam_6.jpg" alt="CH-06" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-06</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="7" title="Нажмите, чтобы открыть Камеру 7">
+                <img src="images/cctv/cam_7.jpg" alt="CH-07" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-07</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="8" title="Нажмите, чтобы открыть Камеру 8">
+                <img src="images/cctv/cam_8.jpg" alt="CH-08" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-08</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="9" title="Нажмите, чтобы открыть Камеру 9">
+                <img src="images/cctv/cam_9.jpg" alt="CH-09" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-09</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="10" title="Нажмите, чтобы открыть Камеру 10">
+                <img src="images/cctv/cam_10.jpg" alt="CH-10" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-10</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="11" title="Нажмите, чтобы открыть Камеру 11">
+                <img src="images/cctv/cam_11.jpg" alt="CH-11" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-11</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="12" title="Нажмите, чтобы открыть Камеру 12">
+                <img src="images/cctv/cam_12.jpg" alt="CH-12" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-12</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="13" title="Нажмите, чтобы открыть Камеру 13">
+                <img src="images/cctv/cam_13.jpg" alt="CH-13" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-13</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="14" title="Нажмите, чтобы открыть Камеру 14">
+                <img src="images/cctv/cam_14.jpg" alt="CH-14" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-14</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="15" title="Нажмите, чтобы открыть Камеру 15">
+                <img src="images/cctv/cam_15.jpg" alt="CH-15" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-15</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+              <div class="cctv-cell" data-cam-idx="16" title="Нажмите, чтобы открыть Камеру 16">
+                <img src="images/cctv/cam_16.jpg" alt="CH-16" class="cctv-cell-img" loading="lazy">
+                <div class="cctv-cell-bar"><span class="cctv-cell-ch">CH-16</span><span class="cctv-cell-rec"></span></div>
+                <span class="cctv-cell-time cctv-stamp-time">07:27:58</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Режим крупного плана выбранной камеры -->
+          <div class="cctv-single-view" id="cctv-single-view" hidden>
+            <div class="cctv-single-player-wrap">
+              <img id="cctv-single-img" src="images/cctv/cam_1.jpg" alt="Крупный план камеры">
+              <div class="team-friend-cam-overlay-badge">
+                <span class="cam-rec-icon" aria-hidden="true">REC</span>
+                <span id="cctv-single-label">CH-01 · 185.253.103.36:8000 (admin)</span>
+              </div>
+              <span class="cctv-single-clock" id="cctv-single-clock">07:27:58 10-12-2026</span>
+            </div>
+            <div class="cctv-single-nav">
+              <button type="button" class="cctv-nav-btn" id="btn-cctv-prev">Предыдущая</button>
+              <span class="cctv-current-ch-indicator" id="cctv-current-ch-indicator">Камера 1 из 16</span>
+              <button type="button" class="cctv-nav-btn" id="btn-cctv-next">Следующая</button>
+              <button type="button" class="cctv-nav-btn cctv-nav-btn--back" id="btn-cctv-back-grid">Вернуться к 16 камерам</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Вкладки: Зарегистрированные / На рассмотрении -->

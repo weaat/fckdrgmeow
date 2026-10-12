@@ -1156,6 +1156,81 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 16-канальная система видеонаблюдения друга команды (185.253.103.36)
+  const cctvGridCells = document.querySelectorAll('.cctv-cell');
+  const cctvMatrixView = document.getElementById('cctv-matrix-view');
+  const cctvSingleView = document.getElementById('cctv-single-view');
+  const cctvSingleImg = document.getElementById('cctv-single-img');
+  const cctvSingleLabel = document.getElementById('cctv-single-label');
+  const cctvCurrentIndicator = document.getElementById('cctv-current-ch-indicator');
+  const btnCctvGrid = document.getElementById('btn-cctv-mode-grid');
+  const btnCctvSingle = document.getElementById('btn-cctv-mode-single');
+  const btnCctvBack = document.getElementById('btn-cctv-back-grid');
+  const btnCctvPrev = document.getElementById('btn-cctv-prev');
+  const btnCctvNext = document.getElementById('btn-cctv-next');
+  let currentCctvIdx = 1;
+
+  function showCctvSingle(idx) {
+    currentCctvIdx = idx;
+    if (cctvSingleImg) cctvSingleImg.src = `images/cctv/cam_${idx}.jpg`;
+    const chFormatted = String(idx).padStart(2, '0');
+    if (cctvSingleLabel) cctvSingleLabel.textContent = `CH-${chFormatted} · 185.253.103.36:8000 (admin)`;
+    if (cctvCurrentIndicator) cctvCurrentIndicator.textContent = `Камера ${idx} из 16`;
+    if (cctvMatrixView) cctvMatrixView.hidden = true;
+    if (cctvSingleView) cctvSingleView.hidden = false;
+    if (btnCctvSingle) btnCctvSingle.classList.add('active');
+    if (btnCctvGrid) btnCctvGrid.classList.remove('active');
+  }
+
+  function showCctvGrid() {
+    if (cctvMatrixView) cctvMatrixView.hidden = false;
+    if (cctvSingleView) cctvSingleView.hidden = true;
+    if (btnCctvGrid) btnCctvGrid.classList.add('active');
+    if (btnCctvSingle) btnCctvSingle.classList.remove('active');
+  }
+
+  cctvGridCells.forEach(cell => {
+    cell.addEventListener('click', () => {
+      const idx = parseInt(cell.getAttribute('data-cam-idx'), 10) || 1;
+      showCctvSingle(idx);
+    });
+  });
+
+  if (btnCctvGrid) btnCctvGrid.addEventListener('click', showCctvGrid);
+  if (btnCctvSingle) btnCctvSingle.addEventListener('click', () => showCctvSingle(currentCctvIdx));
+  if (btnCctvBack) btnCctvBack.addEventListener('click', showCctvGrid);
+
+  if (btnCctvPrev) {
+    btnCctvPrev.addEventListener('click', () => {
+      const prev = currentCctvIdx > 1 ? currentCctvIdx - 1 : 16;
+      showCctvSingle(prev);
+    });
+  }
+
+  if (btnCctvNext) {
+    btnCctvNext.addEventListener('click', () => {
+      const next = currentCctvIdx < 16 ? currentCctvIdx + 1 : 1;
+      showCctvSingle(next);
+    });
+  }
+
+  // Часы реального времени для видеонаблюдения
+  function updateCctvClock() {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('ru-RU', { hour12: false });
+    const dateStr = now.toLocaleDateString('ru-RU');
+    const fullStr = `${timeStr} ${dateStr}`;
+    const clockEl = document.getElementById('cctv-clock');
+    const sClockEl = document.getElementById('cctv-single-clock');
+    if (clockEl) clockEl.textContent = fullStr;
+    if (sClockEl) sClockEl.textContent = fullStr;
+    document.querySelectorAll('.cctv-stamp-time').forEach(el => {
+      el.textContent = timeStr;
+    });
+  }
+  setInterval(updateCctvClock, 1000);
+  updateCctvClock();
+
   // Первый рендер при загрузке
   renderTeams();
 
