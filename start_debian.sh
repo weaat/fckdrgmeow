@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ============================================================
-#  DotaArena 2026 - Zapuskator dlya Debian Linux
-#  Avtomaticheski zapuskaet server (server.py) i shlyuz kamer (go2rtc)
+#  DotaArena 2026 - Zapuskator dlya Debian / Ubuntu Linux
+#  Zapusk: bash start.sh
 # ============================================================
 
 set -e
@@ -10,14 +10,14 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 cd "$DIR"
 
 echo "============================================================"
-echo "  Zapusk DotaArena 2026 i CCTV kamer (Debian Linux)"
+echo "  Zapusk DotaArena 2026 i CCTV kamer (Linux)"
 echo "============================================================"
 echo ""
 
 # 1. Proverka Python 3
 if ! command -v python3 >/dev/null 2>&1; then
     echo "[!] Python 3 ne nayden v sisteme."
-    echo "    Ustanovite ego komandoy: sudo apt update && sudo apt install -y python3"
+    echo "    Ustanovite ego komandoy: sudo apt update && sudo apt install -y python3 curl"
     exit 1
 fi
 
@@ -52,7 +52,7 @@ if [ ! -f "./go2rtc" ]; then
         exit 1
     fi
 
-    chmod +x "./go2rtc"
+    chmod +x "./go2rtc" 2>/dev/null || true
     echo "[OK] go2rtc uspeshno skachan i podgotovlen."
 fi
 
@@ -74,6 +74,7 @@ trap cleanup INT TERM EXIT
 
 # 4. Zapusk shlyuza potokovogo video go2rtc
 echo "[1/2] Zapusk shlyuza kamer go2rtc (port 1984)..."
+chmod +x ./go2rtc 2>/dev/null || true
 ./go2rtc -config ./go2rtc.yaml >/dev/null 2>&1 &
 GO2RTC_PID=$!
 
