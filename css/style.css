@@ -3650,6 +3650,177 @@ section .all-heroes-title::before {
   100% { transform: scale(1.05); opacity: 1; }
 }
 
+/* ============================================================
+   ПЛАШКА ПРЯМОГО ЭФИРА GAZBLOKI31.RU В СЕТКЕ МАТЧЕЙ
+   ============================================================ */
+.bracket-team-spotlight {
+  width: 100%;
+  margin-top: 0.85rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.18) 0%, rgba(8, 24, 56, 0.95) 60%, rgba(2, 6, 23, 0.98) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.55);
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(14, 165, 233, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: spotlightFadeIn 0.4s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.bracket-team-spotlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #38bdf8, #0ea5e9);
+  box-shadow: 0 0 12px #38bdf8;
+}
+
+@keyframes spotlightFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.spotlight-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.spotlight-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 50px;
+  background: rgba(220, 38, 38, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #f87171;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.spotlight-badge .live-pulse-dot {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+.spotlight-match-title {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.spotlight-content {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  flex-wrap: wrap;
+}
+
+.spotlight-avatars {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.spotlight-avatar-player {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+}
+
+.spotlight-avatar-hero {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #e0f2fe;
+  background: #000;
+  margin-left: -12px;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+  animation: heroIconBounce 2s infinite ease-in-out;
+}
+
+@keyframes heroIconBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.spotlight-info {
+  flex: 1;
+  min-width: 240px;
+}
+
+.spotlight-title {
+  font-size: 0.95rem;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.spotlight-title strong {
+  color: #38bdf8;
+}
+
+.spotlight-hero-name {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.spotlight-player-role {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.spotlight-action-text {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #e2e8f0;
+  margin: 0;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px dashed rgba(56, 189, 248, 0.35);
+}
+
+.bracket-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  background: rgba(14, 165, 233, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-left: 0.45rem;
+  flex-shrink: 0;
+}
+
+.bracket-hero-tag img {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
 /* Тултипы героев */
 .team[data-heroes]::after {
   content: attr(data-heroes);

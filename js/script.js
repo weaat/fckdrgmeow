@@ -664,15 +664,133 @@ document.addEventListener('DOMContentLoaded', () => {
   let tournamentSimTimeoutId = null;
   let isTournamentActive = false;
 
+  // ============================================================
+  //  СИГНАТУРНЫЕ ГЕРОИ И ХАЙЛАЙТЫ ИГРОКОВ GAZBLOKI31.RU
+  // ============================================================
+  const GAZBLOKI_SIGNATURE_HEROES = [
+    {
+      player: 'Тимур «cursedkaneki???»',
+      hero: 'Lifestealer',
+      heroKey: 'life_stealer',
+      icon: 'images/heroes/life_stealer.png',
+      avatar: 'images/teams/gazbloki31/player2.jpg',
+      role: 'Керри (Поз. 1)',
+      highlights: [
+        'врывается в Infest-бомбе и стирает вражеского саппорта за 2 секунды!',
+        'забирает Рошана в соло и выбивает Aegis для победного пуша!',
+        'включает Rage и разносит трон прямо под атаками фонтана!',
+        'оформляет красивейший Rampage на хайграунде оппонентов!'
+      ]
+    },
+    {
+      player: 'Тимур «cursedkaneki???»',
+      hero: 'Phantom Lancer',
+      heroKey: 'phantom_lancer',
+      icon: 'images/heroes/phantom_lancer.png',
+      avatar: 'images/teams/gazbloki31/player2.jpg',
+      role: 'Керри (Поз. 1)',
+      highlights: [
+        'создает армию иллюзий, выжигая всю ману оппонентов с Diffusal Blade!',
+        'уворачивается Доппельгангером от двух ультимейтов и сносит бараки!',
+        'с армией из 25 копий хоронит надежды врага на камбэк!'
+      ]
+    },
+    {
+      player: 'Даниил «jewelxxet»',
+      hero: 'Storm Spirit',
+      heroKey: 'storm_spirit',
+      icon: 'images/heroes/storm_spirit.png',
+      avatar: 'images/teams/gazbloki31/player5.jpg',
+      role: 'Мидлейнер (Поз. 2)',
+      highlights: [
+        'влетает на Ball Lightning через полкарты и ваншотит мидера!',
+        'крутит вихрь Vortex и забирает врага соло под чужой Т2 вышкой!',
+        'выдаёт сумасшедший хайлайт на миде и улетает в туман войны без царапины!'
+      ]
+    },
+    {
+      player: 'Даниил «jewelxxet»',
+      hero: 'Shadow Fiend',
+      heroKey: 'nevermore',
+      icon: 'images/heroes/nevermore.png',
+      avatar: 'images/teams/gazbloki31/player5.jpg',
+      role: 'Мидлейнер (Поз. 2)',
+      highlights: [
+        'даёт тройной койл Z-X-C сквозь туман войны и забирает First Blood!',
+        'кастует ультимейт Requiem of Souls прямо из инвиза в пятерых врагов!',
+        'сметает центральную линию с перевесом в 36 поглощённых душ!'
+      ]
+    },
+    {
+      player: 'Женька «skr1ch»',
+      hero: 'Pudge',
+      heroKey: 'pudge',
+      icon: 'images/heroes/pudge.png',
+      avatar: 'images/teams/gazbloki31/player4.jpg',
+      role: 'Оффлейнер (Поз. 3)',
+      highlights: [
+        'выдаёт ювелирный Blind Meat Hook сквозь деревья и съедает вражеского керри!',
+        'набивает 18 стаков Flesh Heap и танчит вышки оппонента в соло!',
+        'переворачивает тимфайт сокрушительным Dismember под действием BKB!'
+      ]
+    },
+    {
+      player: 'Женька «skr1ch»',
+      hero: 'Viper',
+      heroKey: 'viper',
+      icon: 'images/heroes/viper.png',
+      avatar: 'images/teams/gazbloki31/player4.jpg',
+      role: 'Оффлейнер (Поз. 3)',
+      highlights: [
+        'заливает лужу Nethertoxin и отключает все пассивки врагов!',
+        'доминирует на сложной линии, наглухо закрыв фарм вражескому керри!'
+      ]
+    },
+    {
+      player: 'Артур «ar7yexe»',
+      hero: 'Enigma',
+      heroKey: 'enigma',
+      icon: 'images/heroes/enigma.png',
+      avatar: 'images/teams/gazbloki31/player3.jpg',
+      role: 'Поддержка (Поз. 4)',
+      highlights: [
+        'выдаёт сокрушительный Black Hole по 4 героям оппонентов с Blink Dagger!',
+        'переворачивает безнадёжную драку в пользу команды одним идеальным кастом!'
+      ]
+    },
+    {
+      player: 'Ксения «chyug»',
+      hero: 'Crystal Maiden',
+      heroKey: 'crystal_maiden',
+      icon: 'images/heroes/crystal_maiden.png',
+      avatar: 'images/teams/gazbloki31/player1.jpg',
+      role: 'Полная поддержка (Поз. 5)',
+      highlights: [
+        'кастует ультимейт Freezing Field с BKB и замораживает всю команду противника!',
+        'сейвит капитана точнейшим Frostbite и ставит решающий победный вард!'
+      ]
+    }
+  ];
+
   /** Рассчитывает исход матча и счёт */
   function simulateMatch(teamA, teamB, isBo5 = false) {
     if (!teamA || !teamB) {
       return { winner: teamA || teamB || { name: 'TBD' }, loser: { name: 'TBD' }, scoreA: 0, scoreB: 0, aWins: true };
     }
-    const mmrA = teamA.mmr || 10000;
-    const mmrB = teamB.mmr || 10000;
-    const probA = 0.5 + (mmrA - mmrB) / 9000;
-    const aWins = Math.random() < Math.max(0.25, Math.min(0.75, probA));
+    const isGazA = (teamA.name || '').toLowerCase() === 'gazbloki31.ru';
+    const isGazB = (teamB.name || '').toLowerCase() === 'gazbloki31.ru';
+
+    let aWins = false;
+    if (isGazA) {
+      aWins = Math.random() < 0.88; // gazbloki31.ru уверенно побеждают
+    } else if (isGazB) {
+      aWins = Math.random() < 0.12; // gazbloki31.ru уверенно побеждают
+    } else {
+      const mmrA = teamA.mmr || 10000;
+      const mmrB = teamB.mmr || 10000;
+      const probA = 0.5 + (mmrA - mmrB) / 9000;
+      aWins = Math.random() < Math.max(0.25, Math.min(0.75, probA));
+    }
 
     let scoreA, scoreB;
     if (isBo5) {
@@ -694,8 +812,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  /** Отображает команду и её счёт в слоте сетки */
-  function renderSlot(slotId, team, score = null, isWinner = false, isLoser = false) {
+  /** Отображает команду и её счёт в слоте сетки с поддержкой сигнатурного героя */
+  function renderSlot(slotId, team, score = null, isWinner = false, isLoser = false, heroBadge = null) {
     const el = document.querySelector(`[data-slot="${slotId}"]`);
     if (!el) return;
     el.classList.remove('bracket-team--winner', 'bracket-team--loser', 'filled', 'bracket-team--playing');
@@ -712,9 +830,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const scoreHtml = (score !== null)
       ? `<b class="bracket-team__score">${score}</b>`
       : '';
-    el.innerHTML = `<span class="bracket-team__name">${team.name}</span>${scoreHtml}`;
+
+    const heroHtml = heroBadge
+      ? `<span class="bracket-hero-tag" title="${heroBadge.player}: ${heroBadge.hero}">
+           <img src="${heroBadge.icon}" alt="${heroBadge.hero}">
+           <span>${heroBadge.hero}</span>
+         </span>`
+      : '';
+
+    el.innerHTML = `<span class="bracket-team__name">${team.name}</span>${heroHtml}${scoreHtml}`;
     el.title = [
       team.name,
+      heroBadge ? `· Выбран герой: ${heroBadge.hero} (${heroBadge.player})` : '',
       team.region ? '· ' + team.region : '',
       team.mmr    ? '· ' + team.mmr + ' MMR' : '',
       '· Нажмите для просмотра состава'
@@ -840,13 +967,59 @@ document.addEventListener('DOMContentLoaded', () => {
     if (elA) elA.classList.add('bracket-team--playing');
     if (elB) elB.classList.add('bracket-team--playing');
 
+    // Проверяем, играет ли наша команда gazbloki31.ru
+    const isGazA = (teamA.name || '').toLowerCase() === 'gazbloki31.ru';
+    const isGazB = (teamB.name || '').toLowerCase() === 'gazbloki31.ru';
+    const isGazblokiPlaying = isGazA || isGazB;
+
+    let pick1 = null;
+    let pick2 = null;
+    const spotlightEl = document.getElementById('bracket-team-spotlight');
+    const spotMatchTitle = document.getElementById('spotlight-match-title');
+    const spotPlayerAvatar = document.getElementById('spotlight-player-avatar');
+    const spotHeroIcon = document.getElementById('spotlight-hero-icon');
+    const spotPlayerName = document.getElementById('spotlight-player-name');
+    const spotHeroName = document.getElementById('spotlight-hero-name');
+    const spotPlayerRole = document.getElementById('spotlight-player-role');
+    const spotActionText = document.getElementById('spotlight-action-text');
+
+    if (isGazblokiPlaying) {
+      pick1 = GAZBLOKI_SIGNATURE_HEROES[Math.floor(Math.random() * GAZBLOKI_SIGNATURE_HEROES.length)];
+      const otherPicks = GAZBLOKI_SIGNATURE_HEROES.filter(p => p.player !== pick1.player);
+      pick2 = otherPicks[Math.floor(Math.random() * otherPicks.length)] || pick1;
+
+      if (spotlightEl) {
+        spotlightEl.hidden = false;
+        if (spotMatchTitle) spotMatchTitle.textContent = matchDef.title;
+        if (spotPlayerAvatar) spotPlayerAvatar.src = pick1.avatar;
+        if (spotHeroIcon) spotHeroIcon.src = pick1.icon;
+        if (spotPlayerName) spotPlayerName.textContent = pick1.player;
+        if (spotHeroName) spotHeroName.textContent = pick1.hero;
+        if (spotPlayerRole) spotPlayerRole.textContent = pick1.role;
+        if (spotActionText) {
+          spotActionText.textContent = `Пик команды: ${pick1.player} выбирает сигнатурного ${pick1.hero}! Команда готова к сражению.`;
+        }
+      }
+    } else {
+      if (spotlightEl) spotlightEl.hidden = true;
+    }
+
     // Расчет серии
     const simResult = simulateMatch(teamA, teamB, matchDef.isBo5);
 
-    // Генерируем пошаговые счета карт (0:0 -> 1:0 -> 1:1 -> 2:1)
+    // Генерируем пошаговые счета карт (0:0 -> 1:0 -> 1:1 -> 2:1) и игровые моменты
     const frames = [];
     let curA = 0, curB = 0;
-    frames.push({ a: 0, b: 0, note: 'Разминка, драфты героев...' });
+
+    frames.push({
+      a: 0,
+      b: 0,
+      note: isGazblokiPlaying ? `Пик: ${pick1.hero} (${pick1.player})` : 'Разминка, драфты героев...',
+      actionText: isGazblokiPlaying
+        ? `Драфт завершён: ${pick1.player} пикает ${pick1.hero}! Команда выходит на свои линии.`
+        : null,
+      activePick: pick1
+    });
 
     while (curA < simResult.scoreA || curB < simResult.scoreB) {
       if (curA < simResult.scoreA && (curB >= simResult.scoreB || Math.random() > 0.5)) {
@@ -856,10 +1029,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const mapNum = curA + curB;
       const isFinalMap = (curA === simResult.scoreA && curB === simResult.scoreB);
+      const currentActivePick = (mapNum % 2 === 0 && pick2) ? pick2 : pick1;
+
+      let customAction = null;
+      if (isGazblokiPlaying && currentActivePick) {
+        const randHighlight = currentActivePick.highlights[Math.floor(Math.random() * currentActivePick.highlights.length)];
+        customAction = `${currentActivePick.player} (${currentActivePick.hero}): ${randHighlight}`;
+      }
+
       frames.push({
         a: curA,
         b: curB,
-        note: isFinalMap ? 'Решающие минуты...' : `Идет Карта ${mapNum + 1}...`
+        note: isFinalMap
+          ? (isGazblokiPlaying ? `Решающий пуш! ${currentActivePick.player} ломает трон` : 'Решающие минуты...')
+          : (isGazblokiPlaying ? `Карта ${mapNum}: ${currentActivePick.hero}` : `Идет Карта ${mapNum + 1}...`),
+        actionText: customAction,
+        activePick: currentActivePick
       });
     }
 
@@ -867,32 +1052,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderFrame() {
       const f = frames[frameIdx];
-      renderSlot(matchDef.slotA, teamA, f.a);
-      renderSlot(matchDef.slotB, teamB, f.b);
-      setBracketLiveStatus(
-        `LIVE: <b>${teamA.name}</b> ${f.a} : ${f.b} <b>${teamB.name}</b> · ${matchDef.title} (${f.note})`
-      );
+
+      const heroBadgeA = isGazA ? f.activePick : null;
+      const heroBadgeB = isGazB ? f.activePick : null;
+
+      renderSlot(matchDef.slotA, teamA, f.a, false, false, heroBadgeA);
+      renderSlot(matchDef.slotB, teamB, f.b, false, false, heroBadgeB);
+
+      if (isGazblokiPlaying && f.activePick && spotlightEl) {
+        if (spotPlayerAvatar) spotPlayerAvatar.src = f.activePick.avatar;
+        if (spotHeroIcon) spotHeroIcon.src = f.activePick.icon;
+        if (spotPlayerName) spotPlayerName.textContent = f.activePick.player;
+        if (spotHeroName) spotHeroName.textContent = f.activePick.hero;
+        if (spotPlayerRole) spotPlayerRole.textContent = f.activePick.role;
+        if (spotActionText && f.actionText) spotActionText.textContent = f.actionText;
+      }
+
+      const liveStatusText = isGazblokiPlaying && f.actionText
+        ? `LIVE: <b>${teamA.name}</b> ${f.a} : ${f.b} <b>${teamB.name}</b> · ${f.actionText}`
+        : `LIVE: <b>${teamA.name}</b> ${f.a} : ${f.b} <b>${teamB.name}</b> · ${matchDef.title} (${f.note})`;
+
+      setBracketLiveStatus(liveStatusText);
 
       frameIdx++;
       if (frameIdx < frames.length) {
-        tournamentSimTimeoutId = setTimeout(renderFrame, 2600);
+        tournamentSimTimeoutId = setTimeout(renderFrame, 2800);
       } else {
         tournamentSimTimeoutId = setTimeout(() => {
           if (matchEl) matchEl.classList.remove('match--live');
           if (elA) elA.classList.remove('bracket-team--playing');
           if (elB) elB.classList.remove('bracket-team--playing');
 
-          renderSlot(matchDef.slotA, teamA, simResult.scoreA, simResult.aWins, !simResult.aWins);
-          renderSlot(matchDef.slotB, teamB, simResult.scoreB, !simResult.aWins, simResult.aWins);
+          renderSlot(matchDef.slotA, teamA, simResult.scoreA, simResult.aWins, !simResult.aWins, isGazA ? pick1 : null);
+          renderSlot(matchDef.slotB, teamB, simResult.scoreB, !simResult.aWins, simResult.aWins, isGazB ? pick1 : null);
 
           if (matchDef.winTo) {
             bracketSlotTeams[matchDef.winTo] = simResult.winner;
-            renderSlot(matchDef.winTo, simResult.winner, 0);
+            const isGazWinner = (simResult.winner.name || '').toLowerCase() === 'gazbloki31.ru';
+            renderSlot(matchDef.winTo, simResult.winner, 0, false, false, isGazWinner ? pick1 : null);
           }
 
           if (matchDef.loseTo) {
             bracketSlotTeams[matchDef.loseTo] = simResult.loser;
-            renderSlot(matchDef.loseTo, simResult.loser, 0);
+            const isGazLoser = (simResult.loser.name || '').toLowerCase() === 'gazbloki31.ru';
+            renderSlot(matchDef.loseTo, simResult.loser, 0, false, false, isGazLoser ? pick1 : null);
+          }
+
+          if (isGazblokiPlaying && spotActionText) {
+            const mvpName = pick1 ? pick1.player : 'Команда';
+            spotActionText.textContent = (simResult.winner.name || '').toLowerCase() === 'gazbloki31.ru'
+              ? `Победа gazbloki31.ru (${simResult.scoreA}:${simResult.scoreB})! ${mvpName} признан MVP серии!`
+              : `Матч завершён (${simResult.scoreA}:${simResult.scoreB}). gazbloki31.ru продолжают борьбу в сетке лузеров!`;
           }
 
           setBracketLiveStatus(
