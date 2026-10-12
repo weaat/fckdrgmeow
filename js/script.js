@@ -3467,9 +3467,152 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCalc();
   }
 
+  // ============================================================
+  //  ИНТЕРАКТИВНЫЙ СНЕГОПАД С РАЗЛЁТОМ ОТ МЫШИ
+  // ============================================================
+  function initSnowParticles() {
+    const canvas = document.getElementById('snow-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Учёт настройки пониженного движения
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const isMobile = window.innerWidth < 768;
+    const flakeCount = isMobile ? 40 : 90;
+    const flakes = [];
+
+    const mouse = { x: -9999, y: -9999 };
+    const REPEL_RADIUS = 125;
+    const REPEL_FORCE = 5.2;
+
+    class Snowflake {
+      constructor(init = true) {
+        this.reset(init);
+      }
+
+      reset(init = false) {
+        this.x = Math.random() * width;
+        this.y = init ? Math.random() * height : -12;
+        this.radius = Math.random() * 2.2 + 1.0;
+        this.baseVy = Math.random() * 0.75 + 0.45;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = this.baseVy;
+        this.alpha = Math.random() * 0.45 + 0.35;
+        this.swayAngle = Math.random() * Math.PI * 2;
+        this.swaySpeed = Math.random() * 0.02 + 0.01;
+        this.swayRadius = Math.random() * 0.6 + 0.25;
+      }
+
+      update() {
+        this.swayAngle += this.swaySpeed;
+        const windX = Math.sin(this.swayAngle) * this.swayRadius;
+
+        // Отталкивание от курсора мыши
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < REPEL_RADIUS && dist > 0.05) {
+          const force = (1 - dist / REPEL_RADIUS) * REPEL_FORCE;
+          const angle = Math.atan2(dy, dx);
+          this.vx += Math.cos(angle) * force * 0.65;
+          this.vy += Math.sin(angle) * force * 0.65;
+        }
+
+        // Вязкость воздуха (затухание импульса разлёта)
+        this.vx *= 0.94;
+        this.vy = this.vy * 0.93 + this.baseVy * 0.07;
+
+        this.x += this.vx + windX;
+        this.y += this.vy;
+
+        // Возврат снежинок на экран
+        if (this.y > height + 10) {
+          this.reset(false);
+        }
+        if (this.x < -12) this.x = width + 6;
+        if (this.x > width + 12) this.x = -6;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(224, 242, 254, ${this.alpha})`;
+        if (this.radius > 2.4) {
+          ctx.shadowBlur = 5;
+          ctx.shadowColor = 'rgba(56, 189, 248, 0.45)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < flakeCount; i++) {
+      flakes.push(new Snowflake(true));
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    }, { passive: true });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }, 150);
+    });
+
+    if (prefersReducedMotion) {
+      // Статичный тихий рисунок без циклических кадров
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < flakes.length; i++) {
+        flakes[i].draw();
+      }
+      return;
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < flakes.length; i++) {
+        flakes[i].update();
+        flakes[i].draw();
+      }
+      requestAnimationFrame(render);
+    }
+
+    render();
+  }
+
   initSiteProgramTabs();
   initSiteRulesFaq();
   initSiteRegistrationCalculator();
   initHeroPickGrid();
+  initSnowParticles();
 
 });

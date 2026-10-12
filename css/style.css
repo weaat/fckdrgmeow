@@ -6785,3 +6785,16 @@ dialog.team-dialog-modal::backdrop {
     transition: none !important;
   }
 }
+
+/* ============================================================
+   ИНТЕРАКТИВНЫЙ СНЕГОПАД С ЧАСТИЦАМИ
+   ============================================================ */
+.snow-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+}
