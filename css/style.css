@@ -5795,6 +5795,666 @@ footer > * + * {
 }
 
 /* ============================================================
+   КНОПКИ В КАРТОЧКАХ МЕРЧА И ИНТЕРАКТИВ
+   ============================================================ */
+.merch-card__actions {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.btn-detail-merch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 0.85rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #e2e8f0;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+
+.btn-detail-merch:hover {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: #38bdf8;
+  color: #fff;
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.3);
+  transform: translateY(-1px);
+}
+
+.merch-card__media,
+.merch-card__title {
+  cursor: pointer;
+}
+
+/* ============================================================
+   ИНТЕРАКТИВНЫЕ КАРТОЧКИ ИГРОКОВ (ДОСЬЕ)
+   ============================================================ */
+.roster-player-card--interactive {
+  cursor: pointer;
+}
+
+.roster-player-card--interactive:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 12px 30px rgba(14, 165, 233, 0.35);
+}
+
+.roster-click-hint {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  color: #38bdf8;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 50px;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all .25s ease;
+  pointer-events: none;
+}
+
+.roster-player-card--interactive:hover .roster-click-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   МОДАЛКА КАРТОЧКИ ТОВАРА (МАГАЗИН ОДЕЖДЫ)
+   ============================================================ */
+.product-modal-backdrop,
+.player-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(4, 9, 20, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.product-modal-backdrop[hidden],
+.player-modal-backdrop[hidden] {
+  display: none !important;
+}
+
+.product-modal,
+.player-modal {
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(9, 14, 28, 0.98) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-radius: 24px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 35px rgba(14, 165, 233, 0.25);
+  padding: 2.2rem;
+  position: relative;
+  animation: modalIn .25s ease;
+}
+
+.product-modal__close,
+.player-modal__close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .2s ease;
+  z-index: 5;
+  font-size: 1rem;
+}
+
+.product-modal__close:hover,
+.player-modal__close:hover {
+  background: rgba(14, 165, 233, 0.35);
+  border-color: #38bdf8;
+  transform: rotate(90deg);
+}
+
+.product-modal__body {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 2.2rem;
+  align-items: start;
+}
+
+@media (max-width: 820px) {
+  .product-modal__body,
+  .player-modal__body {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .product-modal,
+  .player-modal {
+    padding: 1.4rem;
+  }
+}
+
+/* Галерея товара */
+.product-modal__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-modal__main-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(circle at center, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  overflow: hidden;
+}
+
+.product-modal__main-img {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.55));
+  transition: transform .3s ease;
+}
+
+.product-modal__main-img:hover {
+  transform: scale(1.08);
+}
+
+.product-modal__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.4), rgba(2, 132, 199, 0.7));
+  border: 1px solid rgba(125, 211, 252, 0.85);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  z-index: 2;
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.4);
+}
+
+.product-modal__thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.product-thumb-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.product-thumb-btn img {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.product-thumb-btn:hover {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #fff;
+}
+
+.product-thumb-btn.active {
+  background: rgba(14, 165, 233, 0.25);
+  border-color: #38bdf8;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.35);
+}
+
+/* Информация о товаре */
+.product-modal__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-modal__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.product-modal__brand {
+  color: #38bdf8;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.product-modal__stock {
+  color: #4ade80;
+  font-weight: 700;
+}
+
+.product-modal__title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 0.6rem;
+  line-height: 1.25;
+}
+
+.product-modal__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 1.15rem;
+  font-size: 0.82rem;
+}
+
+.product-stars {
+  color: #f59e0b;
+  letter-spacing: 2px;
+}
+
+.product-rating-val {
+  color: #fff;
+  font-weight: 800;
+}
+
+.product-rating-count {
+  color: var(--text-muted);
+}
+
+.product-modal__price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  margin-bottom: 1.25rem;
+}
+
+.product-price-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.product-price-main .product-price-val {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #38bdf8;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}
+
+.product-price-main .product-price-old {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.product-discount-pill {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #fff;
+  background: #ef4444;
+  padding: 0.15rem 0.55rem;
+  border-radius: 50px;
+}
+
+.product-sizes-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.btn-size-guide {
+  background: none;
+  border: none;
+  color: #38bdf8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.product-size-guide-table {
+  margin-top: 0.85rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.product-size-guide-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.product-size-guide-table th,
+.product-size-guide-table td {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.product-size-guide-table th {
+  background: rgba(14, 165, 233, 0.15);
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.product-size-guide-table td {
+  color: #cbd5e1;
+}
+
+.product-modal__actions {
+  margin: 1.3rem 0;
+}
+
+.btn-product-buy-now {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.95rem 1.5rem;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  border: 1px solid rgba(125, 211, 252, 0.85);
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(14, 165, 233, 0.5);
+  transition: all .22s ease;
+}
+
+.btn-product-buy-now:hover {
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  box-shadow: 0 8px 30px rgba(14, 165, 233, 0.7);
+  transform: translateY(-2px);
+}
+
+/* Табы в карточке товара */
+.product-modal__tabs {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.15rem;
+}
+
+.product-tab-links {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.ptab-link {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
+  padding: 0.35rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.ptab-link:hover {
+  color: #fff;
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.ptab-link.active {
+  background: rgba(14, 165, 233, 0.25);
+  border-color: #38bdf8;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
+}
+
+.ptab-content {
+  display: none;
+  font-size: 0.86rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.ptab-content.active {
+  display: block;
+  animation: modalIn .2s ease;
+}
+
+.product-specs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.product-specs-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.3rem;
+  font-size: 0.84rem;
+}
+
+.product-specs-list span {
+  color: var(--text-muted);
+}
+
+.product-specs-list strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ============================================================
+   МОДАЛКА ДОСЬЕ ИГРОКА (ROSTER DOSSIER)
+   ============================================================ */
+.player-modal__body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.player-modal__media {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.player-modal__photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.player-modal__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.player-modal__pos-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  border: 1px solid rgba(125, 211, 252, 0.9);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.player-modal__team-badge {
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+}
+
+.player-modal__role-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.player-modal__name {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0.2rem 0 0.5rem;
+  line-height: 1.2;
+}
+
+.player-modal__rank-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.3rem 0.85rem;
+  border-radius: 50px;
+  margin-bottom: 1.25rem;
+}
+
+.player-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.3rem;
+}
+
+@media (max-width: 580px) {
+  .player-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.player-stat-card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+  padding: 0.7rem 0.55rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-card-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.stat-card-val {
+  font-size: 1.15rem;
+  color: #38bdf8;
+  font-weight: 900;
+}
+
+.player-modal__section {
+  margin-bottom: 1.15rem;
+}
+
+.player-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.45rem;
+}
+
+.player-section-text {
+  font-size: 0.86rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.player-heroes-chips {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.player-hero-chip {
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #e2e8f0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+}
+
+/* ============================================================
    ПРИНУДИТЕЛЬНОЕ ОТКЛЮЧЕНИЕ БЕЛОЙ ТЕМЫ
    Сайт навсегда зафиксирован в стильном сине-голубом Liquid Glass стиле
    ============================================================ */

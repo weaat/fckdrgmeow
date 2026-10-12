@@ -2893,6 +2893,468 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
+  //  4. ПОДРОБНАЯ КАРТОЧКА ТОВАРА (МАГАЗИН ОДЕЖДЫ GAZBLOKI31.RU)
+  // ============================================================
+  const MERCH_CATALOG = {
+    '1': {
+      id: '1',
+      title: 'Белая футболка «Origin gazbloki31.ru»',
+      apparelImg: 'images/merch/tshirt1.png',
+      printImg: 'images/merch/print1.jpg',
+      badge: 'Хит дропа',
+      sku: 'Арт. GZ31-01',
+      stock: 'В наличии: 31 шт.',
+      price: 1337,
+      oldPrice: 2499,
+      discount: '-46%',
+      category: 'Футболки',
+      desc: 'Культовый флагманский принт команды gazbloki31.ru на белом премиальном хлопке со складками ткани. Свободный крой оверсайз, спущенная линия плеча и усиленный эластичный ворот. Выдерживает более 100 циклов бережной стирки.',
+      specs: [
+        { label: 'Состав ткани', value: '100% органический хлопок' },
+        { label: 'Плотность', value: '240 г/м² (Heavyweight Cotton)' },
+        { label: 'Крой', value: 'Streetwear Oversize (свободный)' },
+        { label: 'Печать', value: 'Шелкография водными красками' },
+        { label: 'Страна бренда', value: 'Россия (Белгород)' }
+      ]
+    },
+    '2': {
+      id: '2',
+      title: 'Белая футболка «Выбирай: я или gazbloki31.ru»',
+      apparelImg: 'images/merch/tshirt2.png',
+      printImg: 'images/merch/print2.jpg',
+      badge: 'Мем-дроп',
+      sku: 'Арт. GZ31-02',
+      stock: 'В наличии: 19 шт.',
+      price: 1337,
+      oldPrice: 2499,
+      discount: '-46%',
+      category: 'Футболки',
+      desc: 'Легендарный диалог истинного фаната Доты на хлопковой футболке оверсайз. Не выцветает, привлекает внимание тиммейтов и наглядно расставляет жизненные приоритеты между отношениями и каткой.',
+      specs: [
+        { label: 'Состав ткани', value: '100% чесаный хлопок (пенье)' },
+        { label: 'Плотность', value: '240 г/м²' },
+        { label: 'Крой', value: 'Streetwear Oversize' },
+        { label: 'Печать', value: 'Прецизионная цифровая печать (DTF)' },
+        { label: 'Страна бренда', value: 'Россия (Белгород)' }
+      ]
+    },
+    '3': {
+      id: '3',
+      title: 'Белая футболка «Культовый Газоблок»',
+      apparelImg: 'images/merch/tshirt_gazoblok.png',
+      printImg: 'images/merch/print_gazoblok.jpg',
+      badge: 'Bestseller',
+      sku: 'Арт. GZ31-03',
+      stock: 'В наличии: 45 шт.',
+      price: 1337,
+      oldPrice: 2499,
+      discount: '-46%',
+      category: 'Футболки',
+      desc: 'Фирменный автоклавный газобетонный блок GAZBLOKI31.RU высокой марки плотности D500. Прочнее любого керри с шестью слотами, выдержит осаду трона и сотни стирок без деформации.',
+      specs: [
+        { label: 'Состав ткани', value: '100% натуральный хлопок' },
+        { label: 'Плотность', value: '240 г/м²' },
+        { label: 'Крой', value: 'Boxy Oversize' },
+        { label: 'Печать', value: 'Шелкотрафаретная стойкая печать' },
+        { label: 'Страна бренда', value: 'Россия (Белгород)' }
+      ]
+    },
+    '4': {
+      id: '4',
+      title: 'Белая футболка «Крестовый поход gazbloki31.ru»',
+      apparelImg: 'images/merch/tshirt3.png',
+      printImg: 'images/merch/print3.jpg',
+      badge: 'Exclusive',
+      sku: 'Арт. GZ31-04',
+      stock: 'В наличии: 24 шт.',
+      price: 1337,
+      oldPrice: 2499,
+      discount: '-46%',
+      category: 'Футболки',
+      desc: 'Поход за победой на DotaArena 2026. Премиальный арт с Boykisser Crusader по центру белой оверсайз футболки. Детализированная графика с геральдикой команды gazbloki31.ru.',
+      specs: [
+        { label: 'Состав ткани', value: '100% органический хлопок' },
+        { label: 'Плотность', value: '240 г/м²' },
+        { label: 'Крой', value: 'Streetwear Oversize' },
+        { label: 'Печать', value: 'Высокоточная шелкография' },
+        { label: 'Страна бренда', value: 'Россия (Белгород)' }
+      ]
+    },
+    '5': {
+      id: '5',
+      title: 'Белое худи «Щебень & Гравий 31»',
+      apparelImg: 'images/merch/hoodie_gravel.png',
+      printImg: 'images/merch/print_gravel.jpg',
+      badge: 'Новинка',
+      sku: 'Арт. GZ31-H01',
+      stock: 'В наличии: 15 шт.',
+      price: 2499,
+      oldPrice: 3899,
+      discount: '-36%',
+      category: 'Худи и кофты',
+      desc: 'Утеплённая белая толстовка с двойным капюшоном и шнурками. Плотный трёхниточный футер 380 г/м² с мягким начёсом, вместительный карман-кенгуру и фотографический принт строительного гравия на лазурном небе.',
+      specs: [
+        { label: 'Состав ткани', value: '80% хлопок, 20% полиэстер' },
+        { label: 'Плотность', value: '380 г/м² (утеплённый футер с начёсом)' },
+        { label: 'Крой', value: 'Streetwear Loose Fit' },
+        { label: 'Детали', value: 'Карман-кенгуру, капюшон со шнурками' },
+        { label: 'Страна бренда', value: 'Россия (Белгород)' }
+      ]
+    },
+    '6': {
+      id: '6',
+      title: 'Чёрное худи «Карьер gazbloki31.ru»',
+      apparelImg: 'images/merch/hoodie_quarry.png',
+      printImg: 'images/merch/print_quarry.jpg',
+      badge: 'Heavy Cotton',
+      sku: 'Арт. GZ31-H02',
+      stock: 'В наличии: 12 шт.',
+      price: 2499,
+      oldPrice: 3999,
+      discount: '-37%',
+      category: 'Худи и кофты',
+      desc: 'Чёрная оверсайз кофта с капюшоном из премиального тяжёлого трикотажа Jet Black. Принт масштабного щебёночного карьера команды gazbloki31.ru — фундаментальная база каждого замеса.',
+      specs: [
+        { label: 'Состав ткани', value: '85% хлопок, 15% полиэстер' },
+        { label: 'Плотность', value: '380 г/м² (Heavyweight Fleece)' },
+        { label: 'Крой', value: 'Loose Fit Oversize' },
+        { label: 'Печать', value: 'DTF высокой детализации' },
+        { label: 'Страна бренда', value: 'Россия (Белгород)' }
+      ]
+    },
+    '7': {
+      id: '7',
+      title: 'Белое худи «Fake News Промокод gazbloki31.ru»',
+      apparelImg: 'images/merch/hoodie_melltroy.png',
+      printImg: 'images/merch/print_melltroy.jpg',
+      badge: 'Special Edition',
+      sku: 'Арт. GZ31-H03',
+      stock: 'В наличии: 18 шт.',
+      price: 2499,
+      oldPrice: 3999,
+      discount: '-37%',
+      category: 'Худи и кофты',
+      desc: 'Лимитированная кофта со скандальным мем-репортажем о промокоде BONES. Глубокий капюшон, эластичные износостойкие манжеты, сочные детали печати и неповторимый киберспортивный шарм.',
+      specs: [
+        { label: 'Состав ткани', value: '80% хлопок, 20% полиэстер' },
+        { label: 'Плотность', value: '380 г/м²' },
+        { label: 'Крой', value: 'Streetwear Loose Fit' },
+        { label: 'Печать', value: 'Прецизионная печать' },
+        { label: 'Страна бренда', value: 'Россия (Белгород)' }
+      ]
+    }
+  };
+
+  const productModalBackdrop = $('#product-modal-backdrop');
+  const productModalClose    = $('#product-modal-close');
+  const pmodalBadge          = $('#pmodal-badge');
+  const pmodalMainImg        = $('#pmodal-main-img');
+  const pmodalThumbApparel   = $('#pmodal-thumb-apparel');
+  const pmodalThumbPrint     = $('#pmodal-thumb-print');
+  const pmodalThumbApparelImg= $('#pmodal-thumb-apparel-img');
+  const pmodalThumbPrintImg  = $('#pmodal-thumb-print-img');
+  const pmodalSku            = $('#pmodal-sku');
+  const pmodalStock          = $('#pmodal-stock');
+  const pmodalTitle          = $('#pmodal-title');
+  const pmodalPrice          = $('#pmodal-price');
+  const pmodalOldPrice       = $('#pmodal-old-price');
+  const pmodalDiscount       = $('#pmodal-discount');
+  const pmodalFullDesc       = $('#pmodal-full-desc');
+  const pmodalSpecsList      = $('#pmodal-specs-list');
+  const pmodalBuyNowBtn      = $('#pmodal-buy-now');
+  const btnToggleSizeGuide   = $('#btn-toggle-size-guide');
+  const pmodalSizeGuide      = $('#pmodal-size-guide');
+
+  let currentProductData = null;
+
+  function openProductDetail(itemId, selectedSize) {
+    const item = MERCH_CATALOG[itemId];
+    if (!item || !productModalBackdrop) return;
+    currentProductData = item;
+
+    if (pmodalBadge)    pmodalBadge.textContent = item.badge;
+    if (pmodalTitle)    pmodalTitle.textContent = item.title;
+    if (pmodalSku)      pmodalSku.textContent = item.sku;
+    if (pmodalStock)    pmodalStock.textContent = item.stock;
+    if (pmodalPrice)    pmodalPrice.textContent = `${item.price} ₽`;
+    if (pmodalOldPrice) pmodalOldPrice.textContent = `${item.oldPrice} ₽`;
+    if (pmodalDiscount) pmodalDiscount.textContent = item.discount;
+    if (pmodalFullDesc) pmodalFullDesc.textContent = item.desc;
+
+    if (pmodalMainImg)         pmodalMainImg.src = item.apparelImg;
+    if (pmodalThumbApparelImg) pmodalThumbApparelImg.src = item.apparelImg;
+    if (pmodalThumbPrintImg)   pmodalThumbPrintImg.src = item.printImg;
+
+    pmodalThumbApparel?.classList.add('active');
+    pmodalThumbPrint?.classList.remove('active');
+
+    // Характеристики
+    if (pmodalSpecsList) {
+      pmodalSpecsList.innerHTML = item.specs.map(s => `<li><span>${s.label}:</span> <strong>${s.value}</strong></li>`).join('');
+    }
+
+    // Выбор размера
+    const sizeBtns = $$('#pmodal-size-selector .size-btn');
+    const targetSize = selectedSize || 'M';
+    sizeBtns.forEach(b => {
+      b.classList.toggle('active', b.dataset.size === targetSize);
+    });
+
+    if (pmodalSizeGuide) pmodalSizeGuide.hidden = true;
+
+    // Сброс табов на Описание
+    $$('.ptab-link').forEach(l => l.classList.toggle('active', l.dataset.ptab === 'desc'));
+    $$('.ptab-content').forEach(c => c.classList.toggle('active', c.id === 'ptab-desc'));
+
+    productModalBackdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProductDetail() {
+    if (!productModalBackdrop) return;
+    productModalBackdrop.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  // Клик по кнопке "О товаре" на карточках
+  $$('.btn-detail-merch').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const itemId = btn.dataset.item;
+      const card = btn.closest('.merch-card');
+      const activeSize = card?.querySelector('.size-btn.active')?.textContent.trim() || 'M';
+      openProductDetail(itemId, activeSize);
+    });
+  });
+
+  // Клик по картинке или заголовку карточки мерча
+  $$('.merch-card').forEach(card => {
+    const itemId = card.dataset.merchId;
+    const media = card.querySelector('.merch-card__media');
+    const title = card.querySelector('.merch-card__title');
+
+    const handleOpen = (e) => {
+      if (e.target.closest('.btn-toggle-print')) return;
+      const activeSize = card.querySelector('.size-btn.active')?.textContent.trim() || 'M';
+      openProductDetail(itemId, activeSize);
+    };
+
+    media?.addEventListener('click', handleOpen);
+    title?.addEventListener('click', handleOpen);
+  });
+
+  // Переключение видов в модалке (Одежда / Принт)
+  pmodalThumbApparel?.addEventListener('click', () => {
+    if (!currentProductData || !pmodalMainImg) return;
+    pmodalMainImg.src = currentProductData.apparelImg;
+    pmodalThumbApparel.classList.add('active');
+    pmodalThumbPrint?.classList.remove('active');
+  });
+
+  pmodalThumbPrint?.addEventListener('click', () => {
+    if (!currentProductData || !pmodalMainImg) return;
+    pmodalMainImg.src = currentProductData.printImg;
+    pmodalThumbPrint.classList.add('active');
+    pmodalThumbApparel?.classList.remove('active');
+  });
+
+  // Переключение размеров в модалке
+  $$('#pmodal-size-selector .size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('#pmodal-size-selector .size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Тоггл таблицы размеров
+  btnToggleSizeGuide?.addEventListener('click', () => {
+    if (pmodalSizeGuide) {
+      pmodalSizeGuide.hidden = !pmodalSizeGuide.hidden;
+    }
+  });
+
+  // Вкладки информации в модалке
+  $$('.ptab-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const target = link.dataset.ptab;
+      $$('.ptab-link').forEach(l => l.classList.remove('active'));
+      $$('.ptab-content').forEach(c => c.classList.remove('active'));
+      link.classList.add('active');
+      $(`#ptab-${target}`)?.classList.add('active');
+    });
+  });
+
+  // Кнопка "Оформить заказ" из модалки товара
+  pmodalBuyNowBtn?.addEventListener('click', () => {
+    if (!currentProductData) return;
+    const activeSize = $('#pmodal-size-selector .size-btn.active')?.dataset.size || 'M';
+    closeProductDetail();
+    openMerchModal(currentProductData.title, currentProductData.price, currentProductData.apparelImg, activeSize);
+  });
+
+  productModalClose?.addEventListener('click', closeProductDetail);
+  productModalBackdrop?.addEventListener('click', (e) => {
+    if (e.target === productModalBackdrop) closeProductDetail();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && productModalBackdrop && !productModalBackdrop.hidden) {
+      closeProductDetail();
+    }
+  });
+
+  // ============================================================
+  //  5. ДОСЬЕ ИГРОКОВ КОМАНДЫ GAZBLOKI31.RU
+  // ============================================================
+  const GAZBLOKI_PLAYERS = [
+    {
+      idx: 0,
+      name: 'Тимур «cursedkaneki???»',
+      roleTag: 'Керри / Капитан',
+      pos: 'Pos 1',
+      rank: '12 100 MMR · Ранг 28 Europe',
+      photo: 'images/teams/gazbloki31/player2.jpg',
+      kda: '8.4',
+      winrate: '76%',
+      gpm: '820 / 790',
+      matches: '412',
+      heroes: ['Lifestealer', 'Phantom Lancer', 'Terrorblade', 'Faceless Void'],
+      items: 'Radiance, Abyssal Blade, Black King Bar, Manta Style',
+      bio: 'Бессменный капитан и идейный вдохновитель команды gazbloki31.ru. Демонстрирует феноменальный тайминг фарма, хладнокровный макро-контроль карты и сокрушительное позиционирование в лейтовых драках 5х5.'
+    },
+    {
+      idx: 1,
+      name: 'Даниил «jewelxxet»',
+      roleTag: 'Мидлейнер',
+      pos: 'Pos 2',
+      rank: '11 950 MMR · Ранг 45 Europe',
+      photo: 'images/teams/gazbloki31/player5.jpg',
+      kda: '7.9',
+      winrate: '74%',
+      gpm: '780 / 860',
+      matches: '388',
+      heroes: ['Storm Spirit', 'Shadow Fiend', 'Invoker', 'Puck'],
+      items: 'Bloodstone, Blink Dagger, Shiva’s Guard, Black King Bar',
+      bio: 'Сердце агрессивного темпа gazbloki31.ru. Разрушает центральную линию оппонента в первые 10 минут игры, непрерывно терроризирует боковые лайны и молниеносно реагирует на контр-инициации соперника.'
+    },
+    {
+      idx: 2,
+      name: 'Женька «skr1ch»',
+      roleTag: 'Оффлейнер',
+      pos: 'Pos 3',
+      rank: '11 400 MMR · Ранг 82 Europe',
+      photo: 'images/teams/gazbloki31/player4.jpg',
+      kda: '5.6',
+      winrate: '71%',
+      gpm: '590 / 640',
+      matches: '365',
+      heroes: ['Viper', 'Pudge', 'Centaur Warrunner', 'Mars'],
+      items: 'Pipe of Insight, Crimson Guard, Blink Dagger, Heart of Tarrasque',
+      bio: 'Живая стена из белгородского газобетона. Впитывает колоссальный урон в тимфайтах, гарантирует пространство для фарма керри и безупречно инициирует решающие драки за Рошана.'
+    },
+    {
+      idx: 3,
+      name: 'Артур «ar7yexe»',
+      roleTag: 'Семи-саппорт',
+      pos: 'Pos 4',
+      rank: '11 250 MMR · Ранг 110 Europe',
+      photo: 'images/teams/gazbloki31/player3.jpg',
+      kda: '6.2',
+      winrate: '72%',
+      gpm: '480 / 590',
+      matches: '394',
+      heroes: ['Enigma', 'Skywrath Mage', 'Rubick', 'Mirana'],
+      items: 'Blink Dagger, Black Hole (Aghanim), Refresher Orb, Eul’s Scepter',
+      bio: 'Мастер переворотов безнадёжных карт. Его Black Hole и внезапные ротации ломают любую тактику противников. Отвечает за глубокий вардинг во вражеском лесу и контроль активных рун.'
+    },
+    {
+      idx: 4,
+      name: 'Ксения «chyug»',
+      roleTag: 'Полная поддержка',
+      pos: 'Pos 5',
+      rank: '11 300 MMR · Ранг 95 Europe',
+      photo: 'images/teams/gazbloki31/player1.jpg',
+      kda: '5.1',
+      winrate: '75%',
+      gpm: '390 / 510',
+      matches: '420',
+      heroes: ['Crystal Maiden', 'Pugna', 'Disruptor', 'Oracle'],
+      items: 'Glimmer Cape, Force Staff, Solar Crest, Aeon Disk',
+      bio: 'Надёжный щит и опора команды. Гарантирует комфортный старт для керри на лёгкой линии, своевременные сейвы с точностью до десятой доли секунды и 100% контроль карты через обсерверы и центри.'
+    }
+  ];
+
+  const playerModalBackdrop = $('#player-modal-backdrop');
+  const playerModalClose    = $('#player-modal-close');
+  const playerModalPhoto    = $('#player-modal-photo');
+  const playerModalPos      = $('#player-modal-pos');
+  const playerModalRoleTag  = $('#player-modal-role-tag');
+  const playerModalName     = $('#player-modal-name');
+  const playerModalRank     = $('#player-modal-rank');
+  const playerStatKda       = $('#player-stat-kda');
+  const playerStatWinrate   = $('#player-stat-winrate');
+  const playerStatGpm       = $('#player-stat-gpm');
+  const playerStatMatches   = $('#player-stat-matches');
+  const playerHeroesChips   = $('#player-heroes-chips');
+  const playerFavItems      = $('#player-fav-items');
+  const playerBio           = $('#player-bio');
+
+  function openPlayerDetail(idx) {
+    const p = GAZBLOKI_PLAYERS[idx];
+    if (!p || !playerModalBackdrop) return;
+
+    if (playerModalPhoto)   playerModalPhoto.src = p.photo;
+    if (playerModalPos)     playerModalPos.textContent = p.pos;
+    if (playerModalRoleTag) playerModalRoleTag.textContent = p.roleTag;
+    if (playerModalName)    playerModalName.textContent = p.name;
+    if (playerModalRank)    playerModalRank.textContent = p.rank;
+    if (playerStatKda)      playerStatKda.textContent = p.kda;
+    if (playerStatWinrate)  playerStatWinrate.textContent = p.winrate;
+    if (playerStatGpm)      playerStatGpm.textContent = p.gpm;
+    if (playerStatMatches)  playerStatMatches.textContent = p.matches;
+    if (playerFavItems)     playerFavItems.textContent = p.items;
+    if (playerBio)          playerBio.textContent = p.bio;
+
+    if (playerHeroesChips) {
+      playerHeroesChips.innerHTML = p.heroes.map(h => `<span class="player-hero-chip">${h}</span>`).join('');
+    }
+
+    playerModalBackdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePlayerDetail() {
+    if (!playerModalBackdrop) return;
+    playerModalBackdrop.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  // Клик по карточкам игроков в составе команды
+  $$('.roster-player-card--interactive').forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.dataset.playerIdx, 10);
+      if (!isNaN(idx)) openPlayerDetail(idx);
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const idx = parseInt(card.dataset.playerIdx, 10);
+        if (!isNaN(idx)) openPlayerDetail(idx);
+      }
+    });
+  });
+
+  playerModalClose?.addEventListener('click', closePlayerDetail);
+  playerModalBackdrop?.addEventListener('click', (e) => {
+    if (e.target === playerModalBackdrop) closePlayerDetail();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && playerModalBackdrop && !playerModalBackdrop.hidden) {
+      closePlayerDetail();
+    }
+  });
+
+  // ============================================================
   //  ПРАКТИКА 14: ДОСТУПНЫЕ WAI-ARIA ВКЛАДКИ РАСПИСАНИЯ (#program)
   // ============================================================
   function initSiteProgramTabs() {

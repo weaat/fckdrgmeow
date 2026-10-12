@@ -1251,10 +1251,11 @@
 
         <div class="team-roster-grid">
           <!-- Игрок 1: Керри -->
-          <article class="roster-player-card">
+          <article class="roster-player-card roster-player-card--interactive" data-player-idx="0" tabindex="0" role="button" title="Открыть подробное досье игрока: Тимур «cursedkaneki???»">
             <div class="roster-player-photo-wrap">
               <img src="images/teams/gazbloki31/player2.jpg" alt="Тимур cursedkaneki??? — Керри gazbloki31.ru" class="roster-player-photo" loading="lazy">
               <span class="roster-pos-pill">Pos 1</span>
+              <span class="roster-click-hint">Досье игрока</span>
             </div>
             <div class="roster-player-details">
               <span class="roster-player-tag">GB31 · Керри / Капитан</span>
@@ -1264,10 +1265,11 @@
           </article>
 
           <!-- Игрок 2: Мидер -->
-          <article class="roster-player-card">
+          <article class="roster-player-card roster-player-card--interactive" data-player-idx="1" tabindex="0" role="button" title="Открыть подробное досье игрока: Даниил «jewelxxet»">
             <div class="roster-player-photo-wrap">
               <img src="images/teams/gazbloki31/player5.jpg" alt="Даниил jewelxxet — Мидер gazbloki31.ru" class="roster-player-photo" loading="lazy">
               <span class="roster-pos-pill">Pos 2</span>
+              <span class="roster-click-hint">Досье игрока</span>
             </div>
             <div class="roster-player-details">
               <span class="roster-player-tag">GB31 · Мидлейнер</span>
@@ -1277,10 +1279,11 @@
           </article>
 
           <!-- Игрок 3: Оффлейнер -->
-          <article class="roster-player-card">
+          <article class="roster-player-card roster-player-card--interactive" data-player-idx="2" tabindex="0" role="button" title="Открыть подробное досье игрока: Женька «skr1ch»">
             <div class="roster-player-photo-wrap">
               <img src="images/teams/gazbloki31/player4.jpg" alt="Женька skr1ch — Оффлейнер gazbloki31.ru" class="roster-player-photo" loading="lazy">
               <span class="roster-pos-pill">Pos 3</span>
+              <span class="roster-click-hint">Досье игрока</span>
             </div>
             <div class="roster-player-details">
               <span class="roster-player-tag">GB31 · Оффлейнер</span>
@@ -1290,10 +1293,11 @@
           </article>
 
           <!-- Игрок 4: Семи-саппорт -->
-          <article class="roster-player-card">
+          <article class="roster-player-card roster-player-card--interactive" data-player-idx="3" tabindex="0" role="button" title="Открыть подробное досье игрока: Артур «ar7yexe»">
             <div class="roster-player-photo-wrap">
               <img src="images/teams/gazbloki31/player3.jpg" alt="Артур ar7yexe — Семи-саппорт gazbloki31.ru" class="roster-player-photo" loading="lazy">
               <span class="roster-pos-pill">Pos 4</span>
+              <span class="roster-click-hint">Досье игрока</span>
             </div>
             <div class="roster-player-details">
               <span class="roster-player-tag">GB31 · Семи-саппорт</span>
@@ -1303,10 +1307,11 @@
           </article>
 
           <!-- Игрок 5: Полная поддержка -->
-          <article class="roster-player-card">
+          <article class="roster-player-card roster-player-card--interactive" data-player-idx="4" tabindex="0" role="button" title="Открыть подробное досье игрока: Ксения «chyug»">
             <div class="roster-player-photo-wrap">
               <img src="images/teams/gazbloki31/player1.jpg" alt="Ксения chyug — Полная поддержка gazbloki31.ru" class="roster-player-photo" loading="lazy">
               <span class="roster-pos-pill">Pos 5</span>
+              <span class="roster-click-hint">Досье игрока</span>
             </div>
             <div class="roster-player-details">
               <span class="roster-player-tag">GB31 · Полная поддержка</span>
@@ -1390,7 +1395,7 @@
       <div class="merch-grid">
         <!-- Товар 1 -->
         <article class="merch-card" data-merch-id="1" data-category="tshirt">
-          <div class="merch-card__media">
+          <div class="merch-card__media" title="Открыть подробную карточку товара">
             <span class="merch-card__badge">Хит дропа</span>
             <div class="merch-image-wrapper">
               <img src="images/merch/tshirt1.png" alt="Белая футболка gazbloki31.ru Origin" class="merch-img merch-img--apparel merch-img--tshirt" loading="lazy">
@@ -1406,7 +1411,7 @@
               <span class="merch-card__code">Арт. GZ31-01</span>
               <span class="merch-card__stock">В наличии: 31 шт.</span>
             </div>
-            <h3 class="merch-card__title">Белая футболка «Origin gazbloki31.ru»</h3>
+            <h3 class="merch-card__title" title="Открыть подробную карточку товара">Белая футболка «Origin gazbloki31.ru»</h3>
             <p class="merch-card__text">
               Культовый флагманский принт команды на белом премиальном хлопке со складками ткани. Свободный крой оверсайз, усиленный ворот.
             </p>
@@ -1425,17 +1430,22 @@
                 <span class="merch-price-val">1&nbsp;337&nbsp;₽</span>
                 <span class="merch-price-old">2&nbsp;499&nbsp;₽</span>
               </div>
-              <button type="button" class="btn-buy-merch" data-item="1" data-name="Белая футболка «Origin gazbloki31.ru»" data-price="1337" data-img="images/merch/tshirt1.png">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span>Купить за 1&nbsp;337&nbsp;₽</span>
-              </button>
+              <div class="merch-card__actions">
+                <button type="button" class="btn-detail-merch" data-item="1" title="Открыть подробную карточку товара и характеристики">
+                  <span>О товаре</span>
+                </button>
+                <button type="button" class="btn-buy-merch" data-item="1" data-name="Белая футболка «Origin gazbloki31.ru»" data-price="1337" data-img="images/merch/tshirt1.png">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  <span>Купить</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
 
         <!-- Товар 2 -->
         <article class="merch-card" data-merch-id="2" data-category="tshirt">
-          <div class="merch-card__media">
+          <div class="merch-card__media" title="Открыть подробную карточку товара">
             <span class="merch-card__badge">Мем-дроп</span>
             <div class="merch-image-wrapper">
               <img src="images/merch/tshirt2.png" alt="Белая футболка Выбирай: я или gazbloki31.ru" class="merch-img merch-img--apparel merch-img--tshirt" loading="lazy">
@@ -1451,7 +1461,7 @@
               <span class="merch-card__code">Арт. GZ31-02</span>
               <span class="merch-card__stock">В наличии: 19 шт.</span>
             </div>
-            <h3 class="merch-card__title">Белая футболка «Выбирай: я или gazbloki31.ru»</h3>
+            <h3 class="merch-card__title" title="Открыть подробную карточку товара">Белая футболка «Выбирай: я или gazbloki31.ru»</h3>
             <p class="merch-card__text">
               Легендарный диалог истинного фаната Доты на хлопковой футболке оверсайз. Не выцветает, привлекает внимание тиммейтов.
             </p>
@@ -1470,17 +1480,22 @@
                 <span class="merch-price-val">1&nbsp;337&nbsp;₽</span>
                 <span class="merch-price-old">2&nbsp;499&nbsp;₽</span>
               </div>
-              <button type="button" class="btn-buy-merch" data-item="2" data-name="Белая футболка «Выбирай: я или gazbloki31.ru»" data-price="1337" data-img="images/merch/tshirt2.png">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span>Купить за 1&nbsp;337&nbsp;₽</span>
-              </button>
+              <div class="merch-card__actions">
+                <button type="button" class="btn-detail-merch" data-item="2" title="Открыть подробную карточку товара и характеристики">
+                  <span>О товаре</span>
+                </button>
+                <button type="button" class="btn-buy-merch" data-item="2" data-name="Белая футболка «Выбирай: я или gazbloki31.ru»" data-price="1337" data-img="images/merch/tshirt2.png">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  <span>Купить</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
 
         <!-- Товар 3 -->
         <article class="merch-card" data-merch-id="3" data-category="tshirt">
-          <div class="merch-card__media">
+          <div class="merch-card__media" title="Открыть подробную карточку товара">
             <span class="merch-card__badge">Bestseller</span>
             <div class="merch-image-wrapper">
               <img src="images/merch/tshirt_gazoblok.png" alt="Белая футболка Культовый Газоблок" class="merch-img merch-img--apparel merch-img--tshirt" loading="lazy">
@@ -1496,7 +1511,7 @@
               <span class="merch-card__code">Арт. GZ31-03</span>
               <span class="merch-card__stock">В наличии: 45 шт.</span>
             </div>
-            <h3 class="merch-card__title">Белая футболка «Культовый Газоблок»</h3>
+            <h3 class="merch-card__title" title="Открыть подробную карточку товара">Белая футболка «Культовый Газоблок»</h3>
             <p class="merch-card__text">
               Фирменный автоклавный газобетонный блок GAZBLOKI31.RU. Прочнее любого керри, выдержит 100 циклов стирки и осаду базы.
             </p>
@@ -1515,17 +1530,22 @@
                 <span class="merch-price-val">1&nbsp;337&nbsp;₽</span>
                 <span class="merch-price-old">2&nbsp;499&nbsp;₽</span>
               </div>
-              <button type="button" class="btn-buy-merch" data-item="3" data-name="Белая футболка «Культовый Газоблок»" data-price="1337" data-img="images/merch/tshirt_gazoblok.png">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span>Купить за 1&nbsp;337&nbsp;₽</span>
-              </button>
+              <div class="merch-card__actions">
+                <button type="button" class="btn-detail-merch" data-item="3" title="Открыть подробную карточку товара и характеристики">
+                  <span>О товаре</span>
+                </button>
+                <button type="button" class="btn-buy-merch" data-item="3" data-name="Белая футболка «Культовый Газоблок»" data-price="1337" data-img="images/merch/tshirt_gazoblok.png">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  <span>Купить</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
 
         <!-- Товар 4 -->
         <article class="merch-card" data-merch-id="4" data-category="tshirt">
-          <div class="merch-card__media">
+          <div class="merch-card__media" title="Открыть подробную карточку товара">
             <span class="merch-card__badge">Exclusive</span>
             <div class="merch-image-wrapper">
               <img src="images/merch/tshirt3.png" alt="Белая футболка Крестовый поход gazbloki31.ru" class="merch-img merch-img--apparel merch-img--tshirt" loading="lazy">
@@ -1541,7 +1561,7 @@
               <span class="merch-card__code">Арт. GZ31-04</span>
               <span class="merch-card__stock">В наличии: 24 шт.</span>
             </div>
-            <h3 class="merch-card__title">Белая футболка «Крестовый поход gazbloki31.ru»</h3>
+            <h3 class="merch-card__title" title="Открыть подробную карточку товара">Белая футболка «Крестовый поход gazbloki31.ru»</h3>
             <p class="merch-card__text">
               Поход за победой на DotaArena 2026. Премиальный арт с Boykisser Crusader по центру белой оверсайз футболки.
             </p>
@@ -1560,17 +1580,22 @@
                 <span class="merch-price-val">1&nbsp;337&nbsp;₽</span>
                 <span class="merch-price-old">2&nbsp;499&nbsp;₽</span>
               </div>
-              <button type="button" class="btn-buy-merch" data-item="4" data-name="Белая футболка «Крестовый поход gazbloki31.ru»" data-price="1337" data-img="images/merch/tshirt3.png">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span>Купить за 1&nbsp;337&nbsp;₽</span>
-              </button>
+              <div class="merch-card__actions">
+                <button type="button" class="btn-detail-merch" data-item="4" title="Открыть подробную карточку товара и характеристики">
+                  <span>О товаре</span>
+                </button>
+                <button type="button" class="btn-buy-merch" data-item="4" data-name="Белая футболка «Крестовый поход gazbloki31.ru»" data-price="1337" data-img="images/merch/tshirt3.png">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  <span>Купить</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
 
         <!-- Товар 5 -->
         <article class="merch-card" data-merch-id="5" data-category="hoodie">
-          <div class="merch-card__media">
+          <div class="merch-card__media" title="Открыть подробную карточку товара">
             <span class="merch-card__badge">Новинка</span>
             <div class="merch-image-wrapper">
               <img src="images/merch/hoodie_gravel.png" alt="Белое худи Щебень и Гравий 31" class="merch-img merch-img--apparel" loading="lazy">
@@ -1586,7 +1611,7 @@
               <span class="merch-card__code">Арт. GZ31-H01</span>
               <span class="merch-card__stock">В наличии: 15 шт.</span>
             </div>
-            <h3 class="merch-card__title">Белое худи «Щебень & Гравий 31»</h3>
+            <h3 class="merch-card__title" title="Открыть подробную карточку товара">Белое худи «Щебень & Гравий 31»</h3>
             <p class="merch-card__text">
               Утеплённая белая толстовка с капюшоном и шнурками. Плотный футер 380 г/м², карман-кенгуру, фотопринт строительного гравия на лазурном небе.
             </p>
@@ -1605,17 +1630,22 @@
                 <span class="merch-price-val">2&nbsp;499&nbsp;₽</span>
                 <span class="merch-price-old">3&nbsp;899&nbsp;₽</span>
               </div>
-              <button type="button" class="btn-buy-merch" data-item="5" data-name="Белое худи «Щебень & Гравий 31»" data-price="2499" data-img="images/merch/hoodie_gravel.png">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span>Купить за 2&nbsp;499&nbsp;₽</span>
-              </button>
+              <div class="merch-card__actions">
+                <button type="button" class="btn-detail-merch" data-item="5" title="Открыть подробную карточку товара и характеристики">
+                  <span>О товаре</span>
+                </button>
+                <button type="button" class="btn-buy-merch" data-item="5" data-name="Белое худи «Щебень & Гравий 31»" data-price="2499" data-img="images/merch/hoodie_gravel.png">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  <span>Купить</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
 
         <!-- Товар 6 -->
         <article class="merch-card" data-merch-id="6" data-category="hoodie">
-          <div class="merch-card__media">
+          <div class="merch-card__media" title="Открыть подробную карточку товара">
             <span class="merch-card__badge">Heavy Cotton</span>
             <div class="merch-image-wrapper">
               <img src="images/merch/hoodie_quarry.png" alt="Чёрное худи Карьер gazbloki31.ru" class="merch-img merch-img--apparel" loading="lazy">
@@ -1631,7 +1661,7 @@
               <span class="merch-card__code">Арт. GZ31-H02</span>
               <span class="merch-card__stock">В наличии: 12 шт.</span>
             </div>
-            <h3 class="merch-card__title">Чёрное худи «Карьер gazbloki31.ru»</h3>
+            <h3 class="merch-card__title" title="Открыть подробную карточку товара">Чёрное худи «Карьер gazbloki31.ru»</h3>
             <p class="merch-card__text">
               Чёрная оверсайз кофта с капюшоном из премиального тяжелого хлопка. Принт масштабного щебёночного карьера — база каждого замеса.
             </p>
@@ -1650,17 +1680,22 @@
                 <span class="merch-price-val">2&nbsp;499&nbsp;₽</span>
                 <span class="merch-price-old">3&nbsp;999&nbsp;₽</span>
               </div>
-              <button type="button" class="btn-buy-merch" data-item="6" data-name="Чёрное худи «Карьер gazbloki31.ru»" data-price="2499" data-img="images/merch/hoodie_quarry.png">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span>Купить за 2&nbsp;499&nbsp;₽</span>
-              </button>
+              <div class="merch-card__actions">
+                <button type="button" class="btn-detail-merch" data-item="6" title="Открыть подробную карточку товара и характеристики">
+                  <span>О товаре</span>
+                </button>
+                <button type="button" class="btn-buy-merch" data-item="6" data-name="Чёрное худи «Карьер gazbloki31.ru»" data-price="2499" data-img="images/merch/hoodie_quarry.png">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  <span>Купить</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
 
         <!-- Товар 7 -->
         <article class="merch-card" data-merch-id="7" data-category="hoodie">
-          <div class="merch-card__media">
+          <div class="merch-card__media" title="Открыть подробную карточку товара">
             <span class="merch-card__badge">Special Edition</span>
             <div class="merch-image-wrapper">
               <img src="images/merch/hoodie_melltroy.png" alt="Белое худи Fake News Промокод gazbloki31.ru" class="merch-img merch-img--apparel" loading="lazy">
@@ -1676,7 +1711,7 @@
               <span class="merch-card__code">Арт. GZ31-H03</span>
               <span class="merch-card__stock">В наличии: 18 шт.</span>
             </div>
-            <h3 class="merch-card__title">Белое худи «Fake News Промокод gazbloki31.ru»</h3>
+            <h3 class="merch-card__title" title="Открыть подробную карточку товара">Белое худи «Fake News Промокод gazbloki31.ru»</h3>
             <p class="merch-card__text">
               Лимитированная кофта со скандальным мем-репортажем о промокоде BONES. Глубокий капюшон, эластичные манжеты, сочные детали.
             </p>
@@ -1695,10 +1730,15 @@
                 <span class="merch-price-val">2&nbsp;499&nbsp;₽</span>
                 <span class="merch-price-old">3&nbsp;999&nbsp;₽</span>
               </div>
-              <button type="button" class="btn-buy-merch" data-item="7" data-name="Белое худи «Fake News Промокод gazbloki31.ru»" data-price="2499" data-img="images/merch/hoodie_melltroy.png">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span>Купить за 2&nbsp;499&nbsp;₽</span>
-              </button>
+              <div class="merch-card__actions">
+                <button type="button" class="btn-detail-merch" data-item="7" title="Открыть подробную карточку товара и характеристики">
+                  <span>О товаре</span>
+                </button>
+                <button type="button" class="btn-buy-merch" data-item="7" data-name="Белое худи «Fake News Промокод gazbloki31.ru»" data-price="2499" data-img="images/merch/hoodie_melltroy.png">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  <span>Купить</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
@@ -2574,6 +2614,205 @@
         <p>Номер заказа: <strong id="merch-order-id">#GZ31-1337</strong></p>
         <p class="merch-success-sub">Менеджер gazbloki31.ru свяжется с вами для подтверждения доставки мерча.</p>
         <button type="button" class="btn-merch-done" id="btn-merch-done">Отлично</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL: КАРТОЧКА ТОВАРА МЕРЧА (ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ)
+       ============================================================ -->
+  <div class="product-modal-backdrop" id="product-modal-backdrop" hidden>
+    <div class="product-modal" role="dialog" aria-modal="true" aria-labelledby="pmodal-title">
+      <button type="button" class="product-modal__close" id="product-modal-close" aria-label="Закрыть карточку товара">✕</button>
+
+      <div class="product-modal__body">
+        <!-- Левая колонка: Галерея и крупное фото -->
+        <div class="product-modal__gallery">
+          <div class="product-modal__main-image-wrap">
+            <span class="product-modal__badge" id="pmodal-badge">Хит дропа</span>
+            <img id="pmodal-main-img" src="images/merch/tshirt1.png" alt="Крупный вид товара" class="product-modal__main-img">
+          </div>
+          <div class="product-modal__thumbs">
+            <button type="button" class="product-thumb-btn active" id="pmodal-thumb-apparel" title="Вид изделия целиком">
+              <img id="pmodal-thumb-apparel-img" src="images/merch/tshirt1.png" alt="Вид на одежде">
+              <span>Вид одежды</span>
+            </button>
+            <button type="button" class="product-thumb-btn" id="pmodal-thumb-print" title="Крупный план принта">
+              <img id="pmodal-thumb-print-img" src="images/merch/print1.jpg" alt="Крупный план принта">
+              <span>Принт крупно</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Правая колонка: Информация о товаре -->
+        <div class="product-modal__info">
+          <div class="product-modal__meta">
+            <span class="product-modal__brand">gazbloki31.ru</span>
+            <span class="product-modal__sku" id="pmodal-sku">Арт. GZ31-01</span>
+            <span class="product-modal__stock" id="pmodal-stock">В наличии: 31 шт.</span>
+          </div>
+
+          <h2 class="product-modal__title" id="pmodal-title">Белая футболка «Origin gazbloki31.ru»</h2>
+
+          <div class="product-modal__rating">
+            <span class="product-stars">★★★★★</span>
+            <span class="product-rating-val">5.0</span>
+            <span class="product-rating-count">(Оценка состава команды)</span>
+          </div>
+
+          <div class="product-modal__price-block">
+            <div class="product-price-main">
+              <span class="product-price-val" id="pmodal-price">1 337 ₽</span>
+              <span class="product-price-old" id="pmodal-old-price">2 499 ₽</span>
+            </div>
+            <span class="product-discount-pill" id="pmodal-discount">-46%</span>
+          </div>
+
+          <!-- Выбор размера -->
+          <div class="product-modal__sizes-block">
+            <div class="product-sizes-head">
+              <span class="sizes-label">Выберите размер (RU / Oversize):</span>
+              <button type="button" class="btn-size-guide" id="btn-toggle-size-guide">Таблица размеров</button>
+            </div>
+            <div class="size-selector" id="pmodal-size-selector">
+              <button type="button" class="size-btn" data-size="S">S</button>
+              <button type="button" class="size-btn active" data-size="M">M</button>
+              <button type="button" class="size-btn" data-size="L">L</button>
+              <button type="button" class="size-btn" data-size="XL">XL</button>
+              <button type="button" class="size-btn" data-size="XXL">XXL</button>
+            </div>
+
+            <!-- Всплывающая таблица размеров -->
+            <div class="product-size-guide-table" id="pmodal-size-guide" hidden>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Размер</th>
+                    <th>Рост (см)</th>
+                    <th>Грудь (см)</th>
+                    <th>Длина (см)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>S (46)</td><td>165–175</td><td>92–96</td><td>71</td></tr>
+                  <tr><td>M (48)</td><td>170–180</td><td>96–100</td><td>74</td></tr>
+                  <tr><td>L (50)</td><td>175–185</td><td>100–108</td><td>77</td></tr>
+                  <tr><td>XL (52)</td><td>180–190</td><td>108–114</td><td>80</td></tr>
+                  <tr><td>XXL (54)</td><td>185–198</td><td>114–122</td><td>82</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Кнопка купить -->
+          <div class="product-modal__actions">
+            <button type="button" class="btn-product-buy-now" id="pmodal-buy-now">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+              <span>Оформить заказ</span>
+            </button>
+          </div>
+
+          <!-- Детальные вкладки магазина -->
+          <div class="product-modal__tabs">
+            <div class="product-tab-links">
+              <button type="button" class="ptab-link active" data-ptab="desc">Описание</button>
+              <button type="button" class="ptab-link" data-ptab="specs">Характеристики</button>
+              <button type="button" class="ptab-link" data-ptab="care">Уход</button>
+              <button type="button" class="ptab-link" data-ptab="delivery">Доставка</button>
+            </div>
+            <div class="ptab-content active" id="ptab-desc">
+              <p id="pmodal-full-desc">Культовый флагманский принт команды на белом премиальном хлопке свободного кроя. Натуральные складки оверсайз, усиленный ворот.</p>
+            </div>
+            <div class="ptab-content" id="ptab-specs">
+              <ul class="product-specs-list" id="pmodal-specs-list">
+                <li><span>Состав ткани:</span> <strong>100% органический хлопок</strong></li>
+                <li><span>Плотность:</span> <strong>240 г/м²</strong></li>
+                <li><span>Крой:</span> <strong>Streetwear Oversize</strong></li>
+                <li><span>Печать:</span> <strong>Шелкография водными красками</strong></li>
+                <li><span>Страна:</span> <strong>Россия (Белгород)</strong></li>
+              </ul>
+            </div>
+            <div class="ptab-content" id="ptab-care">
+              <p>Машинная стирка при температуре до 30°C в деликатном режиме, предварительно вывернув изделие наизнанку. Не использовать хлорсодержащие отбеливатели. Гладить с изнаночной стороны.</p>
+            </div>
+            <div class="ptab-content" id="ptab-delivery">
+              <p>Быстрая доставка курьерской службой СДЭК и Почтой России по всей территории РФ и СНГ. Срок отправки: 1–2 рабочих дня. Доступна примерка при получении в ПВЗ.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL: ДОСЬЕ ИГРОКА СОСТАВА GAZBLOKI31.RU
+       ============================================================ -->
+  <div class="player-modal-backdrop" id="player-modal-backdrop" hidden>
+    <div class="player-modal" role="dialog" aria-modal="true" aria-labelledby="player-modal-name">
+      <button type="button" class="player-modal__close" id="player-modal-close" aria-label="Закрыть досье игрока">✕</button>
+
+      <div class="player-modal__body">
+        <!-- Фото игрока и позиция -->
+        <div class="player-modal__media">
+          <div class="player-modal__photo-wrap">
+            <img id="player-modal-photo" src="images/teams/gazbloki31/player2.jpg" alt="Фото игрока" class="player-modal__photo">
+            <span class="player-modal__pos-badge" id="player-modal-pos">Pos 1</span>
+          </div>
+          <div class="player-modal__team-badge">gazbloki31.ru · DotaArena 2026</div>
+        </div>
+
+        <!-- Данные игрока -->
+        <div class="player-modal__info">
+          <div class="player-modal__header">
+            <span class="player-modal__role-tag" id="player-modal-role-tag">Керри / Капитан</span>
+            <h2 class="player-modal__name" id="player-modal-name">Тимур «cursedkaneki???»</h2>
+            <div class="player-modal__rank-badge" id="player-modal-rank">12 100 MMR · Ранг 28 Europe</div>
+          </div>
+
+          <!-- Числовые показатели -->
+          <div class="player-stats-grid">
+            <div class="player-stat-card">
+              <span class="stat-card-label">KDA</span>
+              <b class="stat-card-val" id="player-stat-kda">8.4</b>
+            </div>
+            <div class="player-stat-card">
+              <span class="stat-card-label">Винрейт</span>
+              <b class="stat-card-val" id="player-stat-winrate">76%</b>
+            </div>
+            <div class="player-stat-card">
+              <span class="stat-card-label">GPM / XPM</span>
+              <b class="stat-card-val" id="player-stat-gpm">820 / 790</b>
+            </div>
+            <div class="player-stat-card">
+              <span class="stat-card-label">Матчей</span>
+              <b class="stat-card-val" id="player-stat-matches">412</b>
+            </div>
+          </div>
+
+          <!-- Сигнатурные герои -->
+          <div class="player-modal__section">
+            <h4 class="player-section-title">Сигнатурные герои:</h4>
+            <div class="player-heroes-chips" id="player-heroes-chips">
+              <span class="player-hero-chip">Lifestealer</span>
+              <span class="player-hero-chip">Phantom Lancer</span>
+              <span class="player-hero-chip">Terrorblade</span>
+            </div>
+          </div>
+
+          <!-- Любимые артефакты -->
+          <div class="player-modal__section">
+            <h4 class="player-section-title">Ключевые артефакты:</h4>
+            <p class="player-section-text" id="player-fav-items">Radiance, Abyssal Blade, Black King Bar</p>
+          </div>
+
+          <!-- Биография / Тактический стиль -->
+          <div class="player-modal__section">
+            <h4 class="player-section-title">Стиль игры в составе:</h4>
+            <p class="player-section-text" id="player-bio">
+              Доминация на поздней стадии, филигранный фарм и точечные врывы в драки 5 на 5. Бессменный капитан и координатор команды gazbloki31.ru.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
