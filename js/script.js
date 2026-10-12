@@ -933,8 +933,8 @@ document.addEventListener('DOMContentLoaded', () => {
     currentMatchFlowIndex = 0;
     isTournamentActive = true;
 
-    setBracketLiveStatus('Жеребьевка завершена! До старта первого матча 3 сек...');
-    tournamentSimTimeoutId = setTimeout(playNextTournamentMatch, 3000);
+    setBracketLiveStatus('Жеребьевка завершена! До старта первого матча 5 сек...');
+    tournamentSimTimeoutId = setTimeout(playNextTournamentMatch, 5000);
   }
 
   /** Пошаговое воспроизведение одного матча в реальном времени */
@@ -943,8 +943,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Турнир завершен
       const champ = bracketSlotTeams['GF-a'] || bracketSlotTeams['GF-b'];
       const champName = champ ? champ.name : 'gazbloki31.ru';
-      setBracketLiveStatus(`Турнир завершен! Чемпион: <b>${champName}</b>. Новый сезон через 12 сек...`);
-      tournamentSimTimeoutId = setTimeout(initTournamentCycle, 12000);
+      setBracketLiveStatus(`Турнир завершен! Чемпион: <b>${champName}</b>. Новый сезон через 16 сек...`);
+      tournamentSimTimeoutId = setTimeout(initTournamentCycle, 16000);
       return;
     }
 
@@ -1076,7 +1076,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       frameIdx++;
       if (frameIdx < frames.length) {
-        tournamentSimTimeoutId = setTimeout(renderFrame, 2800);
+        tournamentSimTimeoutId = setTimeout(renderFrame, 6500);
       } else {
         tournamentSimTimeoutId = setTimeout(() => {
           if (matchEl) matchEl.classList.remove('match--live');
@@ -1106,12 +1106,12 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           setBracketLiveStatus(
-            `Победа <b>${simResult.winner.name}</b> (${simResult.scoreA}:${simResult.scoreB})! Следующий матч через 3.5 сек...`
+            `Победа <b>${simResult.winner.name}</b> (${simResult.scoreA}:${simResult.scoreB})! Следующий матч через 6 сек...`
           );
 
           currentMatchFlowIndex++;
-          tournamentSimTimeoutId = setTimeout(playNextTournamentMatch, 3500);
-        }, 2200);
+          tournamentSimTimeoutId = setTimeout(playNextTournamentMatch, 6000);
+        }, 3200);
       }
     }
 
