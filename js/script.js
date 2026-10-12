@@ -1203,7 +1203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cctvOfflineNotice = document.getElementById('cctv-modal-offline-notice');
   const cctvModalRecBadge = document.getElementById('cctv-modal-rec-badge');
   let currentRestaurantCamIdx = 1;
-  let cctvViewMode = 'record';
+  let cctvViewMode = 'live';
 
   // Автозапуск видеозаписей в сетке камер
   const cctvGridVideos = document.querySelectorAll('#cctv-grid-cells .cctv-cell-video');
@@ -1215,21 +1215,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderModalMedia(idx) {
     if (cctvModalImg) cctvModalImg.src = `images/restaurant_cctv/cam_${idx}.jpg`;
 
-    if (cctvViewMode === 'record') {
-      if (cctvModalStream) {
-        cctvModalStream.hidden = true;
-        cctvModalStream.src = '';
-      }
-      if (cctvModalImg) cctvModalImg.hidden = true;
-      if (cctvOfflineNotice) cctvOfflineNotice.hidden = true;
-      if (cctvModalVideo) {
-        cctvModalVideo.hidden = false;
-        cctvModalVideo.src = `videos/restaurant_cctv/cam_${idx}.mp4`;
-        cctvModalVideo.play().catch(() => {});
-      }
-      if (cctvModalRecBadge) cctvModalRecBadge.textContent = 'RECORDING';
-      if (cctvModalBadgeStatus) cctvModalBadgeStatus.textContent = 'REC';
-    } else if (cctvViewMode === 'live') {
+    if (cctvViewMode === 'live') {
       if (cctvModalVideo) {
         cctvModalVideo.hidden = true;
         cctvModalVideo.pause();
@@ -1256,6 +1242,20 @@ document.addEventListener('DOMContentLoaded', () => {
             cctvModalVideo.play().catch(() => {});
           }
         });
+    } else if (cctvViewMode === 'record') {
+      if (cctvModalStream) {
+        cctvModalStream.hidden = true;
+        cctvModalStream.src = '';
+      }
+      if (cctvModalImg) cctvModalImg.hidden = true;
+      if (cctvOfflineNotice) cctvOfflineNotice.hidden = true;
+      if (cctvModalVideo) {
+        cctvModalVideo.hidden = false;
+        cctvModalVideo.src = `videos/restaurant_cctv/cam_${idx}.mp4`;
+        cctvModalVideo.play().catch(() => {});
+      }
+      if (cctvModalRecBadge) cctvModalRecBadge.textContent = 'RECORDING';
+      if (cctvModalBadgeStatus) cctvModalBadgeStatus.textContent = 'REC';
     } else {
       if (cctvModalVideo) {
         cctvModalVideo.hidden = true;
@@ -1275,15 +1275,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setCctvViewMode(mode) {
     cctvViewMode = mode;
-    [cctvModeRecord, cctvModeLive, cctvModePhoto].forEach(btn => btn?.classList.remove('is-active'));
-    if (mode === 'record' && cctvModeRecord) cctvModeRecord.classList.add('is-active');
-    else if (mode === 'live' && cctvModeLive) cctvModeLive.classList.add('is-active');
+    [cctvModeLive, cctvModeRecord, cctvModePhoto].forEach(btn => btn?.classList.remove('is-active'));
+    if (mode === 'live' && cctvModeLive) cctvModeLive.classList.add('is-active');
+    else if (mode === 'record' && cctvModeRecord) cctvModeRecord.classList.add('is-active');
     else if (mode === 'photo' && cctvModePhoto) cctvModePhoto.classList.add('is-active');
     renderModalMedia(currentRestaurantCamIdx);
   }
 
-  if (cctvModeRecord) cctvModeRecord.addEventListener('click', () => setCctvViewMode('record'));
   if (cctvModeLive) cctvModeLive.addEventListener('click', () => setCctvViewMode('live'));
+  if (cctvModeRecord) cctvModeRecord.addEventListener('click', () => setCctvViewMode('record'));
   if (cctvModePhoto) cctvModePhoto.addEventListener('click', () => setCctvViewMode('photo'));
 
   function openCctvModal(idx) {
@@ -1294,7 +1294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chFormatted = String(idx).padStart(2, '0');
     if (cctvModalBadge) cctvModalBadge.textContent = `CH-${chFormatted} · 82.119.149.206:8000 (admin)`;
 
-    renderModalMedia(idx);
+    setCctvViewMode('live');
 
     if (cctvModalBackdrop) cctvModalBackdrop.hidden = false;
     document.body.style.overflow = 'hidden';

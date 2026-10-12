@@ -1369,13 +1369,13 @@
             <div class="team-friend-cam-info">
               <div class="team-friend-cam-status">
                 <span class="cam-pulse-dot" aria-hidden="true"></span>
-                <span class="cam-status-label">CCTV SYSTEM · НАШ РЕСТОРАН (25 АКТИВНЫХ КАМЕР)</span>
+                <span class="cam-status-label">CCTV SYSTEM · НАШ РЕСТОРАН (ПРЯМОЙ ЭФИР 25 КАМЕР)</span>
               </div>
               <h4 class="team-friend-cam-title">Тут живет тоже друг наш</h4>
-              <p class="team-friend-cam-sub">82.119.149.206:8000 · Логин: admin · Пароль: admin123 · Видеонаблюдение залов и кухни</p>
+              <p class="team-friend-cam-sub">82.119.149.206:8000 · Логин: admin · Пароль: admin123 · Видеонаблюдение залов и кухни в прямом эфире</p>
             </div>
             <div class="team-friend-cam-controls">
-              <span class="cctv-hint-badge">Нажмите на любую камеру для крупного плана</span>
+              <span class="cctv-hint-badge">Нажмите на любую камеру для прямого эфира в реальном времени</span>
             </div>
           </div>
 
@@ -3021,13 +3021,13 @@
 
       <div class="cctv-modal-head">
         <div class="cctv-modal-status">
-          <span class="cam-rec-icon" id="cctv-modal-rec-badge" aria-hidden="true">RECORDING</span>
+          <span class="cam-rec-icon" id="cctv-modal-rec-badge" aria-hidden="true">LIVE STREAM</span>
           <h3 class="cctv-modal-title" id="cctv-modal-title">Камера 1 (Офис / Кабинет)</h3>
         </div>
         <div class="cctv-modal-head-right">
           <div class="cctv-mode-switcher" role="group" aria-label="Режим отображения камеры">
-            <button type="button" class="cctv-mode-btn is-active" id="cctv-mode-record">Видеозапись</button>
-            <button type="button" class="cctv-mode-btn" id="cctv-mode-live">Прямой эфир (Live)</button>
+            <button type="button" class="cctv-mode-btn is-active" id="cctv-mode-live">Прямой эфир (Live)</button>
+            <button type="button" class="cctv-mode-btn" id="cctv-mode-record">Видеозапись</button>
             <button type="button" class="cctv-mode-btn" id="cctv-mode-photo">Стоп-кадр</button>
           </div>
           <span id="cctv-modal-clock" class="cctv-modal-clock">07:36:14 10-12-2026</span>
@@ -3035,15 +3035,15 @@
       </div>
 
       <div class="cctv-modal-player-wrap" id="cctv-modal-player-wrap">
-        <video id="cctv-modal-video" class="cctv-modal-video" src="videos/restaurant_cctv/cam_1.mp4" autoplay loop muted playsinline controls></video>
-        <iframe id="cctv-modal-stream" class="cctv-modal-stream" src="" allow="autoplay; fullscreen" allowfullscreen hidden></iframe>
+        <iframe id="cctv-modal-stream" class="cctv-modal-stream" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <video id="cctv-modal-video" class="cctv-modal-video" src="" loop muted playsinline controls hidden></video>
         <img id="cctv-modal-img" src="images/restaurant_cctv/cam_1.jpg" alt="Крупный план камеры" hidden>
         <div class="team-friend-cam-overlay-badge">
-          <span class="cam-rec-icon" id="cctv-modal-badge-status" aria-hidden="true">REC</span>
+          <span class="cam-rec-icon" id="cctv-modal-badge-status" aria-hidden="true">LIVE</span>
           <span id="cctv-modal-badge-label">CH-01 · 82.119.149.206:8000 (admin)</span>
         </div>
         <div class="cctv-modal-offline-notice" id="cctv-modal-offline-notice" hidden>
-          <span>Шлюз go2rtc не запущен на 127.0.0.1:1984. Показана сохраненная запись камеры. Запустите start_stream_gateway.bat для живого прямого эфира.</span>
+          <span>Шлюз go2rtc не запущен на 127.0.0.1:1984. Для прямого эфира запустите start_stream_gateway.bat (показана запись).</span>
         </div>
       </div>
 
