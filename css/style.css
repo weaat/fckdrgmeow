@@ -146,7 +146,8 @@ body::before,
   background-position: center center;
   background-repeat: repeat-y;
   filter: brightness(.65) saturate(1.4) hue-rotate(185deg);
-  transform: scaleX(1.15);
+  transform: translateZ(0) scaleX(1.15);
+  will-change: transform;
   z-index: 0;
   pointer-events: none;
 }
@@ -162,6 +163,8 @@ body::after,
     rgba(20,6,6,.5) 50%,
     rgba(6,6,20,.65) 100%
   );
+  transform: translateZ(0);
+  will-change: transform;
   z-index: 1;
   pointer-events: none;
 }
@@ -169,6 +172,32 @@ body::after,
 body > * {
   position: relative;
   z-index: 2;
+}
+
+/* Оптимизация производительности: пропуск отрисовки невидимых секций */
+#bracket,
+#teams,
+#stats,
+#schedule,
+#rules,
+#faq,
+#contacts,
+#cctv,
+#merch,
+.merch-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 700px;
+}
+
+/* Аппаратное ускорение для карточек и модалок */
+.hero-card,
+.team-friend-cam-card,
+.cctv-cell,
+.merch-card,
+.cctv-modal,
+.player-modal {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* ============================================================

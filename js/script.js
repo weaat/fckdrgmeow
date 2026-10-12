@@ -1213,11 +1213,37 @@ document.addEventListener('DOMContentLoaded', () => {
         cctvGridVideos.forEach(v => {
           v.hidden = false;
           v.muted = true;
-          v.play().catch(() => {});
+          // Видео ячеек не декодируются все 25 сразу для максимальной плавности ноутбука
         });
       });
   }
   checkGridStreamGateway();
+
+  // Плавный предпросмотр по наведению на отдельную ячейку
+  cctvGridCells.forEach(cell => {
+    const video = cell.querySelector('.cctv-cell-video');
+    if (video) {
+      cell.addEventListener('mouseenter', () => {
+        if (!video.hidden) video.play().catch(() => {});
+      });
+      cell.addEventListener('mouseleave', () => {
+        if (!video.hidden) video.pause();
+      });
+    }
+  });
+
+  // Приостановка фонового декодирования когда блок вне экрана
+  const cctvContainer = document.getElementById('cctv-grid-cells');
+  if (cctvContainer && 'IntersectionObserver' in window) {
+    const cctvObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          cctvGridVideos.forEach(v => { try { v.pause(); } catch (e) {} });
+        }
+      });
+    }, { rootMargin: '100px' });
+    cctvObserver.observe(cctvContainer);
+  }
 
   function openCctvModal(idx) {
     currentRestaurantCamIdx = idx;
@@ -3677,7 +3703,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let height = (canvas.height = window.innerHeight);
 
     const isMobile = window.innerWidth < 768;
-    const flakeCount = isMobile ? 40 : 90;
+    const flakeCount = isMobile ? 16 : 32;
     const flakes = [];
 
     const mouse = { x: -9999, y: -9999 };
@@ -3737,12 +3763,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(224, 242, 254, ${this.alpha})`;
-        if (this.radius > 2.4) {
-          ctx.shadowBlur = 5;
-          ctx.shadowColor = 'rgba(56, 189, 248, 0.45)';
-        } else {
-          ctx.shadowBlur = 0;
-        }
         ctx.fill();
       }
     }
@@ -3783,7 +3803,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (prefersReducedMotion) {
-      // Статичный тихий рисунок без циклических кадров
       ctx.clearRect(0, 0, width, height);
       for (let i = 0; i < flakes.length; i++) {
         flakes[i].draw();
@@ -3791,7 +3810,22 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    let isTabVisible = !document.hidden;
+    document.addEventListener('visibilitychange', () => {
+      isTabVisible = !document.hidden;
+      if (isTabVisible) requestAnimationFrame(render);
+    });
+
+    let isHeroVisible = true;
+    window.addEventListener('scroll', () => {
+      isHeroVisible = window.scrollY < window.innerHeight * 1.5;
+    }, { passive: true });
+
     function render() {
+      if (!isTabVisible || !isHeroVisible) {
+        setTimeout(() => requestAnimationFrame(render), 300);
+        return;
+      }
       ctx.clearRect(0, 0, width, height);
       for (let i = 0; i < flakes.length; i++) {
         flakes[i].update();
