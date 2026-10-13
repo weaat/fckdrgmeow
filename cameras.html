@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Видеонаблюдение — Ресторан gazbloki31.ru (25 камер)</title>
+  <title>Видеонаблюдение — Мультиобъектная система (42 камеры)</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
     body {
@@ -64,6 +64,35 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .cctv-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .cctv-tab-btn {
+      padding: 0.35rem 0.8rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cctv-tab-btn:hover {
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .cctv-tab-btn.active {
+      background: #38bdf8;
+      color: #020617;
+      font-weight: 700;
     }
     .cctv-btn {
       display: inline-flex;
@@ -85,66 +114,49 @@
       border-color: #38bdf8;
       color: #38bdf8;
     }
-    .cctv-btn--primary {
-      background: #dc2626;
-      border-color: #dc2626;
-      color: #fff;
-    }
-    .cctv-btn--primary:hover {
-      background: #b91c1c;
-      color: #fff;
-    }
     .cctv-clock-display {
       font-family: monospace;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: #38bdf8;
-      padding: 0.35rem 0.65rem;
-      background: rgba(56, 189, 248, 0.08);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
       border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 4px;
     }
-    .cctv-main-container {
-      padding: 0.75rem;
+    .cctv-standalone-container {
+      padding: 1.25rem;
       max-width: 1920px;
       margin: 0 auto;
     }
-    .cctv-grid-standalone {
+    .cctv-grid-layout {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 6px;
-      background: #000;
-      padding: 6px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
     }
-    @media (max-width: 1200px) {
-      .cctv-grid-standalone { grid-template-columns: repeat(4, 1fr); }
-    }
-    @media (max-width: 900px) {
-      .cctv-grid-standalone { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .cctv-grid-standalone { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 400px) {
-      .cctv-grid-standalone { grid-template-columns: 1fr; }
+    @media (min-width: 1400px) {
+      .cctv-grid-layout {
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
     .cctv-cell-item {
       position: relative;
-      aspect-ratio: 16 / 10;
-      background: #080d1a;
+      background: #0b1120;
+      border-radius: 8px;
       overflow: hidden;
-      cursor: pointer;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 4px;
-      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .cctv-cell-item:hover {
-      transform: scale(1.025);
-      z-index: 10;
+      transform: translateY(-2px);
       border-color: #38bdf8;
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.2);
     }
     .cctv-cell-item img,
     .cctv-cell-item video {
@@ -153,7 +165,19 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      pointer-events: none;
+    }
+    .cctv-cell-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #1e293b 0%, #090d16 100%);
+      color: #64748b;
+      font-size: 0.85rem;
+      gap: 0.4rem;
     }
     .cctv-cell-header-bar {
       position: absolute;
@@ -163,31 +187,36 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 6px;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+      padding: 0.4rem 0.6rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
       font-size: 0.72rem;
-      font-weight: 700;
       z-index: 2;
     }
     .cctv-cell-ch-tag {
-      background: rgba(0, 0, 0, 0.75);
-      padding: 1px 5px;
-      border-radius: 3px;
+      font-family: monospace;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 2px 6px;
+      border-radius: 4px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #38bdf8;
-      letter-spacing: 0.5px;
+    }
+    .cctv-cell-ip-tag {
+      font-family: monospace;
+      font-size: 0.68rem;
+      color: #94a3b8;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2px 5px;
+      border-radius: 3px;
     }
     .cctv-cell-name-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 6px;
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
-      font-size: 0.72rem;
+      padding: 0.45rem 0.65rem;
+      background: linear-gradient(0deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0) 100%);
+      font-size: 0.75rem;
       z-index: 2;
     }
     .cctv-cell-cam-name {
@@ -196,14 +225,14 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 70%;
+      max-width: 68%;
     }
     .cctv-cell-live-clock {
       font-family: monospace;
       color: #facc15;
       font-size: 0.7rem;
     }
-    /* Modal Styles */
+    /* Modal */
     .cctv-standalone-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -252,6 +281,29 @@
       border: none;
       display: block;
     }
+    .cctv-modal-info-panel {
+      padding: 0.75rem 1.25rem;
+      background: #0a0f1d;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .cctv-url-code {
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: #020617;
+      padding: 0.35rem 0.65rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #38bdf8;
+      max-width: 650px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     .cctv-standalone-modal-foot {
       display: flex;
       justify-content: space-between;
@@ -269,155 +321,242 @@
     <div class="cctv-page-title-wrap">
       <span class="cctv-page-rec-dot"></span>
       <div>
-        <h1 class="cctv-page-title">Ресторан gazbloki31.ru — Система видеонаблюдения</h1>
-        <p class="cctv-page-sub">82.119.149.206:8000 · 25 активных видеокамер · Hikvision RTSP</p>
+        <h1 class="cctv-page-title">Мультиобъектная система видеонаблюдения</h1>
+        <p class="cctv-page-sub">42 активные камеры: 17 локальных (Калитка, Вход, Посты) + 25 удаленных</p>
       </div>
+    </div>
+
+    <!-- Переключатель категорий -->
+    <div class="cctv-tabs">
+      <button type="button" class="cctv-tab-btn active" data-filter="all">Все (42)</button>
+      <button type="button" class="cctv-tab-btn" data-filter="local">Локальный объект (17)</button>
+      <button type="button" class="cctv-tab-btn" data-filter="remote">Ресторан (25)</button>
     </div>
 
     <div class="cctv-page-actions">
-      <div class="cctv-clock-display" id="cctv-global-clock">00:00:00 12.10.2026</div>
-      <a href="cameras.m3u" download class="cctv-btn" title="Скачать плейлист для VLC плеера">
+      <div class="cctv-clock-display" id="cctv-global-clock">00:00:00</div>
+      <a href="cameras.m3u" download class="cctv-btn" title="Скачать общий плейлист для VLC плеера">
         Плейлист для VLC (.m3u)
       </a>
-      <a href="index.html" class="cctv-btn cctv-btn--primary">
-        ← На главный сайт
-      </a>
+      <a href="index.html" class="cctv-btn">← На главную</a>
     </div>
   </header>
 
-  <!-- Сетка 25 камер -->
-  <main class="cctv-main-container">
-    <div class="cctv-grid-standalone" id="cctv-standalone-grid">
-      <!-- Генерируется скриптом для 25 камер -->
-    </div>
+  <!-- Сетка камер -->
+  <main class="cctv-standalone-container">
+    <div class="cctv-grid-layout" id="cctv-standalone-grid"></div>
   </main>
 
-  <!-- Модальное окно камеры крупным планом -->
+  <!-- Модальное окно просмотра -->
   <div class="cctv-standalone-modal-backdrop" id="modal-backdrop" hidden>
     <div class="cctv-standalone-modal">
       <div class="cctv-standalone-modal-head">
-        <h2 id="modal-title" style="margin:0; font-size:1.1rem; color:#38bdf8;">Камера 1</h2>
+        <div>
+          <h2 id="modal-title" style="margin:0; font-size:1.15rem; color:#f1f5f9;">Камера</h2>
+          <span id="modal-subtitle" style="font-size:0.8rem; color:#94a3b8;">RTSP Поток</span>
+        </div>
         <button type="button" class="cctv-btn" id="modal-close-btn" style="padding:0.25rem 0.6rem;">✕ Закрыть (Esc)</button>
       </div>
+
       <div class="cctv-standalone-modal-player" id="modal-player-wrap">
         <iframe id="modal-stream" src="" allow="autoplay; fullscreen" allowfullscreen hidden></iframe>
         <video id="modal-video" src="" autoplay loop muted playsinline controls></video>
       </div>
+
+      <div class="cctv-modal-info-panel">
+        <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+          <span style="font-size:0.8rem; color:#94a3b8;">Поток:</span>
+          <code class="cctv-url-code" id="modal-rtsp-text">rtsp://...</code>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" class="cctv-btn" id="copy-rtsp-btn">Копировать RTSP</button>
+          <button type="button" class="cctv-btn" id="copy-ffplay-btn">Команда ffplay</button>
+        </div>
+      </div>
+
       <div class="cctv-standalone-modal-foot">
         <button type="button" class="cctv-btn" id="modal-prev-btn">← Предыдущая камера</button>
-        <span id="modal-counter" style="color:#94a3b8; font-size:0.9rem;">Камера 1 из 25</span>
+        <span id="modal-counter" style="color:#94a3b8; font-size:0.9rem;">Камера 1</span>
         <button type="button" class="cctv-btn" id="modal-next-btn">Следующая камера →</button>
       </div>
     </div>
   </div>
 
   <script>
-    const CAM_NAMES = [
-      'Камера 1 (Офис / Кабинет)',
-      'Камера 2 (Мойка / Раздача)',
-      'Камера 3 (Главный зал - Диваны)',
-      'Камера 4 (Кухня - Горячий цех)',
-      'Камера 5 (Кухня - Холодный цех)',
-      'Камера 6 (Банкетный зал)',
-      'Камера 7 (Барная стойка)',
-      'Камера 8 (Зал - Столы 1-4)',
-      'Камера 9 (Зал - Столы 5-8)',
-      'Камера 10 (Декоративный холл)',
-      'Камера 11 (Служебный коридор)',
-      'Камера 12 (VIP-зал)',
-      'Камера 13 (Веранда / Столики)',
-      'Камера 14 (Барная линия)',
-      'Камера 15 (Линия выдачи блюд)',
-      'Камера 16 (Служебный проход)',
-      'Камера 17 (Склад / Приёмка)',
-      'Камера 18 (Лестница / Мансарда)',
-      'Камера 19 (Холл / Входная группа)',
-      'Камера 20 (Вход / Гардероб)',
-      'Камера 21 (Двор / Парковка)',
-      'Камера 22 (Коридор персонала)',
-      'Камера 23 (Заготовочный цех)',
-      'Камера 24 (Служебная лестница)',
-      'Камера 25 (Заготовочный склад)'
+    const CAMERAS_DB = [
+      // 17 локальных камер
+      { id: 'loc_1', group: 'local', ch: 'L-01', name: 'Калитка', ip: '192.168.2.132', stream: 'loc_kalitka', rtsp: 'rtsp://admin:admin@192.168.2.132:554/Streaming/Channels/102' },
+      { id: 'loc_2', group: 'local', ch: 'L-02', name: 'Вход', ip: '192.168.2.133', stream: 'loc_vhod', rtsp: 'rtsp://admin:admin@192.168.2.133:554/Streaming/Channels/102' },
+      { id: 'loc_3', group: 'local', ch: 'L-03', name: 'Вход 2', ip: '192.168.2.134', stream: 'loc_vhod2', rtsp: 'rtsp://admin:admin@192.168.2.134:554/Streaming/Channels/102' },
+      { id: 'loc_4', group: 'local', ch: 'L-04', name: 'Ещё вход', ip: '192.168.2.135', stream: 'loc_vhod_extra', rtsp: 'rtsp://admin:admin@192.168.2.135:554/Streaming/Channels/102' },
+      { id: 'loc_5', group: 'local', ch: 'L-05', name: 'Ёлочка', ip: '192.168.2.136', stream: 'loc_elochka', rtsp: 'rtsp://admin:admin@192.168.2.136:554/Streaming/Channels/102' },
+      { id: 'loc_6', group: 'local', ch: 'L-06', name: 'Построение', ip: '192.168.2.138', stream: 'loc_postroenie', rtsp: 'rtsp://admin:admin@192.168.2.138:554/Streaming/Channels/102' },
+      { id: 'loc_7', group: 'local', ch: 'L-07', name: 'Мины', ip: '192.168.2.139', stream: 'loc_miny', rtsp: 'rtsp://admin:admin@192.168.2.139:554/Streaming/Channels/102' },
+      { id: 'loc_8', group: 'local', ch: 'L-08', name: 'Маршрутка', ip: '192.168.2.140', stream: 'loc_marshrutka', rtsp: 'rtsp://admin:admin@192.168.2.140:554/Streaming/Channels/102' },
+      { id: 'loc_9', group: 'local', ch: 'L-09', name: 'Забор', ip: '192.168.2.141', stream: 'loc_zabor', rtsp: 'rtsp://admin:admin@192.168.2.141:554/Streaming/Channels/102' },
+      { id: 'loc_10', group: 'local', ch: 'L-10', name: 'Машинка', ip: '192.168.2.142', stream: 'loc_mashinka', rtsp: 'rtsp://admin:admin@192.168.2.142:554/Streaming/Channels/102' },
+      { id: 'loc_11', group: 'local', ch: 'L-11', name: 'Камера 144', ip: '192.168.2.144', stream: 'loc_cam144', rtsp: 'rtsp://admin:admin@192.168.2.144:554/live/main' },
+      { id: 'loc_12', group: 'local', ch: 'L-12', name: 'Trassir IPC', ip: '192.168.2.145', stream: 'loc_trassir', rtsp: 'rtsp://admin:admin@192.168.2.145:554/live/sub' },
+      { id: 'loc_13', group: 'local', ch: 'L-13', name: 'Камера 181', ip: '192.168.2.181', stream: 'loc_cam181', rtsp: 'rtsp://admin:admin@192.168.2.181:554/h264/ch1/main/av_stream' },
+      { id: 'loc_14', group: 'local', ch: 'L-14', name: 'Камера 182', ip: '192.168.2.182', stream: 'loc_cam182', rtsp: 'rtsp://admin:admin@192.168.2.182:554/h264/ch1/main/av_stream' },
+      { id: 'loc_15', group: 'local', ch: 'L-15', name: 'Камера 183', ip: '192.168.2.183', stream: 'loc_cam183', rtsp: 'rtsp://admin:admin@192.168.2.183:554/h264/ch1/main/av_stream' },
+      { id: 'loc_16', group: 'local', ch: 'L-16', name: 'Камера 184', ip: '192.168.2.184', stream: 'loc_cam184', rtsp: 'rtsp://admin:admin@192.168.2.184:554/h264/ch1/main/av_stream' },
+      { id: 'loc_17', group: 'local', ch: 'L-17', name: 'Камера 185', ip: '192.168.2.185', stream: 'loc_cam185', rtsp: 'rtsp://admin:admin@192.168.2.185:554/h264/ch1/main/av_stream' },
+
+      // 25 камер ресторана
+      { id: 'rem_1', group: 'remote', ch: 'CH-01', name: 'Офис / Кабинет', ip: '82.119.149.206', stream: 'cam1', video: 'videos/restaurant_cctv/cam_1.mp4', poster: 'images/restaurant_cctv/cam_1.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/102' },
+      { id: 'rem_2', group: 'remote', ch: 'CH-02', name: 'Мойка / Раздача', ip: '82.119.149.206', stream: 'cam2', video: 'videos/restaurant_cctv/cam_2.mp4', poster: 'images/restaurant_cctv/cam_2.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/202' },
+      { id: 'rem_3', group: 'remote', ch: 'CH-03', name: 'Главный зал - Диваны', ip: '82.119.149.206', stream: 'cam3', video: 'videos/restaurant_cctv/cam_3.mp4', poster: 'images/restaurant_cctv/cam_3.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/302' },
+      { id: 'rem_4', group: 'remote', ch: 'CH-04', name: 'Кухня - Горячий цех', ip: '82.119.149.206', stream: 'cam4', video: 'videos/restaurant_cctv/cam_4.mp4', poster: 'images/restaurant_cctv/cam_4.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/402' },
+      { id: 'rem_5', group: 'remote', ch: 'CH-05', name: 'Кухня - Холодный цех', ip: '82.119.149.206', stream: 'cam5', video: 'videos/restaurant_cctv/cam_5.mp4', poster: 'images/restaurant_cctv/cam_5.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/502' },
+      { id: 'rem_6', group: 'remote', ch: 'CH-06', name: 'Банкетный зал', ip: '82.119.149.206', stream: 'cam6', video: 'videos/restaurant_cctv/cam_6.mp4', poster: 'images/restaurant_cctv/cam_6.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/602' },
+      { id: 'rem_7', group: 'remote', ch: 'CH-07', name: 'Барная стойка', ip: '82.119.149.206', stream: 'cam7', video: 'videos/restaurant_cctv/cam_7.mp4', poster: 'images/restaurant_cctv/cam_7.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/702' },
+      { id: 'rem_8', group: 'remote', ch: 'CH-08', name: 'Зал - Столы 1-4', ip: '82.119.149.206', stream: 'cam8', video: 'videos/restaurant_cctv/cam_8.mp4', poster: 'images/restaurant_cctv/cam_8.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/802' },
+      { id: 'rem_9', group: 'remote', ch: 'CH-09', name: 'Зал - Столы 5-8', ip: '82.119.149.206', stream: 'cam9', video: 'videos/restaurant_cctv/cam_9.mp4', poster: 'images/restaurant_cctv/cam_9.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/902' },
+      { id: 'rem_10', group: 'remote', ch: 'CH-10', name: 'Декоративный холл', ip: '82.119.149.206', stream: 'cam10', video: 'videos/restaurant_cctv/cam_10.mp4', poster: 'images/restaurant_cctv/cam_10.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1002' },
+      { id: 'rem_11', group: 'remote', ch: 'CH-11', name: 'Служебный коридор', ip: '82.119.149.206', stream: 'cam11', video: 'videos/restaurant_cctv/cam_11.mp4', poster: 'images/restaurant_cctv/cam_11.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1102' },
+      { id: 'rem_12', group: 'remote', ch: 'CH-12', name: 'VIP-зал', ip: '82.119.149.206', stream: 'cam12', video: 'videos/restaurant_cctv/cam_12.mp4', poster: 'images/restaurant_cctv/cam_12.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1202' },
+      { id: 'rem_13', group: 'remote', ch: 'CH-13', name: 'Веранда / Столики', ip: '82.119.149.206', stream: 'cam13', video: 'videos/restaurant_cctv/cam_13.mp4', poster: 'images/restaurant_cctv/cam_13.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1302' },
+      { id: 'rem_14', group: 'remote', ch: 'CH-14', name: 'Барная линия', ip: '82.119.149.206', stream: 'cam14', video: 'videos/restaurant_cctv/cam_14.mp4', poster: 'images/restaurant_cctv/cam_14.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1402' },
+      { id: 'rem_15', group: 'remote', ch: 'CH-15', name: 'Линия выдачи блюд', ip: '82.119.149.206', stream: 'cam15', video: 'videos/restaurant_cctv/cam_15.mp4', poster: 'images/restaurant_cctv/cam_15.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1502' },
+      { id: 'rem_16', group: 'remote', ch: 'CH-16', name: 'Служебный проход', ip: '82.119.149.206', stream: 'cam16', video: 'videos/restaurant_cctv/cam_16.mp4', poster: 'images/restaurant_cctv/cam_16.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1602' },
+      { id: 'rem_17', group: 'remote', ch: 'CH-17', name: 'Склад / Приёмка', ip: '82.119.149.206', stream: 'cam17', video: 'videos/restaurant_cctv/cam_17.mp4', poster: 'images/restaurant_cctv/cam_17.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1702' },
+      { id: 'rem_18', group: 'remote', ch: 'CH-18', name: 'Лестница / Мансарда', ip: '82.119.149.206', stream: 'cam18', video: 'videos/restaurant_cctv/cam_18.mp4', poster: 'images/restaurant_cctv/cam_18.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1802' },
+      { id: 'rem_19', group: 'remote', ch: 'CH-19', name: 'Холл / Входная группа', ip: '82.119.149.206', stream: 'cam19', video: 'videos/restaurant_cctv/cam_19.mp4', poster: 'images/restaurant_cctv/cam_19.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/1902' },
+      { id: 'rem_20', group: 'remote', ch: 'CH-20', name: 'Вход / Гардероб', ip: '82.119.149.206', stream: 'cam20', video: 'videos/restaurant_cctv/cam_20.mp4', poster: 'images/restaurant_cctv/cam_20.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2002' },
+      { id: 'rem_21', group: 'remote', ch: 'CH-21', name: 'Двор / Парковка', ip: '82.119.149.206', stream: 'cam21', video: 'videos/restaurant_cctv/cam_21.mp4', poster: 'images/restaurant_cctv/cam_21.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2102' },
+      { id: 'rem_22', group: 'remote', ch: 'CH-22', name: 'Коридор персонала', ip: '82.119.149.206', stream: 'cam22', video: 'videos/restaurant_cctv/cam_22.mp4', poster: 'images/restaurant_cctv/cam_22.jpg', rtsp: 'rtsp://admin123@82.119.149.206:554/Streaming/Channels/2202' },
+      { id: 'rem_23', group: 'remote', ch: 'CH-23', name: 'Заготовочный цех', ip: '82.119.149.206', stream: 'cam23', video: 'videos/restaurant_cctv/cam_23.mp4', poster: 'images/restaurant_cctv/cam_23.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2302' },
+      { id: 'rem_24', group: 'remote', ch: 'CH-24', name: 'Служебная лестница', ip: '82.119.149.206', stream: 'cam24', video: 'videos/restaurant_cctv/cam_24.mp4', poster: 'images/restaurant_cctv/cam_24.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2402' },
+      { id: 'rem_25', group: 'remote', ch: 'CH-25', name: 'Заготовочный склад', ip: '82.119.149.206', stream: 'cam25', video: 'videos/restaurant_cctv/cam_25.mp4', poster: 'images/restaurant_cctv/cam_25.jpg', rtsp: 'rtsp://admin:admin123@82.119.149.206:554/Streaming/Channels/2502' }
     ];
 
     const gridEl = document.getElementById('cctv-standalone-grid');
     const modalBackdrop = document.getElementById('modal-backdrop');
     const modalTitle = document.getElementById('modal-title');
+    const modalSubtitle = document.getElementById('modal-subtitle');
     const modalCounter = document.getElementById('modal-counter');
     const modalStream = document.getElementById('modal-stream');
     const modalVideo = document.getElementById('modal-video');
+    const modalRtspText = document.getElementById('modal-rtsp-text');
+    const copyRtspBtn = document.getElementById('copy-rtsp-btn');
+    const copyFfplayBtn = document.getElementById('copy-ffplay-btn');
     const modalCloseBtn = document.getElementById('modal-close-btn');
     const modalPrevBtn = document.getElementById('modal-prev-btn');
     const modalNextBtn = document.getElementById('modal-next-btn');
     const clockEl = document.getElementById('cctv-global-clock');
+    const tabBtns = document.querySelectorAll('.cctv-tab-btn');
 
-    let currentIdx = 1;
+    let currentFilter = 'all';
+    let currentIdx = 0;
     let isGatewayOnline = false;
 
-    // Проверка шлюза go2rtc
+    // Проверка активности go2rtc
     fetch('http://127.0.0.1:1984/api/streams', { method: 'GET', mode: 'no-cors', cache: 'no-store' })
       .then(() => { isGatewayOnline = true; })
       .catch(() => { isGatewayOnline = false; });
 
-    // Генерация 25 ячеек
-    CAM_NAMES.forEach((name, i) => {
-      const idx = i + 1;
-      const chFormatted = String(idx).padStart(2, '0');
-      const cell = document.createElement('div');
-      cell.className = 'cctv-cell-item';
-      cell.title = `${name} — Нажмите для крупного плана`;
+    function getVisibleCameras() {
+      if (currentFilter === 'all') return CAMERAS_DB;
+      return CAMERAS_DB.filter(c => c.group === currentFilter);
+    }
 
-      cell.innerHTML = `
-        <img src="images/restaurant_cctv/cam_${idx}.jpg" alt="${name}" loading="lazy" />
-        <video src="videos/restaurant_cctv/cam_${idx}.mp4" poster="images/restaurant_cctv/cam_${idx}.jpg" loop muted playsinline hidden></video>
-        <div class="cctv-cell-header-bar">
-          <span class="cctv-cell-ch-tag">CH-${chFormatted}</span>
-          <span class="cctv-page-rec-dot" style="width:7px; height:7px;"></span>
-        </div>
-        <div class="cctv-cell-name-bar">
-          <span class="cctv-cell-cam-name">${name}</span>
-          <span class="cctv-cell-live-clock cctv-time-stamp">00:00:00</span>
-        </div>
-      `;
+    function renderGrid() {
+      gridEl.innerHTML = '';
+      const list = getVisibleCameras();
 
-      // Плавное воспроизведение при наведении на ячейку
-      const video = cell.querySelector('video');
-      const img = cell.querySelector('img');
-      cell.addEventListener('mouseenter', () => {
-        if (video) {
-          video.hidden = false;
-          if (img) img.hidden = true;
-          video.play().catch(() => {});
+      list.forEach((cam, index) => {
+        const cell = document.createElement('div');
+        cell.className = 'cctv-cell-item';
+        cell.title = `${cam.name} (${cam.ip}) — Клик для просмотра`;
+
+        if (cam.poster) {
+          cell.innerHTML = `
+            <img src="${cam.poster}" alt="${cam.name}" loading="lazy" />
+            <video src="${cam.video}" poster="${cam.poster}" loop muted playsinline hidden></video>
+          `;
+        } else {
+          cell.innerHTML = `
+            <div class="cctv-cell-placeholder">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M23 7l-7 5 7 5V7z"></path>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+              <span>${cam.ip}</span>
+            </div>
+          `;
         }
-      });
-      cell.addEventListener('mouseleave', () => {
-        if (video) {
-          video.pause();
-          video.hidden = true;
-          if (img) img.hidden = false;
-        }
-      });
 
-      cell.addEventListener('click', () => openModal(idx));
-      gridEl.appendChild(cell);
+        cell.innerHTML += `
+          <div class="cctv-cell-header-bar">
+            <span class="cctv-cell-ch-tag">${cam.ch}</span>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span class="cctv-cell-ip-tag">${cam.ip}</span>
+              <span class="cctv-page-rec-dot" style="width:7px; height:7px;"></span>
+            </div>
+          </div>
+          <div class="cctv-cell-name-bar">
+            <span class="cctv-cell-cam-name">${cam.name}</span>
+            <span class="cctv-cell-live-clock cctv-time-stamp">00:00:00</span>
+          </div>
+        `;
+
+        const video = cell.querySelector('video');
+        const img = cell.querySelector('img');
+        if (video) {
+          cell.addEventListener('mouseenter', () => {
+            video.hidden = false;
+            if (img) img.hidden = true;
+            video.play().catch(() => {});
+          });
+          cell.addEventListener('mouseleave', () => {
+            video.pause();
+            video.hidden = true;
+            if (img) img.hidden = false;
+          });
+        }
+
+        cell.addEventListener('click', () => openModal(index));
+        gridEl.appendChild(cell);
+      });
+    }
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderGrid();
+      });
     });
 
-    function openModal(idx) {
-      currentIdx = idx;
-      modalTitle.textContent = CAM_NAMES[idx - 1] || `Камера ${idx}`;
-      modalCounter.textContent = `Камера ${idx} из 25`;
+    function openModal(index) {
+      const list = getVisibleCameras();
+      if (!list[index]) return;
+      currentIdx = index;
+      const cam = list[index];
+
+      modalTitle.textContent = `${cam.name} [${cam.ch}]`;
+      modalSubtitle.textContent = `IP: ${cam.ip} · Канал: ${cam.stream}`;
+      modalCounter.textContent = `Камера ${index + 1} из ${list.length}`;
+      modalRtspText.textContent = cam.rtsp;
 
       if (isGatewayOnline) {
         modalStream.hidden = false;
-        modalStream.src = `http://127.0.0.1:1984/stream.html?src=cam${idx}&background=false`;
+        modalStream.src = `http://127.0.0.1:1984/stream.html?src=${cam.stream}&background=false`;
         modalVideo.hidden = true;
         modalVideo.pause();
-      } else {
+      } else if (cam.video) {
         modalStream.hidden = true;
         modalStream.src = '';
         modalVideo.hidden = false;
-        modalVideo.src = `videos/restaurant_cctv/cam_${idx}.mp4`;
+        modalVideo.src = cam.video;
         modalVideo.play().catch(() => {});
+      } else {
+        modalStream.hidden = false;
+        modalStream.src = `http://127.0.0.1:1984/stream.html?src=${cam.stream}&background=false`;
+        modalVideo.hidden = true;
+        modalVideo.pause();
       }
 
       modalBackdrop.hidden = false;
@@ -432,18 +571,41 @@
       document.body.style.overflow = '';
     }
 
+    copyRtspBtn.addEventListener('click', () => {
+      const list = getVisibleCameras();
+      const cam = list[currentIdx];
+      if (cam) {
+        navigator.clipboard.writeText(cam.rtsp);
+        copyRtspBtn.textContent = 'Скопировано!';
+        setTimeout(() => { copyRtspBtn.textContent = 'Копировать RTSP'; }, 1800);
+      }
+    });
+
+    copyFfplayBtn.addEventListener('click', () => {
+      const list = getVisibleCameras();
+      const cam = list[currentIdx];
+      if (cam) {
+        const cmd = `ffplay -rtsp_transport tcp -fflags nobuffer -flags low_delay "${cam.rtsp}"`;
+        navigator.clipboard.writeText(cmd);
+        copyFfplayBtn.textContent = 'Команда скопирована!';
+        setTimeout(() => { copyFfplayBtn.textContent = 'Команда ffplay'; }, 1800);
+      }
+    });
+
     modalCloseBtn.addEventListener('click', closeModal);
     modalBackdrop.addEventListener('click', e => {
       if (e.target === modalBackdrop) closeModal();
     });
 
     modalPrevBtn.addEventListener('click', () => {
-      const prev = currentIdx > 1 ? currentIdx - 1 : 25;
+      const list = getVisibleCameras();
+      const prev = currentIdx > 0 ? currentIdx - 1 : list.length - 1;
       openModal(prev);
     });
 
     modalNextBtn.addEventListener('click', () => {
-      const next = currentIdx < 25 ? currentIdx + 1 : 1;
+      const list = getVisibleCameras();
+      const next = currentIdx < list.length - 1 ? currentIdx + 1 : 0;
       openModal(next);
     });
 
@@ -454,7 +616,6 @@
       if (e.key === 'ArrowRight') modalNextBtn.click();
     });
 
-    // Живые часы
     function updateClocks() {
       const now = new Date();
       const timeStr = now.toLocaleTimeString('ru-RU', { hour12: false });
@@ -466,6 +627,8 @@
     }
     setInterval(updateClocks, 1000);
     updateClocks();
+
+    renderGrid();
   </script>
 </body>
 </html>
